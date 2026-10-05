@@ -13,5 +13,5 @@ for r in results:
     rows.append((cid, exp, got, "ok" if hit else "MISS", ",".join(f["code"] for f in r["flags"])))
     print(*rows[-1], sep=" | ")
 print(f"\n{ok}/{len(results)} match the answer key")
-json.dump(results, open(os.path.join(ROOT, "public/data/open_cases.json"), "w"))
-json.dump(dict(matched=ok, total=len(results), rows=rows), open(os.path.join(ROOT, "public/data/open_score.json"), "w"))
+json.dump(results, open(os.path.join(ROOT, "data/results/open_cases.json"), "w"))
+json.dump(dict(matched=ok, total=len(results), rows=rows), open(os.path.join(ROOT, "data/results/open_score.json"), "w"))

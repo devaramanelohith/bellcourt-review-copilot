@@ -68,6 +68,6 @@ summary = dict(model=pipeline.llm.MODEL, n=n, tool_correct=ok, human_correct=hum
                confusion=Counter(f"{r['truth']} -> {r['tool']}" for r in rows), outside_allowed=sum(r["tool"] not in allowed for r in rows),
                manual_review=sum(r["tool"] == "MANUAL_REVIEW" for r in rows), adversarial_passed=sum(a["passed"] for a in adv), adversarial_total=len(adv),
                avg_latency=round(sum(r["latency"] for r in rows) / n, 1), avg_tokens_in=round(sum(r["tokens"].get("in", 0) for r in rows) / n), avg_tokens_out=round(sum(r["tokens"].get("out", 0) for r in rows) / n))
-json.dump(dict(summary=summary, qa=rows, adversarial=adv), open(os.path.join(ROOT, "public/data/eval.json"), "w"), indent=1)
+json.dump(dict(summary=summary, qa=rows, adversarial=adv), open(os.path.join(ROOT, "data/results/eval.json"), "w"), indent=1)
 print(json.dumps(summary, indent=1)); [print(("PASS " if a["passed"] else "FAIL ") + a["test"], "| expected", a["expected"], "got", a["got"]) for a in adv]
 print("MISSES:"); [print(" ", r["id"], r["client"], r["service"][:30], "| truth", r["truth"], "| tool", r["tool"], "|", r["error_type"]) for r in rows if r["tool"] != r["truth"]]

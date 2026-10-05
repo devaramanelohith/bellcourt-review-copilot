@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 .vercel
 .cache/
+DEMO_LOGINS.txt

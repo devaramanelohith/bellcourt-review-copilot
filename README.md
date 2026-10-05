@@ -35,7 +35,7 @@ For each request the copilot:
 | Denials issued by the tool | 0 (not possible by design) |
 | 30 open cases, 13 of them fax images | 29 of 30 against the answer key |
 | Adversarial, incomplete and wrong inputs | 23 of 24. The one failure ended in manual review |
-| Deterministic unit tests | 27 of 27 |
+| Deterministic unit tests | 30 of 30 |
 
 Full tables and honest limits: [`docs/EVIDENCE.md`](docs/EVIDENCE.md).
 
@@ -66,16 +66,33 @@ flowchart LR
 | `copilot/agent.py` | Prompts and the bounded agent loop (plan, read, review, verify, second check). Fax reading |
 | `copilot/pipeline.py` | `run_case()`: ties the steps together and applies overrides the model cannot undo |
 | `copilot/llm.py` | The only module that calls a model (OpenRouter or the Gemini API, standard library only) |
-| `api/review.py`, `api/ask.py` | Vercel serverless functions: live review, and "ask the policy library" |
-| `public/index.html` | Reviewer screen: worklist, case review, evidence, ask the library, try a request, audit log |
+| `copilot/auth.py` | Sign-in, signed sessions, roles |
+| `api/login.py`, `api/data.py`, `api/review.py`, `api/ask.py` | Vercel serverless functions: sign-in, protected case data and fax images, live review, "ask the policy library" |
+| `public/index.html` | Reviewer screen: sign-in, worklist, case review, how it works, new request, ask the library, evidence, audit log |
 | `scripts/` | `ingest.py` builds the knowledge base, `run_open.py` and `run_eval.py` produce the evidence, `build_docs.py` builds the PDFs |
 | `data/` | Knowledge base PDFs, sections, registry, vectors, open cases, eligibility, QA audit file |
 
-## Run it locally (5 steps)
+## How each kind of request is read
+
+| Channel | What arrives | How the copilot reads it |
+|---|---|---|
+| Fax (46%) | An image on the fax share | A vision model transcribes the form into fields and detects blanks. The fax timestamp starts the clock |
+| Portal (31%) | Structured fields through the portal webhook | No reading step. Straight to the completeness check |
+| Phone (15%) | A call; the agent keys the request during the call | The agent uses the **New request** screen. The tool does not listen to calls or transcribe audio |
+| Electronic (8%) | X12 278 transaction; PACE creates the case | Read from the PACE read replica as structured fields |
+
+Every channel becomes the same case record and goes through the same six steps. If required fields are missing, a fax back to the provider is drafted in the first minute. At the end a person decides: a nurse confirms approvals, intake sends information requests, and only a physician can sign an adverse determination. The **How it works** tab in the app shows this.
+
+## Sign-in and roles
+
+The app requires sign-in. Four roles: intake coordinator, nurse reviewer, physician reviewer, auditor (read only). Passwords are stored only as salted PBKDF2 hashes in `copilot/users.json`. Sessions are HMAC-signed tokens that expire after 8 hours. Case data, fax images and both model endpoints are served only to signed-in users, and role limits are enforced on the server. Demo logins are shared with evaluators in the submission comment, not in this repository.
+
+## Run it locally
 
 ```bash
 git clone <this repo> && cd bellcourt-review-copilot
-cp .env.example .env            # add an OpenRouter or Gemini key (optional: the app works in replay mode without one)
+cp .env.example .env            # set AUTH_SECRET to any long random string; add an OpenRouter or Gemini key for live mode
+python3 scripts/set_password.py nurse nurse "Your Name"     # create your own login
 python3 scripts/dev_server.py   # needs only Python 3.10+, no packages
 # open http://localhost:8765
 ```
@@ -84,11 +101,11 @@ To re-run the evidence (needs a key and a few cents of credit):
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install pdfplumber pytest reportlab pypdfium2 pypdf
-.venv/bin/python -m pytest -q            # 27 deterministic tests, no key needed
+.venv/bin/python -m pytest -q            # 30 deterministic tests, no key needed
 .venv/bin/python scripts/ingest.py       # rebuild sections, registry and vectors from the PDFs
 .venv/bin/python scripts/run_open.py     # 30 open cases
 .venv/bin/python scripts/run_eval.py     # 120 audited cases + adversarial tests
-.venv/bin/python scripts/build_docs.py   # regenerate the PDFs and EVIDENCE.md
+.venv/bin/python scripts/build_docs.py   # regenerate the PDFs, deck and EVIDENCE.md
 ```
 
 ## Deploy on Vercel
@@ -96,6 +113,13 @@ python3 -m venv .venv && .venv/bin/pip install pdfplumber pytest reportlab pypdf
 ```bash
 npm i -g vercel
 vercel login
+vercel --prod
+```
+
+Set the session-signing secret first (any long random string), then deploy:
+
+```bash
+vercel env add AUTH_SECRET production
 vercel --prod
 ```
 
@@ -127,6 +151,8 @@ A free-tier Gemini key allows about 20 requests a day per model. One case review
 | Implementation strategy (90 days) and one-page design note | `docs/Implementation_Strategy_and_Design_Note.pdf` |
 | Working demo, README, setup | this repository |
 | Evidence it works | `docs/EVIDENCE.md`, Evidence tab in the app |
+| Pitch deck (14 slides) | `docs/Pitch_Deck.pdf` |
+| Submission text | `docs/SUBMISSION.md` |
 
 ## Compliance by design
 
@@ -138,4 +164,4 @@ A free-tier Gemini key allows about 20 requests a day per model. One case review
 
 ## Limits
 
-Prototype. Human decisions are stored in the browser, not a database. Results vary slightly between runs. Only 6 of 38 employer plan documents were in the data pack.
+Prototype. Human decisions are stored in the browser, not a database. Sign-in is a small built-in service, not single sign-on. Results vary slightly between runs. Only 6 of 38 employer plan documents were in the data pack.

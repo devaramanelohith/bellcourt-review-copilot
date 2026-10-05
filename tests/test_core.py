@@ -85,8 +85,23 @@ def test_verifier_enforces_visit_limit_arithmetic():
 
 def test_saved_results_contain_no_denial():
     ok = {"APPROVE_READY", "NEED_INFO", "ROUTE_PHYSICIAN", "ROUTE_NOT_COVERED", "MANUAL_REVIEW"}
-    for r in json.load(open(os.path.join(core.ROOT, "public/data/open_cases.json"))): assert r["result"]["outcome"] in ok
+    for r in json.load(open(os.path.join(core.ROOT, "data/results/open_cases.json"))): assert r["result"]["outcome"] in ok
 def test_review_prompts_never_contain_patient_names():
-    for r in json.load(open(os.path.join(core.ROOT, "public/data/open_cases.json"))):
+    for r in json.load(open(os.path.join(core.ROOT, "data/results/open_cases.json"))):
         name = (r["case"].get("fax") or {}).get("patient_name") or ""
         if name: assert name not in r["record"]
+
+# ---- login and roles
+os.environ.setdefault("AUTH_SECRET", "test-secret")
+from copilot import auth
+def test_login_rejects_wrong_password_and_unknown_user():
+    assert auth.login("nurse", "wrong") is None and auth.login("nobody", "x") is None
+def test_token_roundtrip_tamper_and_expiry():
+    import base64, json as j, time
+    body = base64.urlsafe_b64encode(j.dumps({"u": "auditor", "r": "auditor", "n": "QA", "exp": int(time.time()) + 60}).encode()).decode().rstrip("=")
+    tok = body + "." + auth._sign(body); assert auth.check(tok)["r"] == "auditor"
+    forged = base64.urlsafe_b64encode(j.dumps({"u": "auditor", "r": "physician", "n": "QA", "exp": int(time.time()) + 60}).encode()).decode().rstrip("=")
+    assert auth.check(forged + "." + tok.split(".")[1]) is None
+    old = base64.urlsafe_b64encode(j.dumps({"u": "nurse", "r": "nurse", "n": "x", "exp": 1}).encode()).decode().rstrip("=")
+    assert auth.check(old + "." + auth._sign(old)) is None and auth.check("garbage") is None
+def test_auditor_role_is_read_only(): assert "auditor" not in auth.CAN_RUN_LIVE and {"nurse", "physician", "intake"} <= auth.CAN_RUN_LIVE

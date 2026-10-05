@@ -8,9 +8,11 @@ SYSTEM = ("You answer questions from Bellcourt nurse reviewers about which rules
           "section for every statement. If the passages do not answer the question, say so. Return JSON {\"answer\": \"...\", \"citations\": [\"MP-101 v2 Section 3\"]}.")
 class handler(BaseHTTPRequestHandler):
     def do_POST(self):
+        from copilot import auth
         try:
             from copilot import core, llm
-            b = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0)) or 0) or b"{}"); q = str(b.get("question", ""))[:500]
+            if not auth.session(self): return auth.send(self, 401, {"error": "not signed in"})
+            b = auth.read_json(self); q = str(b.get("question", ""))[:500]
             gov = exc = None
             if b.get("client_id") and b.get("service_code") and b.get("date_of_service"):
                 gov, exc = core.governing_set(b["client_id"], b["service_code"], b["date_of_service"])
@@ -22,7 +24,5 @@ class handler(BaseHTTPRequestHandler):
                 ctx = "\n\n".join(f"[{h['doc_id']} {h['version'] or ''} Section {h['section']} | {h['status']}]\n{h['text']}" for h in hits)
                 ans, _ = llm.chat_json(SYSTEM, f"QUESTION: {q}\n\nPASSAGES\n{ctx}\n\nEXCLUDED DOCUMENTS: {json.dumps(exc or [])}", max_tokens=900); out.update(ans)
             else: out["answer"] = "Live mode is off, so only the retrieved passages are shown."
-            code = 200
-        except Exception as e: out, code = {"error": str(e)[:300]}, 500
-        data = json.dumps(out).encode(); self.send_response(code); self.send_header("Content-Type", "application/json")
-        self.send_header("Content-Length", str(len(data))); self.end_headers(); self.wfile.write(data)
+            auth.send(self, 200, out)
+        except Exception as e: auth.send(self, 500, {"error": str(e)[:300]})

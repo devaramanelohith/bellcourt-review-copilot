@@ -1,0 +1,26 @@
+{
+ "nurse": {
+  "name": "Anita Reyes, RN",
+  "role": "nurse",
+  "salt": "c9434c10ac2edc7dcad6339b1cc1535f",
+  "hash": "7bd1f3bd7ba3d44baad56aad3ff6f2eb582fde4782b860f452c6b6c177c363bf"
+ },
+ "physician": {
+  "name": "Dr. Samuel Okonjo",
+  "role": "physician",
+  "salt": "180d3970c9dfd9e34a934297b256de6c",
+  "hash": "a5c79f29ad84fb1bf8554a70e396f3e43f10592f004404521e9c9597624409a9"
+ },
+ "intake": {
+  "name": "Marcus Bell",
+  "role": "intake",
+  "salt": "dd875b2d6fa126e7736d0c196e58e97b",
+  "hash": "0df2e6379004ef750478c3a5798fc54576230f009842a2c8292ec1ad0039c989"
+ },
+ "auditor": {
+  "name": "QA Auditor",
+  "role": "auditor",
+  "salt": "b8c9f7d7f006bdeb9000884a25409bf9",
+  "hash": "cf7dcae86ab850a49a5d01cab25c40d2b665af5d73b94e6a2c546a0e57566fa1"
+ }
+}

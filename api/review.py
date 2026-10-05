@@ -1,29 +1,27 @@
 """POST /api/review  {"case_id": "PA-2609-8100"}  or  {"custom": {client_id, service_code, date_of_service, clinical_notes, member_id?}}
-Runs the full pipeline live. Needs OPENROUTER_API_KEY or GEMINI_API_KEY in the environment."""
+Runs the full pipeline live. Signed-in nurse, physician or intake roles only."""
 from http.server import BaseHTTPRequestHandler
-import json, os, sys, glob
+import json, os, sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 class handler(BaseHTTPRequestHandler):
-    def _send(self, code, body):
-        data = json.dumps(body).encode(); self.send_response(code); self.send_header("Content-Type", "application/json")
-        self.send_header("Content-Length", str(len(data))); self.end_headers(); self.wfile.write(data)
-    def do_GET(self):
-        from copilot import llm
-        self._send(200, {"live": llm.has_key(), "model": llm.MODEL})
     def do_POST(self):
+        from copilot import auth
         try:
             from copilot import pipeline, llm, core
-            if not llm.has_key(): return self._send(503, {"error": "Live mode is off: no model key is set on the server. Saved results are still available."})
-            body = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0)) or 0) or b"{}")
+            s = auth.session(self)
+            if not s: return auth.send(self, 401, {"error": "not signed in"})
+            if s["r"] not in auth.CAN_RUN_LIVE: return auth.send(self, 403, {"error": "Your role is read-only and cannot run a review."})
+            if not llm.has_key(): return auth.send(self, 503, {"error": "Live mode is off: no model key is set on the server. Saved results are still available."})
+            body = auth.read_json(self)
             if body.get("case_id"):
-                p = os.path.join(core.ROOT, "data", "open_cases", os.path.basename(body["case_id"]) + ".json")
-                if not os.path.exists(p): return self._send(404, {"error": "unknown case"})
-                return self._send(200, pipeline.run_case(json.load(open(p))))
-            c = body.get("custom") or {}
-            raw = dict(case_id="CUSTOM-1", received_ts="2026-09-25 09:00", channel="PORTAL", urgency=c.get("urgency", "STANDARD"), client_id=c.get("client_id", ""),
-                       service_code=c.get("service_code"), date_of_service=c.get("date_of_service"), clinical_notes=str(c.get("clinical_notes", ""))[:4000],
-                       member_id=c.get("member_id") or None, patient_dob=c.get("patient_dob") or None, requesting_provider="Custom request")
-            return self._send(200, pipeline.run_case(raw, assume_eligible=not raw["member_id"]))
-        except Exception as e:
-            self._send(500, {"error": str(e)[:300]})
+                p = os.path.join(core.ROOT, "data", "open_cases", os.path.basename(str(body["case_id"])) + ".json")
+                if not os.path.exists(p): return auth.send(self, 404, {"error": "unknown case"})
+                out = pipeline.run_case(json.load(open(p)))
+            else:
+                c = body.get("custom") or {}
+                raw = dict(case_id="NEW-" + str(c.get("channel", "PORTAL"))[:10], received_ts="2026-09-25 09:00", channel=str(c.get("channel", "PORTAL"))[:12], urgency=c.get("urgency", "STANDARD"),
+                           client_id=c.get("client_id", ""), service_code=c.get("service_code"), date_of_service=c.get("date_of_service"), clinical_notes=str(c.get("clinical_notes", ""))[:4000],
+                           member_id=c.get("member_id") or None, patient_dob=c.get("patient_dob") or None, requesting_provider=str(c.get("requesting_provider") or "Requesting provider")[:80])
+                out = pipeline.run_case(raw, assume_eligible=not raw["member_id"])
+            out["run_by"] = dict(user=s["u"], role=s["r"]); auth.send(self, 200, out)
+        except Exception as e: auth.send(self, 500, {"error": str(e)[:300]})
