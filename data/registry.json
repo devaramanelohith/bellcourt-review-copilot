@@ -1,0 +1,504 @@
+[
+ {
+  "file": "data/kb/health_plan_delegation/RIVERBEND-ADDENDUM.pdf",
+  "version": null,
+  "effective_from": "2026-01-01",
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "RIVERBEND-ADDENDUM",
+  "doc_type": "delegation_agreement",
+  "rank": 2,
+  "clients": [
+   "RB-MA",
+   "RB-ACA"
+  ],
+  "title": "Riverbend UM delegation addendum"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-101_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": "2025-12-31",
+  "service_code": "BHA-IMG-0721",
+  "status": "RETIRED",
+  "doc_id": "MP-101",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Advanced Imaging: MRI of the Lumbar Spine"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-101_v2.pdf",
+  "version": "v2",
+  "effective_from": "2026-01-01",
+  "effective_to": null,
+  "service_code": "BHA-IMG-0721",
+  "status": "ACTIVE",
+  "doc_id": "MP-101",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Advanced Imaging: MRI of the Lumbar Spine"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-102_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": "2025-06-30",
+  "service_code": "BHA-SURG-4310",
+  "status": "RETIRED",
+  "doc_id": "MP-102",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Bariatric (Weight-Loss) Surgery"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-102_v2.pdf",
+  "version": "v2",
+  "effective_from": "2025-07-01",
+  "effective_to": null,
+  "service_code": "BHA-SURG-4310",
+  "status": "ACTIVE",
+  "doc_id": "MP-102",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Bariatric (Weight-Loss) Surgery"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-103_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": "2025-12-31",
+  "service_code": "BHA-DME-2103",
+  "status": "RETIRED",
+  "doc_id": "MP-103",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Continuous Glucose Monitors (CGM)"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-103_v2.pdf",
+  "version": "v2",
+  "effective_from": "2026-01-01",
+  "effective_to": null,
+  "service_code": "BHA-DME-2103",
+  "status": "ACTIVE",
+  "doc_id": "MP-103",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Continuous Glucose Monitors (CGM)"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-104_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": null,
+  "service_code": "BHA-DX-9581",
+  "status": "ACTIVE",
+  "doc_id": "MP-104",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Attended In-Laboratory Polysomnography (Sleep Study)"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-105_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": null,
+  "service_code": "BHA-SURG-2988",
+  "status": "ACTIVE",
+  "doc_id": "MP-105",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Arthroscopic Knee Surgery"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-106_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": "2025-12-31",
+  "service_code": "BHA-SURG-2744",
+  "status": "RETIRED",
+  "doc_id": "MP-106",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Total Knee Arthroplasty (TKA)"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-106_v2.pdf",
+  "version": "v2",
+  "effective_from": "2026-01-01",
+  "effective_to": null,
+  "service_code": "BHA-SURG-2744",
+  "status": "ACTIVE",
+  "doc_id": "MP-106",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Total Knee Arthroplasty (TKA)"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-107_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": null,
+  "service_code": "BHA-LAB-8162",
+  "status": "ACTIVE",
+  "doc_id": "MP-107",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Genetic Testing for Hereditary Breast and Ovarian Cancer (BRCA1/2)"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-108_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": null,
+  "service_code": "BHA-SURG-1582",
+  "status": "ACTIVE",
+  "doc_id": "MP-108",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Blepharoplasty (Upper Eyelid Surgery)"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-109_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": null,
+  "service_code": "BHA-SURG-3052",
+  "status": "ACTIVE",
+  "doc_id": "MP-109",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Septoplasty"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-110_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": "2025-09-30",
+  "service_code": "BHA-SURG-6350",
+  "status": "RETIRED",
+  "doc_id": "MP-110",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Spinal Cord Stimulator (SCS) Trial"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-110_v2.pdf",
+  "version": "v2",
+  "effective_from": "2025-10-01",
+  "effective_to": null,
+  "service_code": "BHA-SURG-6350",
+  "status": "ACTIVE",
+  "doc_id": "MP-110",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Spinal Cord Stimulator (SCS) Trial"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-111_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": null,
+  "service_code": "BHA-VASC-3647",
+  "status": "ACTIVE",
+  "doc_id": "MP-111",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Endovenous Ablation of Varicose Veins"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-112_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": null,
+  "service_code": "BHA-THER-1830",
+  "status": "ACTIVE",
+  "doc_id": "MP-112",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Hyperbaric Oxygen Therapy (HBOT)"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-113_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": null,
+  "service_code": "BHA-RAD-5205",
+  "status": "ACTIVE",
+  "doc_id": "MP-113",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Proton Beam Radiation Therapy"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-114_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": null,
+  "service_code": "BHA-REH-9711",
+  "status": "ACTIVE",
+  "doc_id": "MP-114",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Outpatient Physical Therapy Beyond the Initial 12 Visits"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-115_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": null,
+  "service_code": "BHA-IMG-7519",
+  "status": "ACTIVE",
+  "doc_id": "MP-115",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Coronary CT Angiography (CCTA)"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-116_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": null,
+  "service_code": "BHA-HH-0550",
+  "status": "ACTIVE",
+  "doc_id": "MP-116",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Home Health Services"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-117_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "MP-117",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "Experimental and Investigational Services"
+ },
+ {
+  "file": "data/kb/medical_policies/MP-118_v1.pdf",
+  "version": "v1",
+  "effective_from": "2024-01-01",
+  "effective_to": null,
+  "service_code": "BHA-DME-0601",
+  "status": "ACTIVE",
+  "doc_id": "MP-118",
+  "doc_type": "policy",
+  "rank": 3,
+  "title": "CPAP Continued Coverage (After the Initial 90 Days)"
+ },
+ {
+  "file": "data/kb/memos_and_governance/EMAIL-Kestrel-Amendment.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "EMAIL-Kestrel-Amendment",
+  "doc_type": "email",
+  "rank": 4,
+  "relates_to": [
+   "SPD-KESTREL"
+  ],
+  "title": "Email: Kestrel plan amendment"
+ },
+ {
+  "file": "data/kb/memos_and_governance/GOV-01_Clinical_Policy_Governance.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "GOV-01",
+  "doc_type": "governance",
+  "rank": 0,
+  "title": "Clinical policy governance (hierarchy of authority)"
+ },
+ {
+  "file": "data/kb/memos_and_governance/UM-MEMO-2025-19.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "UM-MEMO-2025-19",
+  "doc_type": "memo",
+  "rank": 4,
+  "relates_to": [
+   "MP-101"
+  ],
+  "title": "Memo: keep 6-week rule for lumbar MRI"
+ },
+ {
+  "file": "data/kb/memos_and_governance/UM-MEMO-2026-04.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "UM-MEMO-2026-04",
+  "doc_type": "memo",
+  "rank": 4,
+  "relates_to": [
+   "MP-101",
+   "MP-102",
+   "MP-103",
+   "MP-106",
+   "MP-110"
+  ],
+  "title": "Memo: PACE criteria screen schedule"
+ },
+ {
+  "file": "data/kb/plan_documents/SPD-BRIGHT.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "SPD-BRIGHT",
+  "doc_type": "plan_document",
+  "rank": 2,
+  "clients": [
+   "BRIGHT"
+  ],
+  "title": "Brightwater Unified School District Employee Health Benefit Plan"
+ },
+ {
+  "file": "data/kb/plan_documents/SPD-HARLAN.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "SPD-HARLAN",
+  "doc_type": "plan_document",
+  "rank": 2,
+  "clients": [
+   "HARLAN"
+  ],
+  "title": "Harlan Freight Lines Employee Health Benefit Plan"
+ },
+ {
+  "file": "data/kb/plan_documents/SPD-JUNIPER.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "SPD-JUNIPER",
+  "doc_type": "plan_document",
+  "rank": 2,
+  "clients": [
+   "JUNIPER"
+  ],
+  "title": "Juniper Foods Cooperative Employee Health Benefit Plan"
+ },
+ {
+  "file": "data/kb/plan_documents/SPD-KESTREL.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "SPD-KESTREL",
+  "doc_type": "plan_document",
+  "rank": 2,
+  "clients": [
+   "KESTREL"
+  ],
+  "title": "Kestrel Precision Manufacturing Employee Health Benefit Plan"
+ },
+ {
+  "file": "data/kb/plan_documents/SPD-OSTR.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "SPD-OSTR",
+  "doc_type": "plan_document",
+  "rank": 2,
+  "clients": [
+   "OSTR"
+  ],
+  "title": "Ostrander Regional Medical Center (employee plan) Employee Health Benefit Plan"
+ },
+ {
+  "file": "data/kb/plan_documents/SPD-SORREL.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "SPD-SORREL",
+  "doc_type": "plan_document",
+  "rank": 2,
+  "clients": [
+   "SORREL"
+  ],
+  "title": "Sorrel Hospitality Group Employee Health Benefit Plan"
+ },
+ {
+  "file": "data/kb/regulatory/REG-01_CMS_Prior_Authorization_Rule.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "REG-01",
+  "doc_type": "regulation",
+  "rank": 1,
+  "products": [
+   "MA"
+  ],
+  "title": "CMS prior authorization rule (CMS-0057-F)"
+ },
+ {
+  "file": "data/kb/regulatory/REG-02_State_AI_Utilization_Review_Laws.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "REG-02",
+  "doc_type": "regulation",
+  "rank": 1,
+  "products": [
+   "MA",
+   "ACA"
+  ],
+  "title": "State laws on AI in utilization review"
+ },
+ {
+  "file": "data/kb/regulatory/REG-03_ERISA_Self_Funded_Plans.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "REG-03",
+  "doc_type": "regulation",
+  "rank": 1,
+  "products": [
+   "SELF_FUNDED"
+  ],
+  "title": "ERISA and self-funded plans"
+ },
+ {
+  "file": "data/kb/regulatory/REG-04_Industry_Context_2026.pdf",
+  "version": null,
+  "effective_from": null,
+  "effective_to": null,
+  "service_code": null,
+  "status": "ACTIVE",
+  "doc_id": "REG-04",
+  "doc_type": "context",
+  "rank": null,
+  "products": [],
+  "title": "Industry context 2026"
+ }
+]

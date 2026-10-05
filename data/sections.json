@@ -1,0 +1,2256 @@
+[
+ {
+  "doc_id": "RIVERBEND-ADDENDUM",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "Riverbend Health Plan: Utilization Management\nDelegation Agreement\nClinical and Operational Addendum (Document ID RIVERBEND-ADDENDUM) | Amended and restated\neffective January 1, 2026"
+ },
+ {
+  "doc_id": "RIVERBEND-ADDENDUM",
+  "version": null,
+  "section": "1",
+  "title": "Scope of delegation",
+  "text": "1. Scope of delegation\nRiverbend Health Plan ('Riverbend') delegates prior authorization for medical services to Bellcourt Health\nAdministrators ('Bellcourt') for two insured products: (a) Riverbend Medicare Advantage HMO, serving members\nin Arizona and Texas; and (b) Riverbend Marketplace Silver HMO, an ACA individual-market plan serving\nmembers in Georgia. Pharmacy prior authorization is not delegated. Riverbend retains ultimate accountability to\nCMS and state regulators and oversees Bellcourt through quarterly delegation audits."
+ },
+ {
+  "doc_id": "RIVERBEND-ADDENDUM",
+  "version": null,
+  "section": "2",
+  "title": "Clinical criteria",
+  "text": "2. Clinical criteria\nBellcourt shall apply the Bellcourt medical policy library in effect on the date of service, except as set out below."
+ },
+ {
+  "doc_id": "RIVERBEND-ADDENDUM",
+  "version": null,
+  "section": "2.1",
+  "title": "Medicare Advantage: Medicare coverage rules take precedence",
+  "text": "2.1 Medicare Advantage: Medicare coverage rules take precedence\nFor Medicare Advantage members, where a Medicare National Coverage Determination (NCD) or applicable\nLocal Coverage Determination (LCD) exists, its criteria must be applied and Bellcourt criteria may not be more\nrestrictive. For the following services, Riverbend has confirmed the Medicare criteria to apply:\nService Criteria to apply for MA members (simplified training summary)\nContinuous glucose monitors Diabetes mellitus AND either (a) insulin treatment of any type or frequency, or (b)\ndocumented problematic hypoglycemia. Applies to all dates of service under this\nAgreement.\nCPAP continued coverage As MP-118 (4 or more hours per night on at least 70% of nights in a consecutive 30-day\nperiod within the first 90 days).\nHyperbaric oxygen therapy As MP-112.\nHome health services As MP-116."
+ },
+ {
+  "doc_id": "RIVERBEND-ADDENDUM",
+  "version": null,
+  "section": "2.2",
+  "title": "Marketplace product",
+  "text": "2.2 Marketplace product\nBellcourt medical policies apply without modification."
+ },
+ {
+  "doc_id": "RIVERBEND-ADDENDUM",
+  "version": null,
+  "section": "3",
+  "title": "Decision timeframes",
+  "text": "3. Decision timeframes\nProduct Standard pre-service Expedited / urgent Basis\nMedicare Advantage 7 calendar days 72 hours CMS Interoperability and Prior Authorization Final\nRule (CMS-0057-F), effective January 2026\nMarketplace (GA) 15 calendar days 72 hours State law and Agreement\nClocks start when Bellcourt receives the request through any channel, including fax, regardless of whether it has\nbeen entered into Bellcourt's systems."
+ },
+ {
+  "doc_id": "RIVERBEND-ADDENDUM",
+  "version": null,
+  "section": "4",
+  "title": "Adverse determinations",
+  "text": "4. Adverse determinations\n- Only a licensed physician may issue a denial based on medical necessity. Nurses may approve but may not\ndeny.\n- For Arizona members, effective July 1, 2026, a medical director licensed in Arizona must personally review and\nsign every denial of a medical-necessity request.\n- Every denial notice must state the specific reason, cite the criteria relied on, and describe appeal rights.\n- For Texas members, where any automated or AI-assisted tool was used in reviewing the request, the notice\nmust disclose that use."
+ },
+ {
+  "doc_id": "RIVERBEND-ADDENDUM",
+  "version": null,
+  "section": "5",
+  "title": "Automation and artificial intelligence",
+  "text": "5. Automation and artificial intelligence\nBellcourt shall give Riverbend 60 days' written notice before deploying any automated or AI-assisted tool in the\nprior authorization workflow. No such tool may deny, delay, or modify a request on its own; a qualified human\nmust make every adverse decision. Bellcourt must be able to produce, on audit, the inputs and outputs of any\nsuch tool for a given case."
+ },
+ {
+  "doc_id": "RIVERBEND-ADDENDUM",
+  "version": null,
+  "section": "6",
+  "title": "Performance standards and remedies",
+  "text": "6. Performance standards and remedies\nMeasure Standard Remedy if missed\nTimeliness (each product, each At least 97% of decisions within Service credit of 4% of quarterly delegation fees per\nquarter) timeframe percentage point below standard; two consecutive\nmisses require a Corrective Action Plan\nDecision accuracy (Riverbend audit At least 95% Corrective Action Plan\nsample)\nAppeal overturn rate (MA) Monitored; above 30% triggers Root-cause review\nroot-cause review"
+ },
+ {
+  "doc_id": "RIVERBEND-ADDENDUM",
+  "version": null,
+  "section": "7",
+  "title": "Term and renewal",
+  "text": "7. Term and renewal\nThe current term ends December 31, 2026. Either party may elect not to renew with 90 days' notice. Riverbend\nmay terminate for cause if a Corrective Action Plan is not satisfied within 120 days."
+ },
+ {
+  "doc_id": "RIVERBEND-ADDENDUM",
+  "version": null,
+  "section": "8",
+  "title": "Interoperability",
+  "text": "8. Interoperability\nBellcourt shall support Riverbend's obligations under CMS-0057-F, including an electronic prior authorization API,\nprovider access to prior authorization status, and public metrics reporting, by the dates set in that rule (January\n2027 for API requirements)."
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-101: Advanced Imaging: MRI of the Lumbar\nSpine\nBellcourt Medical Policy | Version 1 | Status: RETIRED (superseded 2025-12-31) | Effective for dates of\nservice 2024-01-01 through 2025-12-31\nField Value\nPolicy number MP-101\nService code(s) BHA-IMG-0721\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Advanced Imaging: MRI of the Lumbar Spine) is medically necessary. It is applied to prior authorization\nrequests where the date of service falls within the effective period stated above. A client's plan document may\nexclude this service or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Presence of a red-flag condition (suspected cauda equina syndrome, suspected spinal infection, suspected\nmalignancy, progressive neurological deficit, or significant trauma); OR\n2 Radicular pain or radiculopathy that has persisted despite at least 6 weeks of documented conservative\ntherapy (physical therapy, supervised exercise, NSAIDs or activity modification)."
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Uncomplicated low back pain without radiculopathy and without red flags.\n- Imaging requested solely for reassurance or at patient request."
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nOffice notes documenting symptom duration, neurological exam, conservative therapy type and duration;\nsurgeon's note if requested for pre-surgical planning.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 to 2025-12-31 Initial version.\nv2 2026-01-01 Conservative-therapy duration reduced from 6 weeks to 4 weeks; pre-surgical\nplanning added as an indication. Approved by the Clinical Policy Committee\non 2025-11-20."
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v2",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-101: Advanced Imaging: MRI of the Lumbar\nSpine\nBellcourt Medical Policy | Version 2 | Status: ACTIVE | Effective for dates of service 2026-01-01 until\nsuperseded\nField Value\nPolicy number MP-101\nService code(s) BHA-IMG-0721\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v2"
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v2",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Advanced Imaging: MRI of the Lumbar Spine) is medically necessary. It is applied to prior authorization\nrequests where the date of service falls within the effective period stated above. A client's plan document may\nexclude this service or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v2",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v2",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Presence of a red-flag condition (suspected cauda equina syndrome, suspected spinal infection, suspected\nmalignancy, progressive neurological deficit, or significant trauma); OR\n2 Radicular pain or radiculopathy that has persisted despite at least 4 weeks of documented conservative\ntherapy; OR\n3 Pre-surgical planning when spine surgery has already been scheduled or recommended by a spine surgeon."
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v2",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Uncomplicated low back pain without radiculopathy and without red flags.\n- Imaging requested solely for reassurance or at patient request."
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v2",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nOffice notes documenting symptom duration, neurological exam, conservative therapy type and duration;\nsurgeon's note if requested for pre-surgical planning.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-101",
+  "version": "v2",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 to 2025-12-31 Initial version.\nv2 2026-01-01 Conservative-therapy duration reduced from 6 weeks to 4 weeks; pre-surgical\nplanning added as an indication. Approved by the Clinical Policy Committee\non 2025-11-20."
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-102: Bariatric (Weight-Loss) Surgery\nBellcourt Medical Policy | Version 1 | Status: RETIRED (superseded 2025-06-30) | Effective for dates of\nservice 2024-01-01 through 2025-06-30\nField Value\nPolicy number MP-102\nService code(s) BHA-SURG-4310\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Bariatric (Weight-Loss) Surgery) is medically necessary. It is applied to prior authorization requests where\nthe date of service falls within the effective period stated above. A client's plan document may exclude this service\nor impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 BMI of 40 or greater; OR BMI of 35 or greater with at least one obesity-related comorbidity (type 2 diabetes,\nhypertension, obstructive sleep apnea, or dyslipidemia); AND\n2 Completion of a physician-supervised weight-management program of at least 6 consecutive months within\nthe past 2 years; AND\n3 A pre-operative psychological evaluation clearing the member for surgery."
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- BMI below 35.\n- Absence of psychological clearance."
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nHeight, weight and BMI; comorbidity documentation; psychological evaluation report; weight-management\nprogram records where required.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 to 2025-06-30 Initial version.\nv2 2025-07-01 The 6-month supervised weight-management program requirement was\nremoved, consistent with current specialty-society guidance."
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v2",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-102: Bariatric (Weight-Loss) Surgery\nBellcourt Medical Policy | Version 2 | Status: ACTIVE | Effective for dates of service 2025-07-01 until\nsuperseded\nField Value\nPolicy number MP-102\nService code(s) BHA-SURG-4310\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v2"
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v2",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Bariatric (Weight-Loss) Surgery) is medically necessary. It is applied to prior authorization requests where\nthe date of service falls within the effective period stated above. A client's plan document may exclude this service\nor impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v2",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v2",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 BMI of 40 or greater; OR BMI of 35 or greater with at least one obesity-related comorbidity (type 2 diabetes,\nhypertension, obstructive sleep apnea, or dyslipidemia); AND\n2 A pre-operative psychological evaluation clearing the member for surgery."
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v2",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- BMI below 35.\n- Absence of psychological clearance."
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v2",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nHeight, weight and BMI; comorbidity documentation; psychological evaluation report; weight-management\nprogram records where required.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-102",
+  "version": "v2",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 to 2025-06-30 Initial version.\nv2 2025-07-01 The 6-month supervised weight-management program requirement was\nremoved, consistent with current specialty-society guidance."
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-103: Continuous Glucose Monitors (CGM)\nBellcourt Medical Policy | Version 1 | Status: RETIRED (superseded 2025-12-31) | Effective for dates of\nservice 2024-01-01 through 2025-12-31\nField Value\nPolicy number MP-103\nService code(s) BHA-DME-2103\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Continuous Glucose Monitors (CGM)) is medically necessary. It is applied to prior authorization requests\nwhere the date of service falls within the effective period stated above. A client's plan document may exclude this\nservice or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Diagnosis of diabetes mellitus (type 1 or type 2); AND\n2 Intensive insulin therapy: 3 or more daily insulin injections, or use of an insulin pump."
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Diabetes managed with oral agents or basal insulin alone.\n- Use for non-diabetic indications."
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nDiagnosis, current medication list showing insulin regimen, hypoglycemia history if relevant.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 to 2025-12-31 Initial version.\nv2 2026-01-01 Expanded to any insulin use or documented problematic hypoglycemia."
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v2",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-103: Continuous Glucose Monitors (CGM)\nBellcourt Medical Policy | Version 2 | Status: ACTIVE | Effective for dates of service 2026-01-01 until\nsuperseded\nField Value\nPolicy number MP-103\nService code(s) BHA-DME-2103\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v2"
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v2",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Continuous Glucose Monitors (CGM)) is medically necessary. It is applied to prior authorization requests\nwhere the date of service falls within the effective period stated above. A client's plan document may exclude this\nservice or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v2",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v2",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Diagnosis of diabetes mellitus (type 1 or type 2); AND\n2 Either (a) treatment with insulin of any type or frequency, including basal-only insulin; or (b) a documented\nhistory of problematic hypoglycemia (recurrent level 2 events, or at least one level 3 event)."
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v2",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Diabetes managed with non-insulin therapy and no history of problematic hypoglycemia.\n- Use for non-diabetic indications."
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v2",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nDiagnosis, current medication list showing insulin regimen, hypoglycemia history if relevant.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-103",
+  "version": "v2",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 to 2025-12-31 Initial version.\nv2 2026-01-01 Expanded to any insulin use or documented problematic hypoglycemia."
+ },
+ {
+  "doc_id": "MP-104",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-104: Attended In-Laboratory Polysomnography\n(Sleep Study)\nBellcourt Medical Policy | Version 1 | Status: ACTIVE | Effective for dates of service 2024-01-01 until\nsuperseded\nField Value\nPolicy number MP-104\nService code(s) BHA-DX-9581\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-104",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Attended In-Laboratory Polysomnography (Sleep Study)) is medically necessary. It is applied to prior\nauthorization requests where the date of service falls within the effective period stated above. A client's plan\ndocument may exclude this service or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-104",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-104",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 A home sleep apnea test (HSAT) was performed and was negative, inconclusive, or technically inadequate;\nOR\n2 The member has a significant comorbidity that makes HSAT unreliable (moderate-to-severe COPD, heart\nfailure, neuromuscular disease); OR\n3 A sleep disorder other than obstructive sleep apnea is suspected (narcolepsy, parasomnia, periodic limb\nmovement disorder)."
+ },
+ {
+  "doc_id": "MP-104",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Initial evaluation for suspected OSA in a member without the comorbidities above, when HSAT has not been\nattempted.\n- Repeat diagnostic testing after a positive HSAT."
+ },
+ {
+  "doc_id": "MP-104",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nSleep history and Epworth score; HSAT report if performed; documentation of relevant comorbidities.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-104",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 Initial version."
+ },
+ {
+  "doc_id": "MP-105",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-105: Arthroscopic Knee Surgery\nBellcourt Medical Policy | Version 1 | Status: ACTIVE | Effective for dates of service 2024-01-01 until\nsuperseded\nField Value\nPolicy number MP-105\nService code(s) BHA-SURG-2988\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-105",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Arthroscopic Knee Surgery) is medically necessary. It is applied to prior authorization requests where the\ndate of service falls within the effective period stated above. A client's plan document may exclude this service or\nimpose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-105",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-105",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Mechanical symptoms (locking, catching, or giving way); AND\n2 A meniscal tear or loose body confirmed on MRI; AND\n3 Failure of at least 6 weeks of conservative therapy; AND\n4 Absence of advanced osteoarthritis (Kellgren-Lawrence grade 3 or 4)."
+ },
+ {
+  "doc_id": "MP-105",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Arthroscopic debridement or lavage for osteoarthritis.\n- Any arthroscopy in a knee with Kellgren-Lawrence grade 3 or 4 osteoarthritis."
+ },
+ {
+  "doc_id": "MP-105",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nKnee exam, MRI report, weight-bearing radiographs with Kellgren-Lawrence grade, conservative therapy record.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-105",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 Initial version."
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-106: Total Knee Arthroplasty (TKA)\nBellcourt Medical Policy | Version 1 | Status: RETIRED (superseded 2025-12-31) | Effective for dates of\nservice 2024-01-01 through 2025-12-31\nField Value\nPolicy number MP-106\nService code(s) BHA-SURG-2744\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Total Knee Arthroplasty (TKA)) is medically necessary. It is applied to prior authorization requests where\nthe date of service falls within the effective period stated above. A client's plan document may exclude this service\nor impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Radiographic osteoarthritis of Kellgren-Lawrence grade 3 or 4; AND\n2 Functional limitation interfering with activities of daily living; AND\n3 Failure of at least 3 months of conservative management; AND\n4 BMI below 40."
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- BMI of 40 or greater.\n- Kellgren-Lawrence grade 0 to 2."
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nStanding radiographs with Kellgren-Lawrence grade, functional assessment, conservative therapy record, BMI\nand (v2) optimization note.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 to 2025-12-31 Initial version.\nv2 2026-01-01 Hard BMI cut-off replaced by documented risk-optimization requirement."
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v2",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-106: Total Knee Arthroplasty (TKA)\nBellcourt Medical Policy | Version 2 | Status: ACTIVE | Effective for dates of service 2026-01-01 until\nsuperseded\nField Value\nPolicy number MP-106\nService code(s) BHA-SURG-2744\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v2"
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v2",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Total Knee Arthroplasty (TKA)) is medically necessary. It is applied to prior authorization requests where\nthe date of service falls within the effective period stated above. A client's plan document may exclude this service\nor impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v2",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v2",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Radiographic osteoarthritis of Kellgren-Lawrence grade 3 or 4; AND\n2 Functional limitation interfering with activities of daily living; AND\n3 Failure of at least 3 months of conservative management; AND\n4 If BMI is 40 or greater: documentation that a pre-operative risk-optimization discussion (weight, glycemic\ncontrol, smoking) has taken place."
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v2",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Kellgren-Lawrence grade 0 to 2.\n- BMI of 40 or greater without documented risk-optimization discussion."
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v2",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nStanding radiographs with Kellgren-Lawrence grade, functional assessment, conservative therapy record, BMI\nand (v2) optimization note.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-106",
+  "version": "v2",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 to 2025-12-31 Initial version.\nv2 2026-01-01 Hard BMI cut-off replaced by documented risk-optimization requirement."
+ },
+ {
+  "doc_id": "MP-107",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-107: Genetic Testing for Hereditary Breast and\nOvarian Cancer (BRCA1/2)\nBellcourt Medical Policy | Version 1 | Status: ACTIVE | Effective for dates of service 2024-01-01 until\nsuperseded\nField Value\nPolicy number MP-107\nService code(s) BHA-LAB-8162\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-107",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Genetic Testing for Hereditary Breast and Ovarian Cancer (BRCA1/2)) is medically necessary. It is applied\nto prior authorization requests where the date of service falls within the effective period stated above. A client's\nplan document may exclude this service or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-107",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-107",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Personal history of breast cancer diagnosed at age 45 or younger; OR\n2 Personal history of ovarian cancer at any age; OR\n3 A first-degree relative with a known pathogenic BRCA1/2 variant."
+ },
+ {
+  "doc_id": "MP-107",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Population screening in members without the personal or family history above."
+ },
+ {
+  "doc_id": "MP-107",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nPersonal and three-generation family cancer history; genetic counseling note.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-107",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 Initial version."
+ },
+ {
+  "doc_id": "MP-108",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-108: Blepharoplasty (Upper Eyelid Surgery)\nBellcourt Medical Policy | Version 1 | Status: ACTIVE | Effective for dates of service 2024-01-01 until\nsuperseded\nField Value\nPolicy number MP-108\nService code(s) BHA-SURG-1582\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-108",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Blepharoplasty (Upper Eyelid Surgery)) is medically necessary. It is applied to prior authorization requests\nwhere the date of service falls within the effective period stated above. A client's plan document may exclude this\nservice or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-108",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-108",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Formal visual field testing showing superior visual field loss of at least 12 degrees attributable to eyelid\nposition; AND\n2 Clinical photographs documenting eyelid position."
+ },
+ {
+  "doc_id": "MP-108",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Surgery performed to improve appearance (cosmetic).\n- Superior visual field loss under 12 degrees."
+ },
+ {
+  "doc_id": "MP-108",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nFormal visual field study (taped and untaped), external photographs.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-108",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 Initial version."
+ },
+ {
+  "doc_id": "MP-109",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-109: Septoplasty\nBellcourt Medical Policy | Version 1 | Status: ACTIVE | Effective for dates of service 2024-01-01 until\nsuperseded\nField Value\nPolicy number MP-109\nService code(s) BHA-SURG-3052\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-109",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Septoplasty) is medically necessary. It is applied to prior authorization requests where the date of service\nfalls within the effective period stated above. A client's plan document may exclude this service or impose\nadditional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-109",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-109",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Symptomatic nasal airway obstruction; AND\n2 Septal deviation documented on examination; AND\n3 Failure of at least 4 weeks of medical management (intranasal steroids and/or antihistamines)."
+ },
+ {
+  "doc_id": "MP-109",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Rhinoplasty performed for cosmetic purposes."
+ },
+ {
+  "doc_id": "MP-109",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nNasal exam, medication trial history.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-109",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 Initial version."
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-110: Spinal Cord Stimulator (SCS) Trial\nBellcourt Medical Policy | Version 1 | Status: RETIRED (superseded 2025-09-30) | Effective for dates of\nservice 2024-01-01 through 2025-09-30\nField Value\nPolicy number MP-110\nService code(s) BHA-SURG-6350\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Spinal Cord Stimulator (SCS) Trial) is medically necessary. It is applied to prior authorization requests\nwhere the date of service falls within the effective period stated above. A client's plan document may exclude this\nservice or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Chronic neuropathic pain of at least 6 months' duration; AND\n2 Failure of conservative treatment, including physical therapy; AND\n3 Psychological evaluation clearing the member for implantation."
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Pain of under 6 months' duration.\n- No psychological evaluation."
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nPain history, therapy and medication history, psychological evaluation report.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 to 2025-09-30 Initial version.\nv2 2025-10-01 Added requirement for failure of at least 2 medication classes."
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v2",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-110: Spinal Cord Stimulator (SCS) Trial\nBellcourt Medical Policy | Version 2 | Status: ACTIVE | Effective for dates of service 2025-10-01 until\nsuperseded\nField Value\nPolicy number MP-110\nService code(s) BHA-SURG-6350\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v2"
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v2",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Spinal Cord Stimulator (SCS) Trial) is medically necessary. It is applied to prior authorization requests\nwhere the date of service falls within the effective period stated above. A client's plan document may exclude this\nservice or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v2",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v2",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Chronic neuropathic pain of at least 6 months' duration; AND\n2 Failure of conservative treatment, including physical therapy; AND\n3 Documented failure of at least 2 classes of pain medication (e.g. anticonvulsants, SNRIs, tricyclics); AND\n4 Psychological evaluation clearing the member for implantation."
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v2",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Pain of under 6 months' duration.\n- Fewer than 2 medication classes tried.\n- No psychological evaluation."
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v2",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nPain history, therapy and medication history, psychological evaluation report.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-110",
+  "version": "v2",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 to 2025-09-30 Initial version.\nv2 2025-10-01 Added requirement for failure of at least 2 medication classes."
+ },
+ {
+  "doc_id": "MP-111",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-111: Endovenous Ablation of Varicose Veins\nBellcourt Medical Policy | Version 1 | Status: ACTIVE | Effective for dates of service 2024-01-01 until\nsuperseded\nField Value\nPolicy number MP-111\nService code(s) BHA-VASC-3647\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-111",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Endovenous Ablation of Varicose Veins) is medically necessary. It is applied to prior authorization requests\nwhere the date of service falls within the effective period stated above. A client's plan document may exclude this\nservice or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-111",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-111",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Symptomatic varicose veins (pain, swelling, heaviness, skin changes); AND\n2 Duplex ultrasound showing reflux of at least 500 milliseconds in the treated vein; AND\n3 Failure of at least 3 months of compression therapy."
+ },
+ {
+  "doc_id": "MP-111",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Treatment of spider veins or for cosmetic purposes.\n- Reflux under 500 ms."
+ },
+ {
+  "doc_id": "MP-111",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nSymptom history, duplex ultrasound report with reflux times, compression therapy record.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-111",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 Initial version."
+ },
+ {
+  "doc_id": "MP-112",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-112: Hyperbaric Oxygen Therapy (HBOT)\nBellcourt Medical Policy | Version 1 | Status: ACTIVE | Effective for dates of service 2024-01-01 until\nsuperseded\nField Value\nPolicy number MP-112\nService code(s) BHA-THER-1830\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-112",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Hyperbaric Oxygen Therapy (HBOT)) is medically necessary. It is applied to prior authorization requests\nwhere the date of service falls within the effective period stated above. A client's plan document may exclude this\nservice or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-112",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-112",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Diabetic lower-extremity wound of Wagner grade 3 or higher that has failed at least 30 days of standard wound\ncare; OR\n2 Soft-tissue or bone radiation necrosis."
+ },
+ {
+  "doc_id": "MP-112",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Diabetic wounds of Wagner grade 2 or lower.\nInvestigational indications\nHBOT is considered experimental and investigational (see MP-117) and is excluded from coverage for the\nfollowing indications:\n- Autism spectrum disorder\n- Sports injury recovery or athletic performance\n- Long COVID\n- Cognitive decline"
+ },
+ {
+  "doc_id": "MP-112",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nWound measurements, Wagner grade, wound-care log; radiation history if applicable.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-112",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 Initial version."
+ },
+ {
+  "doc_id": "MP-113",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-113: Proton Beam Radiation Therapy\nBellcourt Medical Policy | Version 1 | Status: ACTIVE | Effective for dates of service 2024-01-01 until\nsuperseded\nField Value\nPolicy number MP-113\nService code(s) BHA-RAD-5205\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-113",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Proton Beam Radiation Therapy) is medically necessary. It is applied to prior authorization requests where\nthe date of service falls within the effective period stated above. A client's plan document may exclude this service\nor impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-113",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-113",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Primary or metastatic tumor of the central nervous system in a member under 21; OR\n2 Uveal (ocular) melanoma; OR\n3 Chordoma or chondrosarcoma of the skull base or spine."
+ },
+ {
+  "doc_id": "MP-113",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Localized prostate cancer (intensity-modulated radiation therapy is considered equally effective).\n- Breast cancer."
+ },
+ {
+  "doc_id": "MP-113",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nPathology, staging, radiation oncology consult.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-113",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 Initial version."
+ },
+ {
+  "doc_id": "MP-114",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-114: Outpatient Physical Therapy Beyond the\nInitial 12 Visits\nBellcourt Medical Policy | Version 1 | Status: ACTIVE | Effective for dates of service 2024-01-01 until\nsuperseded\nField Value\nPolicy number MP-114\nService code(s) BHA-REH-9711\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-114",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Outpatient Physical Therapy Beyond the Initial 12 Visits) is medically necessary. It is applied to prior\nauthorization requests where the date of service falls within the effective period stated above. A client's plan\ndocument may exclude this service or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-114",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-114",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 A current progress note (dated within the last 10 visits); AND\n2 Documented measurable functional progress toward stated goals, with goals not yet met."
+ },
+ {
+  "doc_id": "MP-114",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Maintenance therapy where no further functional progress is expected.\nNote: Visit counts are also subject to the plan's annual benefit limit, which is set out in each plan document."
+ },
+ {
+  "doc_id": "MP-114",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nInitial evaluation, most recent progress note with objective measures, visit count.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-114",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 Initial version."
+ },
+ {
+  "doc_id": "MP-115",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-115: Coronary CT Angiography (CCTA)\nBellcourt Medical Policy | Version 1 | Status: ACTIVE | Effective for dates of service 2024-01-01 until\nsuperseded\nField Value\nPolicy number MP-115\nService code(s) BHA-IMG-7519\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-115",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Coronary CT Angiography (CCTA)) is medically necessary. It is applied to prior authorization requests\nwhere the date of service falls within the effective period stated above. A client's plan document may exclude this\nservice or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-115",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-115",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Stable chest pain or anginal-equivalent symptoms; AND\n2 Intermediate pre-test probability of coronary artery disease."
+ },
+ {
+  "doc_id": "MP-115",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Screening in asymptomatic members.\n- Low pre-test probability.\n- High pre-test probability (invasive angiography is the appropriate test)."
+ },
+ {
+  "doc_id": "MP-115",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nSymptom description and pre-test probability assessment.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-115",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 Initial version."
+ },
+ {
+  "doc_id": "MP-116",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-116: Home Health Services\nBellcourt Medical Policy | Version 1 | Status: ACTIVE | Effective for dates of service 2024-01-01 until\nsuperseded\nField Value\nPolicy number MP-116\nService code(s) BHA-HH-0550\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-116",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Home Health Services) is medically necessary. It is applied to prior authorization requests where the date\nof service falls within the effective period stated above. A client's plan document may exclude this service or\nimpose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-116",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-116",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 The member is homebound (leaving home requires considerable and taxing effort); AND\n2 The member needs intermittent skilled nursing or therapy services; AND\n3 A plan of care signed by the treating physician."
+ },
+ {
+  "doc_id": "MP-116",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Custodial care only (bathing, dressing, meal preparation) with no skilled need."
+ },
+ {
+  "doc_id": "MP-116",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nHomebound documentation, skilled-need description, signed plan of care.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-116",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 Initial version."
+ },
+ {
+  "doc_id": "MP-117",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-117: Experimental and Investigational Services\nBellcourt Medical Policy | Version 1 | Status: ACTIVE | Effective for dates of service 2024-01-01 until\nsuperseded\nField Value\nPolicy number MP-117\nService code(s) (applies across services)\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-117",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (Experimental and Investigational Services) is medically necessary. It is applied to prior authorization\nrequests where the date of service falls within the effective period stated above. A client's plan document may\nexclude this service or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-117",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-117",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nDefinition applied across all services:\n1 A service is investigational when it lacks final FDA approval for the indication, OR peer-reviewed evidence is\ninsufficient to show improved health outcomes, OR it is not accepted as standard of care by the relevant\nspecialty society."
+ },
+ {
+  "doc_id": "MP-117",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Investigational services are excluded from coverage under every plan Bellcourt administers. A denial on this\nbasis is a coverage (benefit) determination rather than a medical-necessity determination, but it must still cite\nthis policy and the service-specific policy."
+ },
+ {
+  "doc_id": "MP-117",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nNot applicable.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-117",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 Initial version."
+ },
+ {
+  "doc_id": "MP-118",
+  "version": "v1",
+  "section": "0",
+  "title": "Header",
+  "text": "MP-118: CPAP Continued Coverage (After the Initial\n90 Days)\nBellcourt Medical Policy | Version 1 | Status: ACTIVE | Effective for dates of service 2024-01-01 until\nsuperseded\nField Value\nPolicy number MP-118\nService code(s) BHA-DME-0601\nApplies to All clients administered by Bellcourt unless the client's plan document or delegation addendum\nstates otherwise\nOwner Clinical Policy Committee\nVersion v1"
+ },
+ {
+  "doc_id": "MP-118",
+  "version": "v1",
+  "section": "1",
+  "title": "Purpose and scope",
+  "text": "1. Purpose and scope\nThis policy sets out the clinical criteria Bellcourt reviewers use to decide whether the service described in this\npolicy (CPAP Continued Coverage (After the Initial 90 Days)) is medically necessary. It is applied to prior\nauthorization requests where the date of service falls within the effective period stated above. A client's plan\ndocument may exclude this service or impose additional requirements; plan provisions are checked first."
+ },
+ {
+  "doc_id": "MP-118",
+  "version": "v1",
+  "section": "2",
+  "title": "Definitions",
+  "text": "2. Definitions\nMedically necessary: services that are appropriate and consistent with the diagnosis, in accordance with generally\naccepted standards of medical practice, and not primarily for the convenience of the member or provider."
+ },
+ {
+  "doc_id": "MP-118",
+  "version": "v1",
+  "section": "3",
+  "title": "Coverage criteria",
+  "text": "3. Coverage criteria\nThe service is considered medically necessary when the criteria below are met, read together using the AND / OR\nconnectors shown:\n1 Objective download showing CPAP use of 4 or more hours per night on at least 70% of nights during a\nconsecutive 30-day period within the first 90 days of use."
+ },
+ {
+  "doc_id": "MP-118",
+  "version": "v1",
+  "section": "4",
+  "title": "Not medically necessary / limitations",
+  "text": "4. Not medically necessary / limitations\n- Adherence below the threshold above."
+ },
+ {
+  "doc_id": "MP-118",
+  "version": "v1",
+  "section": "5",
+  "title": "Documentation requirements",
+  "text": "5. Documentation requirements\nDevice compliance download covering a consecutive 30-day period.\nIf required documentation is missing, the request must be pended and the provider contacted for information. It\nmust not be denied for lack of documentation until the information request has gone unanswered within the\nregulatory timeframe."
+ },
+ {
+  "doc_id": "MP-118",
+  "version": "v1",
+  "section": "6",
+  "title": "Version history",
+  "text": "6. Version history\nVersion Effective Summary\nv1 2024-01-01 Initial version."
+ },
+ {
+  "doc_id": "EMAIL-Kestrel-Amendment",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "Email: Kestrel plan amendment\nFrom: Account Manager, Midwest Region | To: Benefits Configuration Team | Date: November 3, 2025\nHi all, Kestrel's benefits committee approved Amendment 3. Bariatric surgery becomes covered from 1/1/2026\n(they're dropping the exclusion). Can you load the benefit change in the claims system before January? Signed\namendment is attached and saved in the Kestrel client folder. Thanks!\nDistribution: Benefits Configuration Team. (UM Operations not copied.)"
+ },
+ {
+  "doc_id": "GOV-01",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "GOV-01: Clinical Policy Governance\nBellcourt internal standard | Owner: Chief Medical Officer | Last reviewed 2025-06-30"
+ },
+ {
+  "doc_id": "GOV-01",
+  "version": null,
+  "section": "1",
+  "title": "Hierarchy of authority",
+  "text": "1. Hierarchy of authority\nWhen sources conflict, reviewers apply them in this order:\n1 Federal and state law and regulation applicable to the product.\n2 The client's plan document (SPD) or delegation agreement, including Medicare coverage rules for MA\nmembers.\n3 Bellcourt medical policies approved by the Clinical Policy Committee, in the version effective on the date of\nservice.\n4 Operational memos, job aids and training materials. These explain process and cannot change clinical\ncriteria. A memo that conflicts with an approved medical policy is void to the extent of the conflict."
+ },
+ {
+  "doc_id": "GOV-01",
+  "version": null,
+  "section": "2",
+  "title": "Version control",
+  "text": "2. Version control\nMedical policies are versioned. Reviewers must apply the version effective on the date of service, not the date of\nthe request or the date of review. Retired versions remain in the UM Library for reference."
+ },
+ {
+  "doc_id": "GOV-01",
+  "version": null,
+  "section": "3",
+  "title": "Criteria screens in PACE",
+  "text": "3. Criteria screens in PACE\nPACE displays criteria 'screens' for common services. Screens are convenience aids maintained by the Systems\nteam; the policy PDF in the UM Library is the authoritative text."
+ },
+ {
+  "doc_id": "UM-MEMO-2025-19",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "UM Operations Memo 2025-19\nFrom: Director, UM Operations | To: All nurse reviewers | Date: December 18, 2025 | Re: Lumbar MRI\nrequests\nTeam, the PACE criteria screen for lumbar spine MRI will not be updated before year-end because of the system\nchange freeze. To keep decisions consistent with what PACE shows, please continue to apply the 6-week\nconservative therapy requirement for lumbar MRI requests until further notice. Systems expects to update the\nscreen in Q1.\nThanks for your continued hard work during the busy season. - D. Mercer"
+ },
+ {
+  "doc_id": "UM-MEMO-2026-04",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "UM Operations Memo 2026-04\nFrom: Systems Team | To: UM Operations | Date: March 9, 2026 | Re: PACE criteria screen update\nschedule\nThe Q1 criteria screen release has slipped because of the Riverbend reporting project. Revised schedule:\nScreen Policy change it reflects Planned release\nLumbar MRI (MP-101) v2, effective 2026-01-01 Q3 2026\nCGM (MP-103) v2, effective 2026-01-01 Q4 2026\nTKA (MP-106) v2, effective 2026-01-01 Q4 2026\nBariatric (MP-102) v2, effective 2025-07-01 Q4 2026\nSCS trial (MP-110) v2, effective 2025-10-01 Not scheduled\nUntil then, screens show the previous criteria. Reviewers should check the UM Library for the current policy text."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "Brightwater Unified School District Employee\nHealth Benefit Plan\nSummary Plan Description (SPD) and Plan Document | Plan year 2026 | Document ID SPD-BRIGHT"
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "1",
+  "title": "Introduction",
+  "text": "1. Introduction\nBrightwater Unified School District (the 'Plan Sponsor') sponsors this self-funded group health plan for about\n6,900 employees and 15,800 covered lives. The Plan is governed by the Employee Retirement Income Security\nAct of 1974 (ERISA). Because the Plan is self-funded, benefits are paid from the Plan Sponsor's assets, not by an\ninsurance company, and state insurance laws generally do not apply to the Plan. Bellcourt Health Administrators,\nInc. is the third-party administrator (TPA) and performs claims administration and utilization management,\nincluding prior authorization, on the Plan Sponsor's behalf. Bellcourt does not insure the Plan."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "2",
+  "title": "Eligibility",
+  "text": "2. Eligibility\nFull-time employees working 30 or more hours per week are eligible on the first of the month after 30 days of\nemployment. Spouses and dependent children to age 26 may be enrolled. Coverage ends on the last day of the\nmonth in which employment ends."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "3",
+  "title": "Network",
+  "text": "3. Network\nPPO."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "4",
+  "title": "Schedule of benefits",
+  "text": "4. Schedule of benefits"
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "4.1",
+  "title": "Summary",
+  "text": "4.1 Summary\nBenefit In-network Out-of-network\nDeductible (individual / family) $1,500 / $3,000 $3,000 / $6,000\nCoinsurance 20% 40%\nOut-of-pocket maximum $5,000 / $10,000 $10,000 / $20,000\nAdvanced imaging 20% after deductible, prior authorization 40% after deductible\nrequired\nDurable medical equipment 20% after deductible 40% after deductible"
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "4.2",
+  "title": "Outpatient rehabilitation",
+  "text": "4.2 Outpatient rehabilitation\nOutpatient physical, occupational and speech therapy are limited to a combined 20 visits per plan year. Visits\nbeyond the 12th require prior authorization and are reviewed under Bellcourt medical policy MP-114. Visits above\nthe annual limit are not covered regardless of medical necessity."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "5",
+  "title": "Utilization management and prior authorization",
+  "text": "5. Utilization management and prior authorization"
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "5.1",
+  "title": "Clinical criteria",
+  "text": "5.1 Clinical criteria\nMedical necessity is determined using the Bellcourt medical policy library in effect on the date of service, subject\nto any stricter or more specific provision of this Plan. Where this Plan and a Bellcourt medical policy conflict, this\nPlan controls."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "5.2",
+  "title": "Services requiring prior authorization",
+  "text": "5.2 Services requiring prior authorization\n- Advanced imaging (MRI, CT angiography)\n- Inpatient admissions and all elective surgery\n- Durable medical equipment over $500 (including CGM and CPAP)\n- Sleep studies performed in a facility\n- Genetic testing\n- Hyperbaric oxygen therapy\n- Radiation therapy including proton beam\n- Home health services\n- Outpatient physical, occupational and speech therapy beyond the 12th visit in a plan year"
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "5.3",
+  "title": "Centers of Excellence",
+  "text": "5.3 Centers of Excellence\nBariatric surgery is covered only when performed at a designated Center of Excellence. Current designated\nfacilities: Front Range Bariatric Institute; Summit Metabolic Surgery Center. Bariatric surgery at any other facility is\nnot covered."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "5.4",
+  "title": "Decision timeframes",
+  "text": "5.4 Decision timeframes\nUrgent pre-service requests: decision within 72 hours. Non-urgent pre-service requests: decision within 15 days,\nextendable once by 15 days where the extension is necessary and the member is notified."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "5.5",
+  "title": "Adverse determinations",
+  "text": "5.5 Adverse determinations\nAny denial based on medical necessity must be made by a licensed physician. The notice must state the specific\nreason, the plan provision or clinical criteria relied upon, and the member's appeal rights."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "6",
+  "title": "Exclusions and limitations",
+  "text": "6. Exclusions and limitations\nThe following are not covered, or are covered only as described:"
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "6.1",
+  "title": "Cosmetic services Services primarily intended to improve appearance, i",
+  "text": "6.1 Cosmetic services Services primarily intended to improve appearance, including cosmetic rhinoplasty\nand cosmetic eyelid surgery."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "6.2",
+  "title": "Eyelid surgery Covered only when criteria in the applicable Bellcourt ",
+  "text": "6.2 Eyelid surgery Covered only when criteria in the applicable Bellcourt medical policy are met."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "6.3",
+  "title": "Experimental and Services considered experimental or investigational u",
+  "text": "6.3 Experimental and Services considered experimental or investigational under Bellcourt medical policy\ninvestigational services MP-117."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "6.4",
+  "title": "Bariatric surgery Covered subject to Bellcourt medical policy MP-102 a",
+  "text": "6.4 Bariatric surgery Covered subject to Bellcourt medical policy MP-102 and Section 5.3."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "6.5",
+  "title": "Infertility treatment Excluded except for diagnostic services.",
+  "text": "6.5 Infertility treatment Excluded except for diagnostic services."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "6.6",
+  "title": "Custodial care Assistance with activities of daily living without a sk",
+  "text": "6.6 Custodial care Assistance with activities of daily living without a skilled need."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "6.7",
+  "title": "Proton beam therapy Proton beam radiation therapy is excluded except f",
+  "text": "6.7 Proton beam therapy Proton beam radiation therapy is excluded except for members under age 21."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "7",
+  "title": "Claims and appeals",
+  "text": "7. Claims and appeals\nMembers and providers may appeal an adverse determination within 180 days. Appeals of medical necessity\ndecisions are reviewed by a physician not involved in the original decision. External review is available after\ninternal appeals are exhausted."
+ },
+ {
+  "doc_id": "SPD-BRIGHT",
+  "version": null,
+  "section": "8",
+  "title": "Amendments",
+  "text": "8. Amendments\nNo amendments for the current plan year."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "Harlan Freight Lines Employee Health Benefit Plan\nSummary Plan Description (SPD) and Plan Document | Plan year 2026 | Document ID SPD-HARLAN"
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "1",
+  "title": "Introduction",
+  "text": "1. Introduction\nHarlan Freight Lines (the 'Plan Sponsor') sponsors this self-funded group health plan for about 18,400 employees\nand 44,100 covered lives. The Plan is governed by the Employee Retirement Income Security Act of 1974\n(ERISA). Because the Plan is self-funded, benefits are paid from the Plan Sponsor's assets, not by an insurance\ncompany, and state insurance laws generally do not apply to the Plan. Bellcourt Health Administrators, Inc. is the\nthird-party administrator (TPA) and performs claims administration and utilization management, including prior\nauthorization, on the Plan Sponsor's behalf. Bellcourt does not insure the Plan."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "2",
+  "title": "Eligibility",
+  "text": "2. Eligibility\nFull-time employees working 30 or more hours per week are eligible on the first of the month after 30 days of\nemployment. Spouses and dependent children to age 26 may be enrolled. Coverage ends on the last day of the\nmonth in which employment ends."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "3",
+  "title": "Network",
+  "text": "3. Network\nOpen-access PPO (in- and out-of-network)."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "4",
+  "title": "Schedule of benefits",
+  "text": "4. Schedule of benefits"
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "4.1",
+  "title": "Summary",
+  "text": "4.1 Summary\nBenefit In-network Out-of-network\nDeductible (individual / family) $1,500 / $3,000 $3,000 / $6,000\nCoinsurance 20% 40%\nOut-of-pocket maximum $5,000 / $10,000 $10,000 / $20,000\nAdvanced imaging 20% after deductible, prior authorization 40% after deductible\nrequired\nDurable medical equipment 20% after deductible 40% after deductible"
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "4.2",
+  "title": "Outpatient rehabilitation",
+  "text": "4.2 Outpatient rehabilitation\nOutpatient physical, occupational and speech therapy are limited to a combined 30 visits per plan year. Visits\nbeyond the 12th require prior authorization and are reviewed under Bellcourt medical policy MP-114. Visits above\nthe annual limit are not covered regardless of medical necessity."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "5",
+  "title": "Utilization management and prior authorization",
+  "text": "5. Utilization management and prior authorization"
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "5.1",
+  "title": "Clinical criteria",
+  "text": "5.1 Clinical criteria\nMedical necessity is determined using the Bellcourt medical policy library in effect on the date of service, subject\nto any stricter or more specific provision of this Plan. Where this Plan and a Bellcourt medical policy conflict, this\nPlan controls."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "5.2",
+  "title": "Services requiring prior authorization",
+  "text": "5.2 Services requiring prior authorization\n- Advanced imaging (MRI, CT angiography)\n- Inpatient admissions and all elective surgery\n- Durable medical equipment over $500 (including CGM and CPAP)\n- Sleep studies performed in a facility\n- Genetic testing\n- Hyperbaric oxygen therapy\n- Radiation therapy including proton beam\n- Home health services\n- Outpatient physical, occupational and speech therapy beyond the 12th visit in a plan year"
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "5.3",
+  "title": "Centers of Excellence",
+  "text": "5.3 Centers of Excellence\nReserved."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "5.4",
+  "title": "Decision timeframes",
+  "text": "5.4 Decision timeframes\nUrgent pre-service requests: decision within 72 hours. Non-urgent pre-service requests: decision within 15 days,\nextendable once by 15 days where the extension is necessary and the member is notified."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "5.5",
+  "title": "Adverse determinations",
+  "text": "5.5 Adverse determinations\nAny denial based on medical necessity must be made by a licensed physician. The notice must state the specific\nreason, the plan provision or clinical criteria relied upon, and the member's appeal rights."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "6",
+  "title": "Exclusions and limitations",
+  "text": "6. Exclusions and limitations\nThe following are not covered, or are covered only as described:"
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "6.1",
+  "title": "Cosmetic services Services primarily intended to improve appearance, i",
+  "text": "6.1 Cosmetic services Services primarily intended to improve appearance, including cosmetic rhinoplasty\nand cosmetic eyelid surgery."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "6.2",
+  "title": "Eyelid surgery Covered only when criteria in the applicable Bellcourt ",
+  "text": "6.2 Eyelid surgery Covered only when criteria in the applicable Bellcourt medical policy are met."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "6.3",
+  "title": "Experimental and Services considered experimental or investigational u",
+  "text": "6.3 Experimental and Services considered experimental or investigational under Bellcourt medical policy\ninvestigational services MP-117."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "6.4",
+  "title": "Bariatric surgery Surgical treatment of obesity is excluded under this",
+  "text": "6.4 Bariatric surgery Surgical treatment of obesity is excluded under this Plan."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "6.5",
+  "title": "Infertility treatment Excluded except for diagnostic services.",
+  "text": "6.5 Infertility treatment Excluded except for diagnostic services."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "6.6",
+  "title": "Custodial care Assistance with activities of daily living without a sk",
+  "text": "6.6 Custodial care Assistance with activities of daily living without a skilled need."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "6.7",
+  "title": "Proton beam therapy Covered subject to Bellcourt medical policy MP-113",
+  "text": "6.7 Proton beam therapy Covered subject to Bellcourt medical policy MP-113."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "7",
+  "title": "Claims and appeals",
+  "text": "7. Claims and appeals\nMembers and providers may appeal an adverse determination within 180 days. Appeals of medical necessity\ndecisions are reviewed by a physician not involved in the original decision. External review is available after\ninternal appeals are exhausted."
+ },
+ {
+  "doc_id": "SPD-HARLAN",
+  "version": null,
+  "section": "8",
+  "title": "Amendments",
+  "text": "8. Amendments\nNo amendments for the current plan year."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "Juniper Foods Cooperative Employee Health\nBenefit Plan\nSummary Plan Description (SPD) and Plan Document | Plan year 2026 | Document ID SPD-JUNIPER"
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "1",
+  "title": "Introduction",
+  "text": "1. Introduction\nJuniper Foods Cooperative (the 'Plan Sponsor') sponsors this self-funded group health plan for about 3,300\nemployees and 8,200 covered lives. The Plan is governed by the Employee Retirement Income Security Act of\n1974 (ERISA). Because the Plan is self-funded, benefits are paid from the Plan Sponsor's assets, not by an\ninsurance company, and state insurance laws generally do not apply to the Plan. Bellcourt Health Administrators,\nInc. is the third-party administrator (TPA) and performs claims administration and utilization management,\nincluding prior authorization, on the Plan Sponsor's behalf. Bellcourt does not insure the Plan."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "2",
+  "title": "Eligibility",
+  "text": "2. Eligibility\nFull-time employees working 30 or more hours per week are eligible on the first of the month after 30 days of\nemployment. Spouses and dependent children to age 26 may be enrolled. Coverage ends on the last day of the\nmonth in which employment ends."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "3",
+  "title": "Network",
+  "text": "3. Network\nPPO."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "4",
+  "title": "Schedule of benefits",
+  "text": "4. Schedule of benefits"
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "4.1",
+  "title": "Summary",
+  "text": "4.1 Summary\nBenefit In-network Out-of-network\nDeductible (individual / family) $1,500 / $3,000 $3,000 / $6,000\nCoinsurance 20% 40%\nOut-of-pocket maximum $5,000 / $10,000 $10,000 / $20,000\nAdvanced imaging 20% after deductible, prior authorization 40% after deductible\nrequired\nDurable medical equipment 20% after deductible 40% after deductible"
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "4.2",
+  "title": "Outpatient rehabilitation",
+  "text": "4.2 Outpatient rehabilitation\nOutpatient physical, occupational and speech therapy are limited to a combined 24 visits per plan year. Visits\nbeyond the 12th require prior authorization and are reviewed under Bellcourt medical policy MP-114. Visits above\nthe annual limit are not covered regardless of medical necessity."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "5",
+  "title": "Utilization management and prior authorization",
+  "text": "5. Utilization management and prior authorization"
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "5.1",
+  "title": "Clinical criteria",
+  "text": "5.1 Clinical criteria\nMedical necessity is determined using the Bellcourt medical policy library in effect on the date of service, subject\nto any stricter or more specific provision of this Plan. Where this Plan and a Bellcourt medical policy conflict, this\nPlan controls."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "5.2",
+  "title": "Services requiring prior authorization",
+  "text": "5.2 Services requiring prior authorization\n- Advanced imaging (MRI, CT angiography)\n- Inpatient admissions and all elective surgery\n- Durable medical equipment over $500 (including CGM and CPAP)\n- Sleep studies performed in a facility\n- Genetic testing\n- Hyperbaric oxygen therapy\n- Radiation therapy including proton beam\n- Home health services\n- Outpatient physical, occupational and speech therapy beyond the 12th visit in a plan year"
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "5.3",
+  "title": "Centers of Excellence",
+  "text": "5.3 Centers of Excellence\nReserved."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "5.4",
+  "title": "Decision timeframes",
+  "text": "5.4 Decision timeframes\nUrgent pre-service requests: decision within 72 hours. Non-urgent pre-service requests: decision within 15 days,\nextendable once by 15 days where the extension is necessary and the member is notified."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "5.5",
+  "title": "Adverse determinations",
+  "text": "5.5 Adverse determinations\nAny denial based on medical necessity must be made by a licensed physician. The notice must state the specific\nreason, the plan provision or clinical criteria relied upon, and the member's appeal rights."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "5.6",
+  "title": "Mandatory second surgical opinion",
+  "text": "5.6 Mandatory second surgical opinion\nBefore any spinal procedure (including spinal fusion, laminectomy, and spinal cord stimulator trial or implantation)\nmay be authorized, a second opinion from a board-certified spine surgeon or pain specialist not affiliated with the\nrequesting provider must be documented. Requests without a documented second opinion must be pended for\nthis information."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "6",
+  "title": "Exclusions and limitations",
+  "text": "6. Exclusions and limitations\nThe following are not covered, or are covered only as described:"
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "6.1",
+  "title": "Cosmetic services Services primarily intended to improve appearance, i",
+  "text": "6.1 Cosmetic services Services primarily intended to improve appearance, including cosmetic rhinoplasty\nand cosmetic eyelid surgery."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "6.2",
+  "title": "Eyelid surgery Covered only when criteria in the applicable Bellcourt ",
+  "text": "6.2 Eyelid surgery Covered only when criteria in the applicable Bellcourt medical policy are met."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "6.3",
+  "title": "Experimental and Services considered experimental or investigational u",
+  "text": "6.3 Experimental and Services considered experimental or investigational under Bellcourt medical policy\ninvestigational services MP-117."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "6.4",
+  "title": "Bariatric surgery Covered subject to Bellcourt medical policy MP-102.",
+  "text": "6.4 Bariatric surgery Covered subject to Bellcourt medical policy MP-102."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "6.5",
+  "title": "Infertility treatment Excluded except for diagnostic services.",
+  "text": "6.5 Infertility treatment Excluded except for diagnostic services."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "6.6",
+  "title": "Custodial care Assistance with activities of daily living without a sk",
+  "text": "6.6 Custodial care Assistance with activities of daily living without a skilled need."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "6.7",
+  "title": "Proton beam therapy Covered subject to Bellcourt medical policy MP-113",
+  "text": "6.7 Proton beam therapy Covered subject to Bellcourt medical policy MP-113."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "7",
+  "title": "Claims and appeals",
+  "text": "7. Claims and appeals\nMembers and providers may appeal an adverse determination within 180 days. Appeals of medical necessity\ndecisions are reviewed by a physician not involved in the original decision. External review is available after\ninternal appeals are exhausted."
+ },
+ {
+  "doc_id": "SPD-JUNIPER",
+  "version": null,
+  "section": "8",
+  "title": "Amendments",
+  "text": "8. Amendments\nNo amendments for the current plan year."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "Kestrel Precision Manufacturing Employee Health\nBenefit Plan\nSummary Plan Description (SPD) and Plan Document | Plan year 2026 | Document ID SPD-KESTREL"
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "1",
+  "title": "Introduction",
+  "text": "1. Introduction\nKestrel Precision Manufacturing (the 'Plan Sponsor') sponsors this self-funded group health plan for about 4,100\nemployees and 10,300 covered lives. The Plan is governed by the Employee Retirement Income Security Act of\n1974 (ERISA). Because the Plan is self-funded, benefits are paid from the Plan Sponsor's assets, not by an\ninsurance company, and state insurance laws generally do not apply to the Plan. Bellcourt Health Administrators,\nInc. is the third-party administrator (TPA) and performs claims administration and utilization management,\nincluding prior authorization, on the Plan Sponsor's behalf. Bellcourt does not insure the Plan."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "2",
+  "title": "Eligibility",
+  "text": "2. Eligibility\nFull-time employees working 30 or more hours per week are eligible on the first of the month after 30 days of\nemployment. Spouses and dependent children to age 26 may be enrolled. Coverage ends on the last day of the\nmonth in which employment ends."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "3",
+  "title": "Network",
+  "text": "3. Network\nPPO."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "4",
+  "title": "Schedule of benefits",
+  "text": "4. Schedule of benefits"
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "4.1",
+  "title": "Summary",
+  "text": "4.1 Summary\nBenefit In-network Out-of-network\nDeductible (individual / family) $1,500 / $3,000 $3,000 / $6,000\nCoinsurance 20% 40%\nOut-of-pocket maximum $5,000 / $10,000 $10,000 / $20,000\nAdvanced imaging 20% after deductible, prior authorization 40% after deductible\nrequired\nDurable medical equipment 20% after deductible 40% after deductible"
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "4.2",
+  "title": "Outpatient rehabilitation",
+  "text": "4.2 Outpatient rehabilitation\nOutpatient physical, occupational and speech therapy are limited to a combined 25 visits per plan year. Visits\nbeyond the 12th require prior authorization and are reviewed under Bellcourt medical policy MP-114. Visits above\nthe annual limit are not covered regardless of medical necessity."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "5",
+  "title": "Utilization management and prior authorization",
+  "text": "5. Utilization management and prior authorization"
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "5.1",
+  "title": "Clinical criteria",
+  "text": "5.1 Clinical criteria\nMedical necessity is determined using the Bellcourt medical policy library in effect on the date of service, subject\nto any stricter or more specific provision of this Plan. Where this Plan and a Bellcourt medical policy conflict, this\nPlan controls."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "5.2",
+  "title": "Services requiring prior authorization",
+  "text": "5.2 Services requiring prior authorization\n- Advanced imaging (MRI, CT angiography)\n- Inpatient admissions and all elective surgery\n- Durable medical equipment over $500 (including CGM and CPAP)\n- Sleep studies performed in a facility\n- Genetic testing\n- Hyperbaric oxygen therapy\n- Radiation therapy including proton beam\n- Home health services\n- Outpatient physical, occupational and speech therapy beyond the 12th visit in a plan year"
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "5.3",
+  "title": "Centers of Excellence",
+  "text": "5.3 Centers of Excellence\nReserved."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "5.4",
+  "title": "Decision timeframes",
+  "text": "5.4 Decision timeframes\nUrgent pre-service requests: decision within 72 hours. Non-urgent pre-service requests: decision within 15 days,\nextendable once by 15 days where the extension is necessary and the member is notified."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "5.5",
+  "title": "Adverse determinations",
+  "text": "5.5 Adverse determinations\nAny denial based on medical necessity must be made by a licensed physician. The notice must state the specific\nreason, the plan provision or clinical criteria relied upon, and the member's appeal rights."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "6",
+  "title": "Exclusions and limitations",
+  "text": "6. Exclusions and limitations\nThe following are not covered, or are covered only as described:"
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "6.1",
+  "title": "Cosmetic services Services primarily intended to improve appearance, i",
+  "text": "6.1 Cosmetic services Services primarily intended to improve appearance, including cosmetic rhinoplasty\nand cosmetic eyelid surgery."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "6.2",
+  "title": "Eyelid surgery Covered only when criteria in the applicable Bellcourt ",
+  "text": "6.2 Eyelid surgery Covered only when criteria in the applicable Bellcourt medical policy are met."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "6.3",
+  "title": "Experimental and Services considered experimental or investigational u",
+  "text": "6.3 Experimental and Services considered experimental or investigational under Bellcourt medical policy\ninvestigational services MP-117."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "6.4",
+  "title": "Bariatric surgery Surgical treatment of obesity is excluded under this",
+  "text": "6.4 Bariatric surgery Surgical treatment of obesity is excluded under this Plan."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "6.5",
+  "title": "Infertility treatment Excluded except for diagnostic services.",
+  "text": "6.5 Infertility treatment Excluded except for diagnostic services."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "6.6",
+  "title": "Custodial care Assistance with activities of daily living without a sk",
+  "text": "6.6 Custodial care Assistance with activities of daily living without a skilled need."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "6.7",
+  "title": "Proton beam therapy Covered subject to Bellcourt medical policy MP-113",
+  "text": "6.7 Proton beam therapy Covered subject to Bellcourt medical policy MP-113."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "7",
+  "title": "Claims and appeals",
+  "text": "7. Claims and appeals\nMembers and providers may appeal an adverse determination within 180 days. Appeals of medical necessity\ndecisions are reviewed by a physician not involved in the original decision. External review is available after\ninternal appeals are exhausted."
+ },
+ {
+  "doc_id": "SPD-KESTREL",
+  "version": null,
+  "section": "8",
+  "title": "Amendments",
+  "text": "8. Amendments\nAmendment No. 3, effective January 1, 2026. Section 6.4 (Bariatric surgery exclusion) is deleted in its entirety.\nEffective for dates of service on or after January 1, 2026, bariatric surgery is a covered benefit subject to prior\nauthorization under Bellcourt medical policy MP-102. Adopted by the Plan Sponsor's benefits committee on October\n14, 2025.\nNote: Section 6.4 above reproduces the exclusion as originally written for reference. It remains in force only for\ndates of service up to and including December 31, 2025."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "Ostrander Regional Medical Center (employee plan)\nEmployee Health Benefit Plan\nSummary Plan Description (SPD) and Plan Document | Plan year 2026 | Document ID SPD-OSTR"
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "1",
+  "title": "Introduction",
+  "text": "1. Introduction\nOstrander Regional Medical Center (employee plan) (the 'Plan Sponsor') sponsors this self-funded group health\nplan for about 5,200 employees and 12,600 covered lives. The Plan is governed by the Employee Retirement\nIncome Security Act of 1974 (ERISA). Because the Plan is self-funded, benefits are paid from the Plan Sponsor's\nassets, not by an insurance company, and state insurance laws generally do not apply to the Plan. Bellcourt\nHealth Administrators, Inc. is the third-party administrator (TPA) and performs claims administration and utilization\nmanagement, including prior authorization, on the Plan Sponsor's behalf. Bellcourt does not insure the Plan."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "2",
+  "title": "Eligibility",
+  "text": "2. Eligibility\nFull-time employees working 30 or more hours per week are eligible on the first of the month after 30 days of\nemployment. Spouses and dependent children to age 26 may be enrolled. Coverage ends on the last day of the\nmonth in which employment ends."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "3",
+  "title": "Network",
+  "text": "3. Network\nExclusive provider organization (EPO); in-network only except emergencies."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "4",
+  "title": "Schedule of benefits",
+  "text": "4. Schedule of benefits"
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "4.1",
+  "title": "Summary",
+  "text": "4.1 Summary\nBenefit In-network Out-of-network\nDeductible (individual / family) $1,500 / $3,000 Not covered\nCoinsurance 20% Not covered\nOut-of-pocket maximum $5,000 / $10,000 Not covered\nAdvanced imaging 20% after deductible, prior authorization 40% after deductible\nrequired\nDurable medical equipment 20% after deductible 40% after deductible"
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "4.2",
+  "title": "Outpatient rehabilitation",
+  "text": "4.2 Outpatient rehabilitation\nOutpatient physical, occupational and speech therapy are limited to a combined 30 visits per plan year. Visits\nbeyond the 12th require prior authorization and are reviewed under Bellcourt medical policy MP-114. Visits above\nthe annual limit are not covered regardless of medical necessity."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "5",
+  "title": "Utilization management and prior authorization",
+  "text": "5. Utilization management and prior authorization"
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "5.1",
+  "title": "Clinical criteria",
+  "text": "5.1 Clinical criteria\nMedical necessity is determined using the Bellcourt medical policy library in effect on the date of service, subject\nto any stricter or more specific provision of this Plan. Where this Plan and a Bellcourt medical policy conflict, this\nPlan controls."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "5.2",
+  "title": "Services requiring prior authorization",
+  "text": "5.2 Services requiring prior authorization\n- Advanced imaging (MRI, CT angiography)\n- Inpatient admissions and all elective surgery\n- Durable medical equipment over $500 (including CGM and CPAP)\n- Sleep studies performed in a facility\n- Genetic testing\n- Hyperbaric oxygen therapy\n- Radiation therapy including proton beam\n- Home health services\n- Outpatient physical, occupational and speech therapy beyond the 12th visit in a plan year"
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "5.3",
+  "title": "Centers of Excellence",
+  "text": "5.3 Centers of Excellence\nReserved."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "5.4",
+  "title": "Decision timeframes",
+  "text": "5.4 Decision timeframes\nUrgent pre-service requests: decision within 72 hours. Non-urgent pre-service requests: decision within 15 days,\nextendable once by 15 days where the extension is necessary and the member is notified."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "5.5",
+  "title": "Adverse determinations",
+  "text": "5.5 Adverse determinations\nAny denial based on medical necessity must be made by a licensed physician. The notice must state the specific\nreason, the plan provision or clinical criteria relied upon, and the member's appeal rights."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "6",
+  "title": "Exclusions and limitations",
+  "text": "6. Exclusions and limitations\nThe following are not covered, or are covered only as described:"
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "6.1",
+  "title": "Cosmetic services Services primarily intended to improve appearance, i",
+  "text": "6.1 Cosmetic services Services primarily intended to improve appearance, including cosmetic rhinoplasty\nand cosmetic eyelid surgery."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "6.2",
+  "title": "Eyelid surgery Covered only when criteria in the applicable Bellcourt ",
+  "text": "6.2 Eyelid surgery Covered only when criteria in the applicable Bellcourt medical policy are met."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "6.3",
+  "title": "Experimental and Services considered experimental or investigational u",
+  "text": "6.3 Experimental and Services considered experimental or investigational under Bellcourt medical policy\ninvestigational services MP-117."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "6.4",
+  "title": "Bariatric surgery Covered subject to Bellcourt medical policy MP-102.",
+  "text": "6.4 Bariatric surgery Covered subject to Bellcourt medical policy MP-102."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "6.5",
+  "title": "Infertility treatment Covered up to a $15,000 lifetime maximum.",
+  "text": "6.5 Infertility treatment Covered up to a $15,000 lifetime maximum."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "6.6",
+  "title": "Custodial care Assistance with activities of daily living without a sk",
+  "text": "6.6 Custodial care Assistance with activities of daily living without a skilled need."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "6.7",
+  "title": "Proton beam therapy Covered subject to Bellcourt medical policy MP-113",
+  "text": "6.7 Proton beam therapy Covered subject to Bellcourt medical policy MP-113."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "7",
+  "title": "Claims and appeals",
+  "text": "7. Claims and appeals\nMembers and providers may appeal an adverse determination within 180 days. Appeals of medical necessity\ndecisions are reviewed by a physician not involved in the original decision. External review is available after\ninternal appeals are exhausted."
+ },
+ {
+  "doc_id": "SPD-OSTR",
+  "version": null,
+  "section": "8",
+  "title": "Amendments",
+  "text": "8. Amendments\nNo amendments for the current plan year."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "Sorrel Hospitality Group Employee Health Benefit\nPlan\nSummary Plan Description (SPD) and Plan Document | Plan year 2026 | Document ID SPD-SORREL"
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "1",
+  "title": "Introduction",
+  "text": "1. Introduction\nSorrel Hospitality Group (the 'Plan Sponsor') sponsors this self-funded group health plan for about 7,600\nemployees and 13,900 covered lives. The Plan is governed by the Employee Retirement Income Security Act of\n1974 (ERISA). Because the Plan is self-funded, benefits are paid from the Plan Sponsor's assets, not by an\ninsurance company, and state insurance laws generally do not apply to the Plan. Bellcourt Health Administrators,\nInc. is the third-party administrator (TPA) and performs claims administration and utilization management,\nincluding prior authorization, on the Plan Sponsor's behalf. Bellcourt does not insure the Plan."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "2",
+  "title": "Eligibility",
+  "text": "2. Eligibility\nFull-time employees working 30 or more hours per week are eligible on the first of the month after 30 days of\nemployment. Spouses and dependent children to age 26 may be enrolled. Coverage ends on the last day of the\nmonth in which employment ends."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "3",
+  "title": "Network",
+  "text": "3. Network\nPPO."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "4",
+  "title": "Schedule of benefits",
+  "text": "4. Schedule of benefits"
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "4.1",
+  "title": "Summary",
+  "text": "4.1 Summary\nBenefit In-network Out-of-network\nDeductible (individual / family) $1,500 / $3,000 $3,000 / $6,000\nCoinsurance 20% 40%\nOut-of-pocket maximum $5,000 / $10,000 $10,000 / $20,000\nAdvanced imaging 20% after deductible, prior authorization 40% after deductible\nrequired\nDurable medical equipment 20% after deductible 40% after deductible"
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "4.2",
+  "title": "Outpatient rehabilitation",
+  "text": "4.2 Outpatient rehabilitation\nOutpatient physical, occupational and speech therapy are limited to a combined 30 visits per plan year. Visits\nbeyond the 12th require prior authorization and are reviewed under Bellcourt medical policy MP-114. Visits above\nthe annual limit are not covered regardless of medical necessity."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "5",
+  "title": "Utilization management and prior authorization",
+  "text": "5. Utilization management and prior authorization"
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "5.1",
+  "title": "Clinical criteria",
+  "text": "5.1 Clinical criteria\nMedical necessity is determined using the Bellcourt medical policy library in effect on the date of service, subject\nto any stricter or more specific provision of this Plan. Where this Plan and a Bellcourt medical policy conflict, this\nPlan controls."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "5.2",
+  "title": "Services requiring prior authorization",
+  "text": "5.2 Services requiring prior authorization\n- Advanced imaging (MRI, CT angiography)\n- Inpatient admissions and all elective surgery\n- Durable medical equipment over $500 (including CGM and CPAP)\n- Sleep studies performed in a facility\n- Genetic testing\n- Hyperbaric oxygen therapy\n- Radiation therapy including proton beam\n- Home health services\n- Outpatient physical, occupational and speech therapy beyond the 12th visit in a plan year"
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "5.3",
+  "title": "Centers of Excellence",
+  "text": "5.3 Centers of Excellence\nReserved."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "5.4",
+  "title": "Decision timeframes",
+  "text": "5.4 Decision timeframes\nUrgent pre-service requests: decision within 72 hours. Non-urgent pre-service requests: decision within 15 days,\nextendable once by 15 days where the extension is necessary and the member is notified."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "5.5",
+  "title": "Adverse determinations",
+  "text": "5.5 Adverse determinations\nAny denial based on medical necessity must be made by a licensed physician. The notice must state the specific\nreason, the plan provision or clinical criteria relied upon, and the member's appeal rights."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "6",
+  "title": "Exclusions and limitations",
+  "text": "6. Exclusions and limitations\nThe following are not covered, or are covered only as described:"
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "6.1",
+  "title": "Cosmetic services Services primarily intended to improve appearance, i",
+  "text": "6.1 Cosmetic services Services primarily intended to improve appearance, including cosmetic rhinoplasty\nand cosmetic eyelid surgery."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "6.2",
+  "title": "Eyelid surgery Blepharoplasty is covered ONLY when formal visual field",
+  "text": "6.2 Eyelid surgery Blepharoplasty is covered ONLY when formal visual field testing shows superior\nvisual field loss of 30 degrees or more. This requirement applies in addition to, and is\nstricter than, the Bellcourt medical policy. Requests with superior field loss below 30\ndegrees are not covered under this Plan."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "6.3",
+  "title": "Experimental and Services considered experimental or investigational u",
+  "text": "6.3 Experimental and Services considered experimental or investigational under Bellcourt medical policy\ninvestigational services MP-117."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "6.4",
+  "title": "Bariatric surgery Covered subject to Bellcourt medical policy MP-102.",
+  "text": "6.4 Bariatric surgery Covered subject to Bellcourt medical policy MP-102."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "6.5",
+  "title": "Infertility treatment Excluded except for diagnostic services.",
+  "text": "6.5 Infertility treatment Excluded except for diagnostic services."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "6.6",
+  "title": "Custodial care Assistance with activities of daily living without a sk",
+  "text": "6.6 Custodial care Assistance with activities of daily living without a skilled need."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "6.7",
+  "title": "Proton beam therapy Covered subject to Bellcourt medical policy MP-113",
+  "text": "6.7 Proton beam therapy Covered subject to Bellcourt medical policy MP-113."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "7",
+  "title": "Claims and appeals",
+  "text": "7. Claims and appeals\nMembers and providers may appeal an adverse determination within 180 days. Appeals of medical necessity\ndecisions are reviewed by a physician not involved in the original decision. External review is available after\ninternal appeals are exhausted."
+ },
+ {
+  "doc_id": "SPD-SORREL",
+  "version": null,
+  "section": "8",
+  "title": "Amendments",
+  "text": "8. Amendments\nNo amendments for the current plan year."
+ },
+ {
+  "doc_id": "REG-01",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "REG-01: CMS Interoperability and Prior\nAuthorization Final Rule (CMS-0057-F)\nTraining summary prepared for the Bellcourt case study. Simplified for learning purposes; not legal advice\nand not a substitute for the source text.\nWho it applies to\nMedicare Advantage organizations, state Medicaid and CHIP programs (fee-for-service and managed care), and\nqualified health plans on the federally facilitated exchanges. It does not apply directly to self-funded employer\nplans. Delegated vendors such as TPAs are bound through their contracts.\nDecision timeframes (from January 2026)\n- Standard requests: decision within 7 calendar days (previously up to 14).\n- Expedited requests: decision within 72 hours.\n- Timeframe requirements apply to MA, Medicaid and CHIP; they do not apply to exchange (ACA) plans.\nDenial reasons\nPayers must give a specific reason for any denial, whatever the channel used to communicate the decision\n(portal, fax, email, mail or phone).\nPublic reporting\nPayers must post annual aggregated metrics: approval rates, denial rates, approvals after appeal, and average\nand median decision times. The first reports, covering 2025, were due March 31, 2026.\nAPIs (from January 2027)\n- Expanded Patient Access API including prior authorization information.\n- Provider Access API.\n- Payer-to-Payer API.\n- Prior Authorization API that can receive requests and return decisions electronically."
+ },
+ {
+  "doc_id": "REG-02",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "REG-02: State Laws on AI in Utilization Review\n(states relevant to Bellcourt)\nTraining summary prepared for the Bellcourt case study. Simplified for learning purposes; not legal advice\nand not a substitute for the source text.\nA wave of state legislation in 2025 and 2026 restricts the use of AI and automated tools in coverage decisions.\nThe common pattern: AI may assist, but a qualified human clinician must make any adverse medical-necessity\ndecision. State insurance laws apply to insured products (Riverbend) and generally NOT to self-funded ERISA\nplans, although sponsors may adopt the same standards voluntarily.\nState Summary of requirement Effective Relevance to Bellcourt\nArizona A licensed medical director must personally review July 1, 2026 Riverbend MA members in AZ\nand sign any denial involving medical necessity; AI\ncannot be the sole basis.\nTexas Written disclosure to patients when AI is used in January 1, Riverbend MA members in TX\nconnection with their health care services; utilization 2026\nreview determinations made by physicians.\nGeorgia Coverage decisions may not be based solely on AI or January 1, Riverbend Marketplace (GA)\nother software tools; human clinical review required 2027\nbefore denial.\nColorado AI used in utilization review must consider individual January 1, No insured Bellcourt business in CO\nclinical history, be audited periodically for accuracy, 2027 (Brightwater is self-funded)\nand not be applied in a discriminatory way; qualified\nprofessional must review medical-necessity denials.\nIllinois Algorithmic downcoding of claims restricted; human January 1, Claims (not prior authorization)\nreview of downcoding required. Self-insured ERISA 2028\nplans excluded.\nCalifornia Physicians Make Decisions Act: medical-necessity January 1, No current Bellcourt business\ndenials must be made by a licensed physician. 2025\nNote: at least ten states had enacted or advanced similar laws by mid-2026, and each defines 'human review'\ndifferently."
+ },
+ {
+  "doc_id": "REG-03",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "REG-03: ERISA, Self-Funded Plans and the Role of\na TPA\nTraining summary prepared for the Bellcourt case study. Simplified for learning purposes; not legal advice\nand not a substitute for the source text.\nSelf-funded versus fully insured\nIn a fully insured plan the employer buys a policy and the insurer bears the claims risk. In a self-funded plan the\nemployer bears the risk, pays claims from its own funds, and usually hires a TPA to administer the plan. Most\nself-funded employers also buy stop-loss insurance to cap catastrophic claims.\nPre-emption\nERISA generally pre-empts state insurance laws for self-funded plans. State mandates (for example, required\ncoverage of particular services) and state AI-in-UR laws therefore generally do not bind self-funded plans. The\nplan document controls what is covered.\nClaims procedure timeframes (29 CFR 2560.503-1)\n- Urgent care claims: 72 hours.\n- Pre-service claims: 15 days, with one 15-day extension if needed.\n- Post-service claims: 30 days, with one 15-day extension.\nNotice content\nAn adverse benefit determination must state the specific reason, reference the plan provision relied on, describe\nany additional information needed and why, and explain the appeal procedure."
+ },
+ {
+  "doc_id": "REG-04",
+  "version": null,
+  "section": "0",
+  "title": "Header",
+  "text": "REG-04: Prior Authorization in 2026, Industry\nContext\nCompiled from public sources; see the source list in the case study.\n- KFF's August 2026 analysis of the first public CMS-mandated metrics found insurers denied 12% (Medicare\nAdvantage), 14% (Medicaid managed care) and 18% (ACA marketplace) of standard prior authorization\nrequests in 2025.\n- Few denials are appealed, but many appeals succeed: KFF reported overturn rates of 67% in Medicare\nAdvantage, 47% in Medicaid managed care and 43% in the marketplace.\n- An AMA survey found practices completed an average of 39 prior authorizations per physician per week in\n2024, with about 13 staff hours a week spent on them.\n- In June 2025, around 50 insurers made voluntary commitments to streamline prior authorization, including\nprocessing a large share of electronic approvals in real time.\n- High-profile controversies over algorithmic denials have driven bipartisan state legislation requiring clinician\nreview of AI-assisted denials."
+ }
+]
