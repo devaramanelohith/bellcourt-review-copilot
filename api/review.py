@@ -1,5 +1,5 @@
 """POST /api/review  {"case_id": "PA-2609-8100"}  or  {"custom": {client_id, service_code, date_of_service, clinical_notes, member_id?}}
-Runs the full pipeline live. Needs OPENROUTER_API_KEY in the environment."""
+Runs the full pipeline live. Needs OPENROUTER_API_KEY or GEMINI_API_KEY in the environment."""
 from http.server import BaseHTTPRequestHandler
 import json, os, sys, glob
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -14,7 +14,7 @@ class handler(BaseHTTPRequestHandler):
     def do_POST(self):
         try:
             from copilot import pipeline, llm, core
-            if not llm.has_key(): return self._send(503, {"error": "Live mode is off: OPENROUTER_API_KEY is not set on the server. Saved results are still available."})
+            if not llm.has_key(): return self._send(503, {"error": "Live mode is off: no model key is set on the server. Saved results are still available."})
             body = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0)) or 0) or b"{}")
             if body.get("case_id"):
                 p = os.path.join(core.ROOT, "data", "open_cases", os.path.basename(body["case_id"]) + ".json")

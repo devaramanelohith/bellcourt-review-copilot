@@ -63,7 +63,7 @@ flowchart LR
 | `copilot/core.py` | Deterministic core: registry, rule resolver, read and search tools, eligibility, clock, de-identification, verifier |
 | `copilot/agent.py` | Prompts and the bounded agent loop (plan, read, review, verify, second check). Fax reading |
 | `copilot/pipeline.py` | `run_case()`: ties the steps together and applies overrides the model cannot undo |
-| `copilot/llm.py` | The only module that calls a model (OpenRouter, standard library only) |
+| `copilot/llm.py` | The only module that calls a model (OpenRouter or the Gemini API, standard library only) |
 | `api/review.py`, `api/ask.py` | Vercel serverless functions: live review, and "ask the policy library" |
 | `public/index.html` | Reviewer screen: worklist, case review, evidence, ask the library, try a request, audit log |
 | `scripts/` | `ingest.py` builds the knowledge base, `run_open.py` and `run_eval.py` produce the evidence, `build_docs.py` builds the PDFs |
@@ -73,7 +73,7 @@ flowchart LR
 
 ```bash
 git clone <this repo> && cd bellcourt-review-copilot
-cp .env.example .env            # put your OpenRouter key in it (optional: the app works in replay mode without one)
+cp .env.example .env            # add an OpenRouter or Gemini key (optional: the app works in replay mode without one)
 python3 scripts/dev_server.py   # needs only Python 3.10+, no packages
 # open http://localhost:8765
 ```
@@ -97,14 +97,24 @@ vercel login
 vercel --prod
 ```
 
-That gives a working public URL in **replay mode** (saved results, no model calls, no cost). To turn on live mode, add the key and redeploy:
+That gives a working public URL in **replay mode** (saved results, no model calls, no cost). To turn on live mode, add one model key and redeploy.
+
+Option A, OpenRouter (recommended, pay as you go):
 
 ```bash
 vercel env add OPENROUTER_API_KEY production
 vercel --prod
 ```
 
-Optional: `LLM_MODEL` (default `google/gemini-2.5-flash`; any OpenRouter model with image input works).
+Option B, Google Gemini API directly:
+
+```bash
+vercel env add GEMINI_API_KEY production
+vercel env add LLM_PROVIDER production     # type: gemini
+vercel --prod
+```
+
+A free-tier Gemini key allows about 20 requests a day per model. One case review makes 3 to 5 calls, so a free key runs out after about 5 cases. Use a paid Gemini key or OpenRouter for a demo. With Gemini only, library search uses keyword ranking (the vector index was built with OpenRouter embeddings).
 
 ## Deliverables
 

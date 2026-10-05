@@ -14,7 +14,8 @@ class handler(BaseHTTPRequestHandler):
             gov = exc = None
             if b.get("client_id") and b.get("service_code") and b.get("date_of_service"):
                 gov, exc = core.governing_set(b["client_id"], b["service_code"], b["date_of_service"])
-            qv = llm.embed([q])[0] if llm.has_key() else None
+            try: qv = llm.embed([q])[0]
+            except Exception: qv = None
             hits = core.search(q, gov, k=6, qvec=qv)
             out = {"hits": [{k: h[k] for k in ("doc_id", "version", "section", "title", "status")} | {"text": h["text"][:400]} for h in hits], "excluded": exc or []}
             if llm.has_key():
