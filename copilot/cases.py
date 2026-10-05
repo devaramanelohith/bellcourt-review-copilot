@@ -7,15 +7,19 @@ RECEIVED = core.DEMO_NOW.strftime("%Y-%m-%d %H:%M")          # demo clock is pin
 DECISIONS = {  # decision -> (roles allowed, resulting status, creates a letter)
     "APPROVED": ({"nurse", "physician"}, "DECIDED", True), "PENDED_INFO": ({"intake", "nurse", "physician"}, "PENDED", True),
     "ROUTED_PHYSICIAN": ({"nurse", "intake"}, "ROUTED", False), "DENIED_MEDICAL_NECESSITY": ({"physician"}, "DECIDED", True), "DENIED_NOT_COVERED": ({"physician"}, "DECIDED", True)}
+# Only a handful of cases are preloaded, one per kind of outcome. Everything else is raised by a user (fax, file or form) and reviewed on demand.
+SAMPLE_IDS = ("PA-2609-8113", "PA-2609-8106", "PA-2609-8100", "PA-2609-8105", "PA-2609-8118")
 _seed = None
 def seeds():
-    """The 30 open cases from the data pack, shown as if imported from PACE and the fax share, with their saved reviews."""
+    """A few sample cases from the data pack, shown as if imported from PACE and the fax share, with their saved reviews."""
     global _seed
     if _seed is None:
         raws = {os.path.basename(f)[:-5]: json.load(open(f)) for f in glob.glob(os.path.join(core.D, "open_cases", "*.json"))}
         _seed = {}
         for rv in json.load(open(os.path.join(core.D, "results", "open_cases.json"))):
-            cid = rv["case"]["case_id"]; rv["case"]["patient_name"] = raws[cid].get("patient_name") or (rv["case"].get("fax") or {}).get("patient_name")
+            cid = rv["case"]["case_id"]
+            if cid not in SAMPLE_IDS: continue
+            rv["case"]["patient_name"] = raws[cid].get("patient_name") or (rv["case"].get("fax") or {}).get("patient_name")
             _seed[cid] = dict(id=cid, status="REVIEWED", raw=raws[cid], review=rv, decision=None, letter_id=None, seeded=True,
                               created=dict(by="System import", ts=raws[cid]["received_ts"], source={"FAX": "Fax share", "PORTAL": "Portal webhook", "PHONE": "PACE (phone)", "ELECTRONIC": "PACE (X12 278)"}[raws[cid]["channel"]]))
     return _seed
@@ -37,11 +41,14 @@ def audit(sess, action, case_id, detail=""):
 
 def create(sess, b):
     """source: form | json | text | fax (image as data URL; a PDF is rendered to an image in the browser first)."""
-    src = b.get("source", "form"); n = len(store.all("case")) + 1; cid = f"PA-2610-{9000 + n}"; image = None
+    src = b.get("source", "form"); existing = store.all("case"); n = len(existing) + 1; cid = f"PA-2610-{9000 + n}"; image = None
     base = dict(case_id=cid, received_ts=RECEIVED, urgency="STANDARD", requesting_provider="", client_id="", source=src)
     if src == "json":
         j = b.get("case") or {}; raw = {**base, **{k: j.get(k) for k in ("channel", "urgency", "client_id", "requesting_provider", "member_id", "patient_name", "patient_dob", "date_of_service", "service_code", "service_requested", "clinical_notes", "icd10") if j.get(k)}}
         raw.setdefault("channel", "PORTAL"); raw["imported_from"] = j.get("case_id")
+        if j.get("received_ts"): raw["received_ts"] = j["received_ts"]                       # keep the original receipt time so the clock is right
+        jid = str(j.get("case_id") or "")
+        if jid.startswith("PA-") and jid not in existing and jid not in seeds(): cid = jid; raw["case_id"] = jid
         if j.get("fax_image") and not j.get("clinical_notes"): raw["fax_image"] = j["fax_image"]; raw["channel"] = "FAX"     # an un-keyed fax case from the pack
     elif src in ("fax", "text"):
         if src == "fax":

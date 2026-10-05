@@ -112,8 +112,8 @@ N = dict(u="nurse", n="Test Nurse", r="nurse"); PH = dict(u="physician", n="Test
 @pytest.fixture(autouse=True)
 def _isolated_store(tmp_path, monkeypatch):
     monkeypatch.setattr(store, "FILE", str(tmp_path / "store.json")); monkeypatch.setattr(store, "URL", ""); yield
-def test_queue_has_30_seeded_cases_sorted_by_priority():
-    q = cases.all_cases(); assert len(q) == 30 and q[0]["priority"]["level"] == "OVERDUE" and q[0]["id"] == "PA-2609-8113"
+def test_queue_starts_with_a_few_samples_sorted_by_priority():
+    q = cases.all_cases(); assert len(q) == len(cases.SAMPLE_IDS) and q[0]["priority"]["level"] == "OVERDUE" and q[0]["id"] == "PA-2609-8113"
 def test_nurse_cannot_deny_and_intake_cannot_approve():
     with pytest.raises(PermissionError): cases.decide(N, "PA-2609-8105", "DENIED_MEDICAL_NECESSITY")
     with pytest.raises(PermissionError): cases.decide(IN, "PA-2609-8100", "APPROVED")
