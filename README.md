@@ -157,6 +157,7 @@ A free-tier Gemini key allows about 20 requests a day per model. One case review
 | Working demo, README, setup | this repository |
 | Evidence it works | `docs/EVIDENCE.md`, Evidence tab in the app |
 | Pitch deck (14 slides) | `docs/Pitch_Deck.pdf` |
+| All of the above as one folder | `deliverables/` |
 | Submission text | `docs/SUBMISSION.md` |
 | Database and email setup | `docs/SETUP_DATABASE_AND_EMAIL.md` |
 
