@@ -101,7 +101,7 @@ Misses:
 
 ## 4. Deterministic tests
 
-`python -m pytest -q` runs 30 tests with no model call: version by date of service, excluded documents, read-tool refusal, eligibility, clock, de-identification, planted-text detection, every verifier check, and no denial in saved results.
+`python -m pytest -q` runs 36 tests with no model call: version by date of service, excluded documents, read-tool refusal, eligibility, clock, de-identification, planted-text detection, every verifier check, and no denial in saved results.
 
 ## Honest limits
 

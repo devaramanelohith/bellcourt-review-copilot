@@ -131,7 +131,9 @@ D += [T([["Rank", "Problem", "Evidence", "Impact", "Fix and pattern"],
       P("Problem 1 is first because it is the only fix that makes Bellcourt both faster and more defensible, which is the CEO's brief; it is the cause Riverbend named; and its rule engine is the foundation for the other two. Problem 2 drives the credits, so the build includes its highest-value slice: catching incompleteness in the first minute instead of after 17 hours.")]
 D += Hd("4. The solution and where it fits")
 D += [P("<b>Bellcourt Review Copilot</b> runs beside PACE and never writes to it. For each request it (1) reads the request, including un-keyed fax images; (2) checks completeness and drafts a fax-back listing exactly what is missing; "
-        "(3) confirms eligibility and starts the clock from receipt; (4) selects the governing documents in code; (5) lets the model plan what to read and check each criterion with an exact quote; (6) verifies the answer; (7) hands a recommendation to a person."),
+        "(3) confirms eligibility and starts the clock from receipt; (4) selects the governing documents in code; (5) lets the model plan what to read and check each criterion with an exact quote; (6) verifies the answer; (7) hands a recommendation to a person. "
+        "The working prototype covers the whole path: a case is raised by form, by uploading a case file, or by uploading a fax image or PDF; it joins a priority queue (overdue, urgent, due soon, standard); a nurse or physician records the decision; "
+        "and a decision letter with the specific reason, the provision relied on and appeal rights is created, downloadable as PDF and sent by email. Sign-in is required and roles are enforced on the server."),
       architecture(CW), P("Architecture. Blue boxes call the model, white boxes are code, green is the human decision. Full-page version: docs/Architecture_Diagram.pdf.", "cap"),
       T([["Design decision", "Why"],
          ["Rule selection is code, not the model", "The failure at Bellcourt is choosing the wrong version. Versions 1 and 2 of a policy are near-identical text and the void memo looks highly relevant, so similarity search alone would repeat the error. A registry with effective dates and authority rank (GOV-01) decides; the model can only read documents that are in force."],
@@ -146,7 +148,7 @@ D += [T([["Test", "Data", "Result"],
          ["Wrongful approvals / denials issued", "Same 120 cases", f"{len(S['wrong_approvals'])} wrongful approvals. {S['outside_allowed']} denials (not possible by design)"],
          ["Open queue", "30 live cases incl. 13 fax images, against my answer key", f"{SC['matched']} of {SC['total']}. Misses fall on the cautious side"],
          ["Adversarial, incomplete, wrong inputs", "Planted instructions (10), policy time-travel (7), missing data and bad inputs (7)", f"{S['adversarial_passed']} of {S['adversarial_total']} pass. The one failure ended in manual review, not a wrong answer"],
-         ["Deterministic unit tests", "Resolver, clock, eligibility, de-identification, verifier, login and roles", "30 of 30 pass"]], [52, 62, 66]),
+         ["Deterministic unit tests", "Resolver, clock, eligibility, de-identification, verifier, login and roles", "36 of 36 pass"]], [52, 62, 66]),
       P(f"Model: {S['model']} through OpenRouter, about {S['avg_latency']} seconds and a third of a US cent per case. Limits: results vary slightly between runs (27 to 29 of 30 on the open queue across runs); prompts were tuned while looking at these cases, so a fresh audit sample is the right next test; only 6 of 38 employer plan documents were in the pack. Full tables: docs/EVIDENCE.md and the Evidence tab of the app.", "cap")]
 D += Hd("6. Success metrics")
 D += [T([["Measure", "Today", "Target", "How measured"],
@@ -189,6 +191,8 @@ I += [P("Design note: technology choices", "t"), P("One page. The stack is delib
          ["Verifier", "Plain code", "Citations must be in force, quotes must exist in the record, outcome must match the checklist, arithmetic on visit limits is recomputed. The model cannot talk its way past code.", "Same"],
          ["Backend", "Python standard library only, two serverless functions", "Zero dependencies means nothing to break at deploy time and a tiny attack surface.", "Azure Functions or a container"],
          ["Screen and access", "One static HTML page. Sign-in with salted password hashes and signed 8-hour sessions; roles enforced on the server", "Case data and fax images are served only to signed-in users. A nurse cannot sign an adverse decision; an auditor cannot run a review.", "Single sign-on with Entra ID, same roles"],
+         ["Storage", "Supabase (Postgres) through its REST API, one table for cases, letters and the audit log. Falls back to a local file", "Serverless functions keep no state, so cases, decisions and letters need a database. One generic table keeps the prototype simple.", "Azure SQL or Postgres inside the tenant, with proper tables"],
+         ["Letters and email", "Letter text built in code from the human decision and the cited provision. A small built-in PDF writer. Gmail SMTP for the demo, delivered only to a configured demo mailbox", "A letter is never generated by the model alone and never sent without a human decision. No extra dependency.", "Bellcourt's correspondence system and print vendor"],
          ["Evidence", "Scripts that write JSON and the PDFs from the same run", "Numbers in the documents cannot drift from the numbers in the app.", "Monthly QA job"]], [26, 44, 70, 40]),
       Spacer(1, 6), P("<b>What I would change with more time:</b> a database-backed audit log instead of browser storage; a fresh held-out audit sample; a stronger model for the review step if the fresh sample shows drift; plan documents for the other 32 employers.")]
 build("Implementation_Strategy_and_Design_Note.pdf", I, "Implementation strategy and design note")
@@ -205,7 +209,7 @@ L = ["# Evidence it works", "", f"Model `{S['model']}`. Generated by `scripts/ru
      "| Case | Expected | Got | | Flags |", "|---|---|---|---|---|"] + [f"| {r[0]} | {r[1]} | {r[2]} | {r[3]} | {r[4]} |" for r in SC["rows"]] + ["",
      "## 3. Adversarial, incomplete and wrong inputs", "", f"{S['adversarial_passed']} of {S['adversarial_total']} pass.", "", "| Test | Expected | Got | |", "|---|---|---|---|"] + \
     [f"| {a['test']} | {a['expected']} | {a['got']} | {'PASS' if a['passed'] else 'FAIL'} |" for a in E["adversarial"]] + ["",
-     "## 4. Deterministic tests", "", "`python -m pytest -q` runs 30 tests with no model call: version by date of service, excluded documents, read-tool refusal, eligibility, clock, de-identification, planted-text detection, every verifier check, and no denial in saved results.", "",
+     "## 4. Deterministic tests", "", "`python -m pytest -q` runs 36 tests with no model call: version by date of service, excluded documents, read-tool refusal, eligibility, clock, de-identification, planted-text detection, every verifier check, and no denial in saved results.", "",
      "## Honest limits", "", "- Results vary slightly between runs because the model is not fully deterministic. Across runs the open queue scored 27 to 29 of 30. Misses were on the cautious side (manual review, need information or physician referral).",
      "- Prompts were tuned while looking at these cases. The right next test is a fresh, random audit sample.", "- The open-case answer key is my reading of the policies, not an official key.", "- Only 6 of 38 employer plan documents are in the pack."]
 open(os.path.join(DOCS, "EVIDENCE.md"), "w").write("\n".join(L) + "\n")
@@ -304,11 +308,12 @@ y = table([["Channel", "What arrives", "How the copilot reads it"],
        ["Portal (31%)", "Structured fields and notes through the portal webhook.", "No reading needed. Straight to the completeness check."],
        ["Phone (15%)", "A call. The agent keys the request during the call.", "The agent types into the New request screen. The tool does not listen to calls. The agent sees what is missing while the caller is on the line."],
        ["Electronic (8%)", "Standard X12 278 transaction; PACE creates the case.", "Read from the PACE read replica as structured fields."]], X0, Y0, [110, 270, Wc - 380], 11)
-bullets(["<b>Incomplete?</b> A fax back to the provider is drafted in the first minute, listing exactly what to send. Intake reviews and sends it.",
-         "<b>Human review.</b> Worklist sorted by time left. Nurse confirms approvals. Only a physician can sign an adverse decision. Roles come from sign-in and are enforced on the server."], X0, y - 14, Wc, 12.5, 7)
+bullets(["<b>Raise a case three ways:</b> upload a fax image or PDF, upload a case file, or fill the form. It joins a priority queue: overdue, urgent, due soon, standard.",
+         "<b>Incomplete?</b> Missing items are listed at once and a request to the provider is drafted. <b>Human decision:</b> approve, pend, route to physician, or (physician only) deny.",
+         "<b>Decision letter</b> is created from the human decision: specific reason, provision cited, appeal rights. PDF download and email. Everything is logged."], X0, y - 12, Wc, 12, 6)
 
 slide("Evidence it works", "Tested on Bellcourt's own audited cases, the live queue, and hostile inputs")
-for i, (a, b, s_, col) in enumerate([(f"{S['tool_correct']}/{S['n']}", "Agrees with the QA auditor", f"Humans: {S['human_correct']}/{S['n']}", GOODC), (f"{SC['matched']}/{SC['total']}", "Open queue incl. 13 faxes", "vs my answer key", NAVY), (f"{S['adversarial_passed']}/{S['adversarial_total']}", "Adversarial, incomplete, wrong inputs", "The 1 failure went to manual review", NAVY), ("30/30", "Unit tests, no model needed", "Resolver, clock, verifier, login", NAVY)]): tile(X0 + i * (tw + 12), Y0, tw, 100, a, b, s_, col)
+for i, (a, b, s_, col) in enumerate([(f"{S['tool_correct']}/{S['n']}", "Agrees with the QA auditor", f"Humans: {S['human_correct']}/{S['n']}", GOODC), (f"{SC['matched']}/{SC['total']}", "Open queue incl. 13 faxes", "vs my answer key", NAVY), (f"{S['adversarial_passed']}/{S['adversarial_total']}", "Adversarial, incomplete, wrong inputs", "The 1 failure went to manual review", NAVY), ("36/36", "Unit tests, no model needed", "Resolver, verifier, login, letters", NAVY)]): tile(X0 + i * (tw + 12), Y0, tw, 100, a, b, s_, col)
 table([["Where humans went wrong", "Copilot correct"], ["A memo overrode the policy", f"{by['MEMO_CONFLICT'][0]} of {by['MEMO_CONFLICT'][1]}"], ["Retired policy version applied", f"{by['OUTDATED_POLICY_VERSION'][0]} of {by['OUTDATED_POLICY_VERSION'][1]}"],
        ["Client plan rule missed", f"{by['CLIENT_RULE_MISSED'][0]} of {by['CLIENT_RULE_MISSED'][1]}"], ["Clinical facts misread", f"{by['CRITERIA_MISREAD'][0]} of {by['CRITERIA_MISREAD'][1]}"]], X0, Y0 - 120, [250, 120], 12)
 bullets(["<b>Planted instructions:</b> 10 of 10 flagged and ignored, plus the two real faxes in the queue.", "<b>Policy time-travel:</b> same record, different service date, correct version each time.", f"<b>Zero wrongful approvals</b> and zero denials on the {S['n']} audited cases.",
@@ -330,12 +335,12 @@ table([["When", "What", "Exit test"], ["Day 0", "Send Riverbend the 60-day notic
 bullets(["<b>Staffing answer:</b> fill the 7.4 vacant nurse posts instead of adding 20. Recovering half the rule-hunting time is worth 9.3 nurses.", "<b>The ask this week:</b> send the notice, withdraw the memo, approve the re-review."], X0, Y0 - 240, Wc, 13, 8)
 
 slide("5. Live demo", "bellcourt-review-copilot.vercel.app")
-table([["Step", "Show", "Point"], ["1", "Sign in as a nurse. Worklist sorted by time left", "Case 8113 is an urgent fax that is already overdue and nobody had keyed it"],
+table([["Step", "Show", "Point"], ["1", "Sign in as a nurse. Queue sorted by priority", "Case 8113 is an urgent fax that is already overdue and nobody had keyed it"],
        ["2", "Case 8100, lumbar MRI", "Picks the current policy by date of service. The old version and the memo are listed as excluded, with reasons. Evidence is quoted"],
        ["3", "Case 8106, fax with a planted \"pre-approved\" note", "Fax read into fields. Note flagged and ignored. Outcome rests on the criteria"],
        ["4", "Case 8120, missing second opinion", "Need information. Fax back to the provider already drafted"],
        ["5", "Case 8105 as nurse, then as physician", "The nurse cannot sign an adverse decision. The tool cannot deny"],
-       ["6", "New request: change the date from 15 Dec 2025 to 5 Jan 2026", "Same record, different policy version, different outcome"],
+       ["6", "New case: upload a fax image, run the review, approve, open the decision letter, email it", "End to end in under a minute: intake, review, human decision, letter"],
        ["7", "Evidence tab and audit trail", f"{S['tool_correct']} of {S['n']} against {S['human_correct']} of {S['n']}. Every step logged"]], X0, Y0, [40, 300, Wc - 340], 12)
 c.save()
 
@@ -351,7 +356,7 @@ open(os.path.join(DOCS, "SUBMISSION.md"), "w").write(f"""# Submission-ready text
 - 🔗 **Submission:** https://github.com/devaramanelohith/bellcourt-review-copilot
 - ▶️ **Demo:** https://bellcourt-review-copilot.vercel.app (sign-in required; demo logins: [paste from DEMO_LOGINS.txt]) · video: [your recording link]
 - 🔍 **Problems I found:** (1) Reviewers apply the wrong rule: 34% of 2026 denials cite a retired policy version and 91% of those are overturned. (2) The clock is lost at intake: 66 of 69 late decisions arrived incomplete, and faxes wait 17 hours before keying. (3) No status visibility: 67% of calls ask where a request is.
-- 🎯 **What I built:** Wrong-rule decisions and late detection of incomplete requests, solved using Agentic RAG with a deterministic rule resolver and a human decision at the end, built with Python (standard library), Gemini 2.5 Flash via OpenRouter, a metadata registry plus vector index, and Vercel. On Bellcourt's 120 audited cases it agrees with the auditor on {S['tool_correct']} ({pct(S['tool_correct'], S['n'])}) against {S['human_correct']} ({pct(S['human_correct'], S['n'])}) for the original human decisions, with zero wrongful approvals.
+- 🎯 **What I built:** Wrong-rule decisions and late detection of incomplete requests, solved using Agentic RAG with a deterministic rule resolver and a human decision at the end, built with Python (standard library), Gemini 2.5 Flash via OpenRouter, a metadata registry plus vector index, Supabase, and Vercel. Cases can be raised by form, case file, fax image or PDF; a nurse or physician decides; a decision letter is generated and emailed. On Bellcourt's 120 audited cases it agrees with the auditor on {S['tool_correct']} ({pct(S['tool_correct'], S['n'])}) against {S['human_correct']} ({pct(S['human_correct'], S['n'])}) for the original human decisions, with zero wrongful approvals.
 ```
 
 ## Deliverables checklist
@@ -372,6 +377,6 @@ open(os.path.join(DOCS, "SUBMISSION.md"), "w").write(f"""# Submission-ready text
 - **How I found it:** tested each stakeholder claim against the request file, the QA audit, staffing and call logs. Staffing does not explain the misses.
 - **Approach and why:** Agentic RAG. Plain RAG would retrieve the retired version; an autonomous agent is not allowed to decide. Code selects the rules, the model reads and checks, a person decides.
 - **Architecture:** intake, member and clock, rule resolver, review agent, verifier, reviewer screen, audit log. Read-only beside PACE.
-- **Live demo:** cases 8113, 8100, 8106, 8120, 8105, then New request with two dates, then Evidence.
+- **Live demo:** cases 8113, 8100, 8106, 8120, 8105, then raise a new case from a fax image, decide it, open and email the decision letter, then Evidence.
 """)
 print("Pitch_Deck.pdf", len(PdfReader(os.path.join(DOCS, "Pitch_Deck.pdf")).pages), "slides")

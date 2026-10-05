@@ -105,3 +105,29 @@ def test_token_roundtrip_tamper_and_expiry():
     old = base64.urlsafe_b64encode(j.dumps({"u": "nurse", "r": "nurse", "n": "x", "exp": 1}).encode()).decode().rstrip("=")
     assert auth.check(old + "." + auth._sign(old)) is None and auth.check("garbage") is None
 def test_auditor_role_is_read_only(): assert "auditor" not in auth.CAN_RUN_LIVE and {"nurse", "physician", "intake"} <= auth.CAN_RUN_LIVE
+
+# ---- case workflow, letters, PDF (no model calls: uses the saved reviews of seeded cases)
+from copilot import cases, store, letters
+N = dict(u="nurse", n="Test Nurse", r="nurse"); PH = dict(u="physician", n="Test Physician", r="physician"); IN = dict(u="intake", n="Test Intake", r="intake")
+@pytest.fixture(autouse=True)
+def _isolated_store(tmp_path, monkeypatch):
+    monkeypatch.setattr(store, "FILE", str(tmp_path / "store.json")); monkeypatch.setattr(store, "URL", ""); yield
+def test_queue_has_30_seeded_cases_sorted_by_priority():
+    q = cases.all_cases(); assert len(q) == 30 and q[0]["priority"]["level"] == "OVERDUE" and q[0]["id"] == "PA-2609-8113"
+def test_nurse_cannot_deny_and_intake_cannot_approve():
+    with pytest.raises(PermissionError): cases.decide(N, "PA-2609-8105", "DENIED_MEDICAL_NECESSITY")
+    with pytest.raises(PermissionError): cases.decide(IN, "PA-2609-8100", "APPROVED")
+def test_override_needs_a_reason():
+    with pytest.raises(ValueError): cases.decide(N, "PA-2609-8105", "APPROVED")          # recommendation was route to physician
+    c = cases.decide(N, "PA-2609-8105", "APPROVED", "Peer-to-peer supplied the missing test result"); assert c["decision"]["override"]
+def test_approval_creates_letter_and_audit_entries():
+    c = cases.decide(N, "PA-2609-8100", "APPROVED"); L = store.get("letter", c["letter_id"])
+    assert c["status"] == "DECIDED" and "APPROVED" in L["body"] and "MP-101 v2" in L["body"] and "AI-assisted" in L["body"]
+    assert [a["action"] for a in store.all("audit").values()] == ["DECISION_APPROVED"]
+def test_route_then_physician_denial_letter_has_reason_citation_and_appeal_rights():
+    assert cases.decide(N, "PA-2609-8105", "ROUTED_PHYSICIAN")["letter_id"] is None
+    c = cases.decide(PH, "PA-2609-8105", "DENIED_MEDICAL_NECESSITY"); L = store.get("letter", c["letter_id"])
+    for must in ("DENIED", "SPECIFIC REASON", "MP-104 v1", "RIGHT TO APPEAL", "180 days", "licensed in Arizona"): assert must in L["body"]
+def test_letter_pdf_is_a_valid_pdf():
+    c = cases.decide(N, "PA-2609-8100", "APPROVED"); pdf = letters.to_pdf(store.get("letter", c["letter_id"]))
+    assert pdf.startswith(b"%PDF-1.4") and pdf.rstrip().endswith(b"%%EOF") and b"Notice of Approval" in pdf

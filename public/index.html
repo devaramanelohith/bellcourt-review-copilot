@@ -1,151 +1,217 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Bellcourt Review Copilot</title>
 <style>
-:root{--ink:#0b0b0b;--sec:#52514e;--mut:#898781;--line:#e1e0d9;--bg:#f9f9f7;--card:#fff;--navy:#104281;--blue:#2a78d6;--tint:#f1f6fd;
---good:#0a7a0a;--goodbg:#e8f6e8;--warn:#9a5b00;--warnbg:#fdf3dc;--bad:#b42a2a;--badbg:#fbe9e9;--vio:#4a3aa7;--viobg:#eeebfa}
-*{box-sizing:border-box}body{margin:0;font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
-header{background:var(--navy);color:#fff;padding:12px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-header h1{font-size:17px;margin:0}header small{opacity:.8}header .sp{flex:1}
-select,button,input,textarea{font:inherit}header select{padding:4px 6px;border-radius:6px;border:0}
-nav{display:flex;gap:4px;padding:0 16px;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto}
-nav button{border:0;background:none;padding:11px 12px;cursor:pointer;color:var(--sec);border-bottom:3px solid transparent;white-space:nowrap}
-nav button.on{color:var(--navy);border-color:var(--navy);font-weight:600}
-main{max-width:1180px;margin:0 auto;padding:16px}
-.banner{background:var(--warnbg);color:var(--warn);padding:7px 12px;border-radius:8px;font-size:12.5px;margin-bottom:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:12px}
-h2{font-size:15px;margin:0 0 8px}h3{font-size:13px;margin:12px 0 5px;color:var(--sec);text-transform:uppercase;letter-spacing:.03em}
-table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;color:var(--sec);font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line);background:#f4f4f1}
-td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}tr.row{cursor:pointer}tr.row:hover{background:var(--tint)}
-.chip{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11.5px;font-weight:600;white-space:nowrap}
-.APPROVE_READY{background:var(--goodbg);color:var(--good)}.NEED_INFO{background:var(--warnbg);color:var(--warn)}
-.ROUTE_PHYSICIAN{background:var(--viobg);color:var(--vio)}.ROUTE_NOT_COVERED{background:var(--badbg);color:var(--bad)}.MANUAL_REVIEW{background:#eee;color:#444}
-.flag{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:11px;margin:1px 2px 1px 0;color:var(--sec)}
-.flag.hot{border-color:var(--bad);color:var(--bad)}
-.grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:12px}@media(max-width:900px){.grid{grid-template-columns:1fr}}
-.kv{display:grid;grid-template-columns:150px 1fr;gap:3px 10px;font-size:13px}.kv b{color:var(--sec);font-weight:500}
-pre,.mono{font:12px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;background:#f6f6f3;border-radius:8px;padding:10px;margin:6px 0}
-img.fax{width:100%;border:1px solid var(--line);border-radius:8px}
-.out{padding:12px 14px;border-radius:10px;margin-bottom:10px}.out b{font-size:16px}
-.st{font-weight:700;font-size:11.5px}.MET{color:var(--good)}.NOT_MET{color:var(--bad)}.NOT_DOCUMENTED{color:var(--warn)}.NOT_APPLICABLE{color:var(--mut)}
-q{color:var(--sec);font-style:italic}.muted{color:var(--mut);font-size:12.5px}
-.btn{border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:8px;padding:7px 12px;cursor:pointer;margin:3px 4px 3px 0}
-.btn.alt{background:#fff;color:var(--navy)}.btn:disabled{opacity:.4;cursor:not-allowed}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.tile{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px}
-.tile .n{font-size:26px;font-weight:700;color:var(--navy)}.tile .l{font-weight:600;font-size:13px}.tile .s{color:var(--sec);font-size:12px}
-textarea,input[type=text],input[type=date],select.f{width:100%;padding:7px;border:1px solid var(--line);border-radius:8px;background:#fff}
-.ex{color:var(--bad)}.trace li{margin-bottom:4px;font-size:12.5px}
-</style></head><body>
-<header><div><h1>Bellcourt Review Copilot</h1><small>Agentic RAG for prior authorization review. The tool recommends, a person decides.</small></div><div class="sp"></div>
-<small id="who"></small><small id="live"></small><button id="out" class="btn alt" style="display:none;padding:4px 10px" onclick="logout()">Sign out</button></header>
-<nav id="nav"></nav><main><div class="banner">Training prototype. Bellcourt, Riverbend and every patient here are fictional and all data is synthetic. Clock is pinned to 26 Sep 2026, 09:00.</div><div id="view"></div></main>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#0f172a;--sec:#475569;--mut:#94a3b8;--line:#e2e8f0;--side:#0b1530;--side2:#131f40;--pri:#3b5bdb;--pri2:#2f4ac0;--tint:#eef2ff;
+--g:#0f7a3d;--gb:#e7f6ec;--a:#a15c00;--ab:#fff4dc;--r:#b42318;--rb:#fdecea;--v:#5b3fc4;--vb:#efeafd;--sh:0 1px 2px rgba(15,23,42,.05),0 4px 16px rgba(15,23,42,.05)}
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}a{color:var(--pri);text-decoration:none}
+#app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+aside{background:linear-gradient(180deg,var(--side),var(--side2));color:#cbd5e1;padding:18px 14px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:10px;align-items:center;padding:4px 8px 16px}.logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#5b7cfa,#8b5cf6);display:grid;place-items:center;color:#fff;font-weight:800}
+.brand b{color:#fff;font-size:15px;display:block;line-height:1.1}.brand small{font-size:11px;color:#94a3b8}
+.nv{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;cursor:pointer;color:#cbd5e1;border:0;background:none;width:100%;text-align:left}
+.nv:hover{background:rgba(255,255,255,.06)}.nv.on{background:rgba(99,125,255,.22);color:#fff;font-weight:600}.nv .ct{margin-left:auto;background:rgba(255,255,255,.12);border-radius:99px;padding:0 8px;font-size:11.5px}
+.nv svg{width:17px;height:17px;flex:none;opacity:.9}.sp{flex:1}.me{background:rgba(255,255,255,.06);border-radius:12px;padding:10px;font-size:12.5px}.me b{color:#fff;display:block}
+.sv{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0 0}.sv span{font-size:10.5px;padding:1px 7px;border-radius:99px;background:rgba(255,255,255,.1)}.sv .ok{background:rgba(34,197,94,.25);color:#bbf7d0}.sv .no{background:rgba(250,204,21,.2);color:#fde68a}
+main{padding:22px 28px 60px;max-width:1380px;width:100%}
+.top{display:flex;align-items:flex-end;gap:12px;margin-bottom:16px;flex-wrap:wrap}.top h1{font-size:22px;margin:0;letter-spacing:-.01em}.top p{margin:2px 0 0;color:var(--sec)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh);padding:16px 18px;margin-bottom:14px}
+.card h2{font-size:14.5px;margin:0 0 10px;display:flex;align-items:center;gap:8px}.card h3{font-size:11.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 6px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:14px}.kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--sh)}
+.kpi .n{font-size:28px;font-weight:750;letter-spacing:-.02em}.kpi .l{color:var(--sec);font-size:12.5px}
+table{width:100%;border-collapse:collapse}th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);font-weight:600}
+td{padding:10px;border-bottom:1px solid #eef2f6;vertical-align:top}tr.rw{cursor:pointer}tr.rw:hover td{background:#f8faff}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:99px;font-size:11.5px;font-weight:650;white-space:nowrap}
+.APPROVE_READY,.APPROVED,.MET,.ok{background:var(--gb);color:var(--g)}.NEED_INFO,.PENDED_INFO,.PENDED,.NOT_DOCUMENTED,.DUE_SOON{background:var(--ab);color:var(--a)}
+.ROUTE_PHYSICIAN,.ROUTED_PHYSICIAN,.ROUTED{background:var(--vb);color:var(--v)}.ROUTE_NOT_COVERED,.DENIED_MEDICAL_NECESSITY,.DENIED_NOT_COVERED,.NOT_MET,.OVERDUE{background:var(--rb);color:var(--r)}
+.URGENT{background:#ffe8d9;color:#b54708}.STANDARD,.NOT_APPLICABLE,.MANUAL_REVIEW,.NEW,.REVIEWED,.DECIDED{background:#eef2f6;color:var(--sec)}.NEW{background:#e0f2fe;color:#075985}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:0 6px;font-size:11px;color:var(--sec);margin:1px 3px 1px 0;background:#fff}.tag.hot{border-color:#f5b5ae;color:var(--r);background:#fff8f7}
+.btn{border:1px solid var(--pri);background:var(--pri);color:#fff;border-radius:10px;padding:8px 14px;cursor:pointer;font-weight:600;display:inline-flex;gap:6px;align-items:center}
+.btn:hover{background:var(--pri2)}.btn.g{background:#fff;color:var(--ink);border-color:var(--line)}.btn.g:hover{background:#f8fafc}.btn.d{background:#fff;color:var(--r);border-color:#f1b8b2}.btn.ok2{background:var(--g);border-color:var(--g)}
+.btn:disabled{opacity:.4;cursor:not-allowed}.btn.sm{padding:4px 10px;font-size:12.5px;border-radius:8px}
+.seg{display:inline-flex;background:#e9edf3;border-radius:10px;padding:3px}.seg button{border:0;background:none;padding:6px 12px;border-radius:8px;cursor:pointer;color:var(--sec);font-weight:600}.seg button.on{background:#fff;color:var(--ink);box-shadow:var(--sh)}
+input[type=text],input[type=password],input[type=date],select,textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(59,91,219,.15)}label{display:block;font-size:12.5px;color:var(--sec);font-weight:600;margin-bottom:10px}label>*{margin-top:4px;font-weight:400;color:var(--ink)}
+.grid2{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:14px}.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:1000px){#app{grid-template-columns:1fr}aside{position:static;height:auto}.grid2,.g3,.g2{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:140px 1fr;gap:5px 12px}.kv b{color:var(--sec);font-weight:500}
+pre{font:12.5px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:12px;margin:6px 0}
+.rec{border-radius:14px;padding:16px 18px;margin-bottom:14px;border:1px solid}.rec.APPROVE_READY{background:linear-gradient(180deg,#f0fbf4,#fff);border-color:#bfe6cc}.rec.NEED_INFO{background:linear-gradient(180deg,#fff8e8,#fff);border-color:#f2d9a0}
+.rec.ROUTE_PHYSICIAN{background:linear-gradient(180deg,#f5f1ff,#fff);border-color:#d6caf7}.rec.ROUTE_NOT_COVERED{background:linear-gradient(180deg,#fff1ef,#fff);border-color:#f3c2bc}.rec.MANUAL_REVIEW{background:#f8fafc;border-color:var(--line)}
+.rec .big{font-size:19px;font-weight:750;letter-spacing:-.01em}.ic{width:22px;height:22px;border-radius:50%;display:inline-grid;place-items:center;font-size:12px;font-weight:800;flex:none}
+.steps{display:flex;gap:0;margin:0 0 14px}.steps div{flex:1;text-align:center;font-size:12px;color:var(--mut);position:relative;padding-top:22px}.steps div:before{content:"";position:absolute;top:6px;left:50%;width:12px;height:12px;border-radius:50%;background:#cbd5e1;transform:translateX(-50%);z-index:1}
+.steps div:after{content:"";position:absolute;top:11px;left:-50%;width:100%;height:2px;background:#e2e8f0}.steps div:first-child:after{display:none}.steps .dn{color:var(--ink);font-weight:600}.steps .dn:before{background:var(--pri)}.steps .dn:after{background:var(--pri)}
+.muted{color:var(--sec);font-size:12.5px}q{color:var(--sec);font-style:italic}.drop{border:2px dashed #c7d2fe;border-radius:14px;padding:26px;text-align:center;background:#f8f9ff;cursor:pointer}.drop:hover{background:#eef2ff}
+.paper{background:#fff;border:1px solid var(--line);border-radius:6px;box-shadow:0 8px 30px rgba(15,23,42,.1);padding:34px 40px;font:13.5px/1.6 Georgia,serif;white-space:pre-wrap;max-width:760px}
+#toast{position:fixed;bottom:22px;right:22px;background:#0f172a;color:#fff;padding:11px 16px;border-radius:12px;box-shadow:var(--sh);display:none;z-index:50;max-width:420px}
+#modal{position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;place-items:center;z-index:40;padding:20px}#modal .box{background:#fff;border-radius:16px;max-width:860px;width:100%;max-height:86vh;overflow:auto;padding:20px 24px}
+.sec.hit{background:#fffbea;border-left:3px solid #f59e0b;padding-left:10px}.login{min-height:100vh;display:grid;place-items:center;background:radial-gradient(1200px 600px at 20% 0,#1d2b5c,#0b1530)}
+.login .card{width:390px;padding:28px}.bar{height:5px;border-radius:9px;background:#e9edf3;overflow:hidden;margin-top:4px;width:90px}.bar i{display:block;height:100%}
+img.fax{width:100%;border:1px solid var(--line);border-radius:10px}.spin{display:inline-block;width:14px;height:14px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:s .7s linear infinite}@keyframes s{to{transform:rotate(360deg)}}
+</style></head><body><div id="root"></div><div id="toast"></div><div id="modal" onclick="if(event.target.id=='modal')closeModal()"><div class="box" id="mbox"></div></div>
 <script>
-const $=s=>document.querySelector(s), esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const LABEL={APPROVE_READY:"Approve-ready",NEED_INFO:"Need information",ROUTE_PHYSICIAN:"Route to physician",ROUTE_NOT_COVERED:"Route: not covered",MANUAL_REVIEW:"Manual review"};
-const TABS=["Worklist","Case review","How it works","New request","Ask the library","Evidence","Audit log"];
-let S={tab:"Worklist",cases:[],ev:null,cur:null,live:false,model:""}, HOT=["EMBEDDED_INSTRUCTION","OVERDUE","NOT_ELIGIBLE_ON_DOS","UNVERIFIED_OUTPUT","MISSING_MEMBER_ID"];
-const audit=()=>JSON.parse(localStorage.getItem("audit")||"[]"), role=()=>S.me?S.me.role_label:"";
-let TOKEN=sessionStorage.getItem("tok")||"";
-async function api(path,body){const r=await fetch(path,{method:body?"POST":"GET",headers:TOKEN?{Authorization:"Bearer "+TOKEN}:{},body:body?JSON.stringify(body):undefined});
- if(r.status==401&&path!="/api/login"){logout();throw new Error("Session expired. Sign in again.")}return r.json()}
-function logout(){TOKEN="";sessionStorage.removeItem("tok");S.me=null;$("#nav").innerHTML="";$("#who").textContent="";$("#live").textContent="";$("#out").style.display="none";loginView()}
-function loginView(msg){$("#view").innerHTML=`<div class="card" style="max-width:380px;margin:40px auto"><h2>Sign in</h2><div class="muted">Access is limited to Bellcourt utilization management staff. Every action is recorded against your account.</div>
- <form onsubmit="doLogin(event)" style="margin-top:10px"><label>Username<input type="text" id="lu" autocomplete="username" autofocus></label><div style="height:8px"></div>
- <label>Password<input type="password" id="lp" autocomplete="current-password" style="width:100%;padding:7px;border:1px solid var(--line);border-radius:8px"></label>
- <div class="ex" style="min-height:20px;margin-top:6px">${esc(msg||"")}</div><button class="btn" type="submit">Sign in</button></form></div>`}
-async function doLogin(e){e.preventDefault();const r=await api("/api/login",{username:$("#lu").value,password:$("#lp").value}).catch(x=>({error:String(x)}));
- if(r.error)return loginView(r.error);TOKEN=r.token;sessionStorage.setItem("tok",TOKEN);start(r)}
-async function start(me){S.me=me;S.live=me.live&&me.can_run_live;S.model=me.model;$("#who").textContent=me.name+" · "+me.role_label;$("#out").style.display="";
- $("#live").textContent=me.live?"Live mode: "+me.model:"Replay mode (saved results)";$("#view").innerHTML='<div class="card">Loading the queue...</div>';
- [S.cases,S.ev,S.score]=await Promise.all(["open_cases","eval","open_score"].map(f=>api("/api/data?name="+f)));nav();render()}
-function nav(){$("#nav").innerHTML=TABS.map(t=>`<button class="${t==S.tab?"on":""}" onclick="go('${t}')">${t}</button>`).join("")}
-function go(t){S.tab=t;nav();render()}
-const chip=o=>`<span class="chip ${o}">${LABEL[o]||o}</span>`, flags=f=>(f||[]).map(x=>`<span class="flag ${HOT.includes(x.code)?"hot":""}" title="${esc(x.detail)}">${x.code}</span>`).join("");
-function worklist(){const rows=[...S.cases].sort((a,b)=>a.clock.hours_remaining-b.clock.hours_remaining);
- const n=o=>S.cases.filter(c=>c.result.outcome==o).length;
- return `<div class="tiles" style="margin-bottom:12px">${["APPROVE_READY","NEED_INFO","ROUTE_PHYSICIAN","ROUTE_NOT_COVERED","MANUAL_REVIEW"].map(o=>`<div class="tile"><div class="n">${n(o)}</div><div class="l">${LABEL[o]}</div></div>`).join("")}
- <div class="tile"><div class="n">${S.cases.filter(c=>c.case.channel=="FAX").length}</div><div class="l">Faxes read by the tool</div><div class="s">None had been keyed into PACE</div></div></div>
- <div class="card"><h2>Open queue, most urgent first (${rows.length} requests)</h2><table><tr><th>Case</th><th>Client</th><th>Channel</th><th>Service</th><th>Due</th><th>Hours left</th><th>Recommendation</th><th>Flags</th></tr>
- ${rows.map(c=>`<tr class="row" onclick="openCase('${c.case.case_id}')"><td><b>${c.case.case_id.slice(-4)}</b></td><td>${c.case.client_id}</td><td>${c.case.channel}</td><td>${esc(c.case.service_requested||"not identified")}</td>
- <td>${c.clock.due} ${c.clock.effective_urgency=="URGENT"?'<span class="flag hot">URGENT</span>':""}</td><td class="${c.clock.hours_remaining<0?"ex":""}"><b>${c.clock.hours_remaining}</b></td><td>${chip(c.result.outcome)}</td><td>${flags(c.flags)}</td></tr>`).join("")}</table></div>`}
-function openCase(id){S.cur=S.cases.find(c=>c.case.case_id==id);go("Case review")}
-function checks(list){return (list||[]).map(c=>`<tr><td><span class="st ${c.status}">${c.status}</span></td><td>${esc(c.criterion)}${c.evidence_quote?`<br><q>"${esc(c.evidence_quote)}"</q>`:""}${c.note?`<br><span class="muted">${esc(c.note)}</span>`:""}</td><td class="muted">${esc((c.source||{}).doc_id||"")} ${esc((c.source||{}).version||"")} s${esc((c.source||{}).section||"")}</td></tr>`).join("")}
-function caseView(c){if(!c)return `<div class="card">Pick a case from the worklist.</div>`;const k=c.case,r=c.result,ps=r.primary_source||{};
- const decided=audit().filter(a=>a.case_id==k.case_id).slice(-1)[0];
- const rk=S.me.role,canApprove=rk=="nurse"||rk=="physician",canAdverse=rk=="physician",canSend=rk!="auditor";
- return `<div class="grid"><div>
- <div class="card"><h2>Request ${k.case_id}</h2><div class="kv"><b>Client</b><span>${k.client_id} (${c.eligibility.member_state||"state unknown"})</span><b>Channel</b><span>${k.channel}</span><b>Received</b><span>${k.received_ts}</span>
- <b>Decision due</b><span>${c.clock.due} (${c.clock.sla_hours}h clock from receipt, ${c.clock.hours_remaining}h left)</span><b>Service</b><span>${esc(k.service_requested)} ${k.service_code?`(${k.service_code})`:""}</span>
- <b>Date of service</b><span>${esc(k.date_of_service)}</span><b>Member ID</b><span>${esc(k.member_id||"missing")}</span><b>Eligibility</b><span>${c.eligibility.status}: ${esc(c.eligibility.reason)}</span></div>
- <h3>Flags</h3>${(c.flags||[]).map(f=>`<div><span class="flag ${HOT.includes(f.code)?"hot":""}">${f.code}</span> <span class="muted">${esc(f.detail)}</span></div>`).join("")||'<span class="muted">None</span>'}
- <h3>Clinical record sent to the model (identifiers removed)</h3><pre>${esc(c.record)}</pre>
- ${k.fax_image?`<h3>Original fax</h3><img class="fax" src="/api/data?fax=${k.fax_image.split("/").pop()}&t=${TOKEN}"><h3>Fields read from the fax</h3><pre>${esc(JSON.stringify(k.fax,null,1))}</pre>`:""}</div></div>
- <div><div class="out ${r.outcome}"><b>${LABEL[r.outcome]}</b>${c.expected?` <span class="muted">answer key: ${LABEL[c.expected]}</span>`:""}<div style="margin-top:6px">${esc(r.rationale)}</div>
- ${ps.doc_id?`<div class="muted" style="margin-top:6px">Deciding provision: <b>${esc(ps.doc_id)} ${esc(ps.version||"")}, Section ${esc(ps.section)}</b></div>`:""}</div>
- <div class="card"><h2>Which rules govern this case</h2><table><tr><th>Document</th><th>Rank</th><th>In force</th><th>Why</th></tr>${(c.governing||[]).map(g=>`<tr><td><b>${g.doc_id} ${g.version||""}</b><br><span class="muted">${esc(g.title)}</span></td><td>${g.rank}</td><td>${g.effective_from||""} ${g.effective_to?"to "+g.effective_to:""}</td><td class="muted">${esc(g.why)}</td></tr>`).join("")}</table>
- ${(c.excluded||[]).length?`<h3>Deliberately not used</h3>${c.excluded.map(e=>`<div class="ex">&#10005; <b>${e.doc_id} ${e.version||""}</b> <span class="muted">${esc(e.reason)}</span></div>`).join("")}`:""}</div>
- <div class="card"><h2>Checklist with evidence</h2><table><tr><th>Status</th><th>Coverage under the plan</th><th>Source</th></tr>${checks(r.coverage_checks)}<tr><th>Status</th><th>Medical necessity criteria</th><th>Source</th></tr>${checks(r.criteria)}</table>
- ${(r.missing_information||[]).length?`<h3>Missing information</h3><ul>${r.missing_information.map(m=>`<li>${esc(m)}</li>`).join("")}</ul>`:""}</div>
- ${c.info_request?`<div class="card"><h2>Draft fax back to the provider</h2><div class="muted">Prepared at intake so the provider hears the same hour. A person reviews and sends it.</div><pre>${esc(c.info_request)}</pre></div>`:""}
- ${r.letter_paragraph?`<div class="card"><h2>Draft letter paragraph (for the human decision maker)</h2><pre>${esc(r.letter_paragraph)}</pre></div>`:""}
- <div class="card"><h2>Human decision</h2>${decided?`<div class="banner" style="background:var(--goodbg);color:var(--good)">Recorded: ${esc(decided.action)} by ${esc(decided.role)} at ${decided.ts}</div>`:""}
- <button class="btn" ${canApprove&&r.outcome=="APPROVE_READY"?"":"disabled"} onclick="decide('Approved')">Confirm approval</button>
- <button class="btn alt" ${canSend&&c.info_request?"":"disabled"} onclick="decide('Information request sent to provider')">Send information request</button>
- <button class="btn alt" ${canSend?"":"disabled"} onclick="decide('Routed to physician queue')">Route to physician</button>
- <button class="btn alt" ${canAdverse?"":"disabled"} onclick="decide('Adverse determination signed by physician')">Sign adverse determination</button>
- <button class="btn alt" ${canSend?"":"disabled"} onclick="decide('Recommendation overridden: '+(prompt('Reason for override (required)')||'no reason given'))">Override</button>
- <div class="muted">The tool has no deny button. Only the physician role can sign an adverse determination. Nothing is written to PACE.</div>
- ${S.live?`<button class="btn alt" onclick="rerun()">Run review again, live</button>`:""}</div>
- <div class="card"><h2>Audit trail for this run</h2><div class="muted">Model ${esc(c.model)}, prompt ${esc(c.prompt_version)}, ${c.usage.calls||0} model calls, ${c.usage.in||0} tokens in, ${c.usage.out||0} out, ${c.latency_s}s</div>
- <ul class="trace">${(c.trace||[]).map(t=>`<li><b>${t.step}</b> ${esc(JSON.stringify(Object.fromEntries(Object.entries(t).filter(([k])=>k!="step"))))}</li>`).join("")}</ul></div></div></div>`}
-function decide(action){const a=audit();a.push({ts:new Date().toISOString().slice(0,19).replace("T"," "),case_id:S.cur.case.case_id,role:S.me.name+" ("+role()+")",action,tool_outcome:S.cur.result.outcome,model:S.cur.model});localStorage.setItem("audit",JSON.stringify(a));render()}
-async function rerun(){$("#view").insertAdjacentHTML("afterbegin",'<div class="banner">Running live review...</div>');const r=await api("/api/review",{case_id:S.cur.case.case_id}).catch(x=>({error:String(x)}));if(r.error)return alert(r.error);r.expected=S.cur.expected;S.cases[S.cases.indexOf(S.cur)]=r;S.cur=r;render()}
-function evidence(){const e=S.ev,s=e.summary,p=(a,b)=>(100*a/b).toFixed(1)+"%",sc=S.score;
- return `<div class="tiles" style="margin-bottom:12px"><div class="tile"><div class="n">${p(s.tool_correct,s.n)}</div><div class="l">Tool agrees with the QA auditor</div><div class="s">${s.tool_correct} of ${s.n} audited cases</div></div>
- <div class="tile"><div class="n">${p(s.human_correct,s.n)}</div><div class="l">Human reviewers, same cases</div><div class="s">${s.human_correct} of ${s.n}. Contract standard is 95%</div></div>
- <div class="tile"><div class="n">${s.wrong_approvals.length}</div><div class="l">Wrongful approvals</div><div class="s">Cases the tool called approve-ready that the auditor did not</div></div>
- <div class="tile"><div class="n">${s.outside_allowed}</div><div class="l">Denials issued by the tool</div><div class="s">Not possible by design, and tested</div></div>
- <div class="tile"><div class="n">${s.adversarial_passed}/${s.adversarial_total}</div><div class="l">Adversarial, incomplete and wrong-input tests</div></div>
- <div class="tile"><div class="n">${sc.matched}/${sc.total}</div><div class="l">Open queue vs answer key</div></div></div>
- <div class="card"><h2>By the kind of mistake the human reviewer made</h2><table><tr><th>Auditor's error type on the original human decision</th><th>Tool correct</th></tr>${Object.entries(s.by_error_type).map(([k,v])=>`<tr><td>${k=="NONE"?"No human error":k}</td><td>${v[0]} of ${v[1]}</td></tr>`).join("")}</table>
- <div class="muted">Governing document and version correct on ${s.source_correct} of ${s.n}. Average ${s.avg_latency}s and ${s.avg_tokens_in+s.avg_tokens_out} tokens per case with ${esc(s.model)}.</div></div>
- <div class="card"><h2>Adversarial, incomplete and wrong inputs</h2><table><tr><th>Test</th><th>Expected</th><th>Got</th><th>Result</th></tr>${e.adversarial.map(a=>`<tr><td>${esc(a.test)}</td><td>${chip(a.expected)}</td><td>${chip(a.got)}</td><td class="${a.passed?"MET":"NOT_MET"} st">${a.passed?"PASS":"FAIL"}</td></tr>`).join("")}</table></div>
- <div class="card"><h2>Every miss on the audited cases</h2><table><tr><th>Case</th><th>Service</th><th>Auditor</th><th>Tool</th></tr>${e.qa.filter(r=>r.tool!=r.truth).map(r=>`<tr><td>${r.id} ${r.client}</td><td>${esc(r.service)}</td><td>${r.truth}</td><td>${r.tool}</td></tr>`).join("")}</table></div>`}
-function ask(){return `<div class="card"><h2>Ask the policy library</h2><div class="muted">Search is limited to the documents in force for the client and date you pick. Retired versions and memos come back labelled, never as the rule.</div>
- <div class="grid" style="margin-top:8px"><div><label>Question<textarea id="q" rows="3">How many weeks of conservative therapy are needed before a lumbar MRI?</textarea></label></div>
- <div><label>Client <select id="qc" class="f">${["HARLAN","KESTREL","BRIGHT","JUNIPER","SORREL","OSTR","RB-MA","RB-ACA"].map(c=>`<option>${c}</option>`).join("")}</select></label>
- <label>Service <select id="qs" class="f">${SVC.map(s=>`<option value="${s[0]}">${s[1]}</option>`).join("")}</select></label><label>Date of service <input type="date" id="qd" value="2026-10-02"></label></div></div>
- <button class="btn" onclick="doAsk()">Ask</button><div id="ans"></div></div>`}
-async function doAsk(){$("#ans").innerHTML='<div class="muted">Searching...</div>';const r=await api("/api/ask",{question:$("#q").value,client_id:$("#qc").value,service_code:$("#qs").value,date_of_service:$("#qd").value}).catch(e=>({error:String(e)}));
- $("#ans").innerHTML=r.error?`<div class="banner">${esc(r.error)}</div>`:`<h3>Answer</h3><pre>${esc(r.answer)}</pre><div class="muted">Citations: ${esc((r.citations||[]).join("; "))}</div><h3>Passages retrieved</h3>${r.hits.map(h=>`<div><span class="flag ${h.status=="GOVERNING"?"":"hot"}">${h.status}</span> <b>${h.doc_id} ${h.version||""} s${h.section}</b> <span class="muted">${esc(h.text.slice(0,160))}...</span></div>`).join("")}${(r.excluded||[]).map(e=>`<div class="ex">&#10005; ${e.doc_id} ${e.version||""}: <span class="muted">${esc(e.reason)}</span></div>`).join("")}`}
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const L={APPROVE_READY:"Approve-ready",NEED_INFO:"Need information",ROUTE_PHYSICIAN:"Route to physician",ROUTE_NOT_COVERED:"Not covered: route",MANUAL_REVIEW:"Manual review",APPROVED:"Approved",PENDED_INFO:"Pended for information",ROUTED_PHYSICIAN:"Routed to physician",
+DENIED_MEDICAL_NECESSITY:"Denied: medical necessity",DENIED_NOT_COVERED:"Denied: not covered",NEW:"New, not reviewed",REVIEWED:"Awaiting decision",ROUTED:"With physician",PENDED:"Waiting on provider",DECIDED:"Decided",OVERDUE:"Overdue",URGENT:"Urgent",DUE_SOON:"Due soon",STANDARD:"Standard",
+MET:"Met",NOT_MET:"Not met",NOT_DOCUMENTED:"Not documented",NOT_APPLICABLE:"n/a"};
+const I={q:'<path d="M3 5h14M3 10h14M3 15h9"/>',n:'<path d="M10 4v12M4 10h12"/>',l:'<path d="M3 5h14v10H3zM3 6l7 5 7-5"/>',b:'<path d="M4 3h9l3 3v11H4zM7 9h6M7 12h6"/>',h:'<circle cx="10" cy="10" r="7"/><path d="M10 9v5M10 6.5v.5"/>',e:'<path d="M4 16V9M10 16V4M16 16v-5"/>',a:'<path d="M5 4h10v13H5zM8 8h4M8 11h4"/>'};
+const ic=k=>`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${I[k]}</svg>`;
+const NAV=[["Queue","q"],["New case","n"],["Decision letters","l"],["Policy library","b"],["How it works","h"],["Evidence","e"],["Audit log","a"]];
+const CLIENTS=[["HARLAN","Harlan Freight Lines"],["KESTREL","Kestrel Precision Manufacturing"],["BRIGHT","Brightwater Unified School District"],["JUNIPER","Juniper Foods Cooperative"],["SORREL","Sorrel Hospitality Group"],["OSTR","Ostrander Regional Medical Center"],["RB-MA","Riverbend Medicare Advantage"],["RB-ACA","Riverbend Marketplace"]];
 const SVC=[["BHA-IMG-0721","Lumbar spine MRI"],["BHA-SURG-4310","Bariatric surgery"],["BHA-DME-2103","Continuous glucose monitor"],["BHA-DX-9581","In-lab sleep study"],["BHA-SURG-2988","Knee arthroscopy"],["BHA-SURG-2744","Total knee replacement"],["BHA-LAB-8162","BRCA genetic test"],["BHA-SURG-1582","Upper eyelid surgery"],["BHA-SURG-3052","Septoplasty"],["BHA-SURG-6350","Spinal cord stimulator trial"],["BHA-VASC-3647","Varicose vein ablation"],["BHA-THER-1830","Hyperbaric oxygen"],["BHA-RAD-5205","Proton beam therapy"],["BHA-REH-9711","Physical therapy beyond 12 visits"],["BHA-IMG-7519","Coronary CT angiography"],["BHA-HH-0550","Home health"],["BHA-DME-0601","CPAP continued coverage"]];
-function tryIt(){return `<div class="card"><h2>New request: phone call, portal or electronic</h2><div class="muted">This is the screen a call-center agent or intake coordinator uses while the provider is on the line. The same pipeline runs for every channel. Try changing the date of service to before or after a policy change, or leave out the therapy sentence, and watch the outcome change.</div>
- <div class="grid" style="margin-top:8px"><div><label>Channel <select id="tch" class="f"><option>PHONE</option><option>PORTAL</option><option>ELECTRONIC</option></select></label>
- <label>Client <select id="tc" class="f">${["HARLAN","KESTREL","BRIGHT","JUNIPER","SORREL","OSTR","RB-MA","RB-ACA"].map(c=>`<option>${c}</option>`).join("")}</select></label>
- <label>Member ID (optional) <input type="text" id="tm" placeholder="for example BHA30169508"></label>
- <label>Service <select id="ts" class="f">${SVC.map(s=>`<option value="${s[0]}">${s[1]}</option>`).join("")}</select></label><label>Date of service <input type="date" id="td" value="2025-12-15"></label>
- <label>Urgency <select id="tu" class="f"><option>STANDARD</option><option>URGENT</option></select></label></div>
- <div><label>Clinical notes (typed by the agent, or pasted from the portal)<textarea id="tn" rows="11">Patient presents with low back pain radiating down the left leg in an L5 distribution with positive straight-leg raise. Has completed 5 weeks of PT and scheduled naproxen without adequate relief. Requesting MRI lumbar spine without contrast.</textarea></label></div></div>
- <button class="btn" onclick="doTry()" ${S.live?"":"disabled"}>Run review</button> ${S.live?"":'<span class="muted">Not available: your role is read-only, or live mode is off on this server.</span>'}</div><div id="tr"></div>`}
-async function doTry(){$("#tr").innerHTML='<div class="banner">Running: completeness check, resolve rules, read sections, check criteria, verify...</div>';const r=await api("/api/review",{custom:{channel:$("#tch").value,client_id:$("#tc").value,member_id:$("#tm").value.trim(),service_code:$("#ts").value,date_of_service:$("#td").value,urgency:$("#tu").value,clinical_notes:$("#tn").value}}).catch(e=>({error:String(e)}));
- if(r.error){$("#tr").innerHTML=`<div class="banner">${esc(r.error)}</div>`;return}S.cur=r;$("#tr").innerHTML=caseView(r)}
-function how(){const ch=[["FAX","46% of requests","A fax image lands on the fax share. Nobody has typed anything.","A vision model transcribes the form into fields (member ID, service, date, diagnosis code, clinical text). Blank fields are detected. The fax timestamp starts the clock."],
- ["PORTAL","31%","The provider fills a web form. The portal calls our webhook with structured fields and notes.","No reading step needed. Fields arrive structured, so the request goes straight to the completeness check."],
- ["PHONE","15%","A provider office calls. Today the call-center agent keys the request into PACE during the call.","The agent types into the New request screen (or PACE, which we read through the read replica). The tool does not listen to calls or transcribe audio. The agent sees what is missing while the caller is still on the line."],
- ["ELECTRONIC","8%","A hospital system sends a standard X12 278 transaction through a clearinghouse. PACE creates the case.","Read from the PACE read replica as structured fields. Same pipeline from there."]];
- const steps=[["1 Intake and completeness","Code + model (fax only)","Every channel is turned into the same case record. Required fields are checked at once: member ID, service, date of service, clinical notes, diagnosis code. If anything is missing, a fax back to the provider is drafted in the first minute, listing exactly what to send. Text that tries to instruct the reviewer is flagged."],
- ["2 Member and clock","Code","Eligibility is checked on the date of service. The decision clock starts at receipt: 72 hours urgent, 7 days Riverbend Medicare Advantage, 15 days otherwise. State rules are attached (Arizona, Texas, Georgia)."],
- ["3 Which rules govern","Code","A registry of all 38 documents (type, client, version, effective dates, authority rank) selects the plan document, the Riverbend addendum and the policy version in force on the date of service. Retired versions and memos are excluded and shown with the reason."],
- ["4 Review","Model with tools","The model plans which sections to read, reads only governing documents, and checks every criterion. Each MET or NOT MET needs an exact quote from the clinical record. Identifiers are removed first."],
- ["5 Verify","Code + second model pass","Code rejects citations that are not in force, quotes that are not in the record, and outcomes that contradict the checklist. Every approval gets a skeptical second check. A failure goes to manual review."],
- ["6 Human decision","Person","The worklist is sorted by time left. A nurse confirms an approval. Intake sends the information request. Only a physician can sign an adverse determination. The tool has no deny outcome and writes nothing to PACE. Every action is logged."]];
- return `<div class="card"><h2>How a request arrives, by channel</h2><table><tr><th>Channel</th><th>Share</th><th>What arrives</th><th>How the copilot reads it</th></tr>${ch.map(c=>`<tr><td><b>${c[0]}</b></td><td>${c[1]}</td><td>${c[2]}</td><td>${c[3]}</td></tr>`).join("")}</table>
- <div class="muted" style="margin-top:6px">In this queue: ${["FAX","PORTAL","PHONE","ELECTRONIC"].map(c=>S.cases.filter(x=>x.case.channel==c).length+" "+c.toLowerCase()).join(", ")}.</div></div>
- <div class="card"><h2>One pipeline for every request</h2><table><tr><th>Step</th><th>Who does it</th><th>What happens</th></tr>${steps.map(c=>`<tr><td><b>${c[0]}</b></td><td>${c[1]}</td><td>${c[2]}</td></tr>`).join("")}</table></div>
- <div class="card"><h2>Who can do what</h2><table><tr><th>Role</th><th>Run a review</th><th>Confirm approval</th><th>Send information request</th><th>Sign adverse determination</th></tr>
- ${[["Intake coordinator","Yes","No","Yes","No"],["Nurse reviewer","Yes","Yes","Yes","No"],["Physician reviewer","Yes","Yes","Yes","Yes"],["Auditor","No","No","No","No"],["The copilot itself","n/a","Never","Drafts only","Never"]].map(r=>`<tr>${r.map((x,i)=>`<td>${i?x:"<b>"+x+"</b>"}</td>`).join("")}</tr>`).join("")}</table>
- <div class="muted" style="margin-top:6px">The four outcomes: approve-ready, need information, route to physician, route as not covered. Roles are enforced on the server from your sign-in, not chosen on the page.</div></div>`}
-function auditView(){const a=audit().reverse();return `<div class="card"><h2>Human decisions recorded in this browser</h2><div class="muted">In production this is a database table next to PACE, kept for Riverbend audits. Each model run also stores its inputs, sources, versions, tool trace and output (see "Audit trail" on any case).</div>
- <table><tr><th>Time</th><th>Case</th><th>Role</th><th>Action</th><th>Tool recommended</th></tr>${a.map(x=>`<tr><td>${x.ts}</td><td>${x.case_id}</td><td>${esc(x.role)}</td><td>${esc(x.action)}</td><td>${chip(x.tool_outcome)}</td></tr>`).join("")||'<tr><td colspan=5 class="muted">No decisions yet. Open a case and record one.</td></tr>'}</table></div>`}
-function render(){$("#view").innerHTML={"Worklist":worklist,"Case review":()=>caseView(S.cur),"How it works":how,"New request":tryIt,"Evidence":evidence,"Ask the library":ask,"Audit log":auditView}[S.tab]()}
-(async()=>{if(!TOKEN)return loginView();const me=await fetch("/api/login",{headers:{Authorization:"Bearer "+TOKEN}}).then(r=>r.ok?r.json():null).catch(()=>null);me?start(me):logout()})();
+let S={tab:"Queue",cases:[],letters:[],audit:[],server:{},cur:null,me:null,filter:"mine",search:"",ev:null,score:null,letter:null},TOKEN=sessionStorage.getItem("tok")||"";
+async function api(path,body){const r=await fetch(path,{method:body?"POST":"GET",headers:TOKEN?{Authorization:"Bearer "+TOKEN}:{},body:body?JSON.stringify(body):undefined});
+ if(r.status==401&&path!="/api/login"){logout();throw new Error("Session expired. Sign in again.")}const j=await r.json();if(j&&j.error)throw new Error(j.error);return j}
+function toast(m){const t=$("#toast");t.textContent=m;t.style.display="block";clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display="none",4200)}
+function openModal(h){$("#mbox").innerHTML=h;$("#modal").style.display="grid"}function closeModal(){$("#modal").style.display="none"}
+const pill=(k,t)=>`<span class="pill ${k}">${esc(t||L[k]||k)}</span>`,HOT=["EMBEDDED_INSTRUCTION","OVERDUE","NOT_ELIGIBLE_ON_DOS","UNVERIFIED_OUTPUT","MISSING_MEMBER_ID","MEMBER_NOT_VERIFIED"];
+const tags=f=>(f||[]).map(x=>`<span class="tag ${HOT.includes(x.code)?"hot":""}" title="${esc(x.detail)}">${x.code.replace(/_/g," ").toLowerCase()}</span>`).join("");
+function logout(){TOKEN="";sessionStorage.removeItem("tok");S.me=null;loginView()}
+function loginView(msg){$("#root").innerHTML=`<div class="login"><div class="card"><div class="brand" style="padding:0 0 14px"><div class="logo">B</div><div><b style="color:var(--ink);font-size:17px">Bellcourt Review Copilot</b><small style="color:var(--sec)">Utilization management workspace</small></div></div>
+ <form onsubmit="doLogin(event)"><label>Username<input type="text" id="lu" autocomplete="username" autofocus></label><label>Password<input type="password" id="lp" autocomplete="current-password"></label>
+ <div style="color:var(--r);min-height:20px;font-size:13px">${esc(msg||"")}</div><button class="btn" style="width:100%;justify-content:center" type="submit">Sign in</button></form>
+ <p class="muted" style="margin:14px 0 0">Access is limited to authorized staff. Every action is recorded against your account. Training prototype with synthetic data.</p></div></div>`}
+async function doLogin(e){e.preventDefault();try{const r=await api("/api/login",{username:$("#lu").value,password:$("#lp").value});TOKEN=r.token;sessionStorage.setItem("tok",TOKEN);S.me=r;await load();shell()}catch(x){loginView(x.message)}}
+async function load(){const d=await api("/api/cases");Object.assign(S,{cases:d.cases,letters:d.letters,audit:d.audit,server:d.server});if(S.cur)S.cur=S.cases.find(c=>c.id==S.cur.id)||S.cur}
+const oc=c=>c.review?c.review.result.outcome:null;
+function mine(c){const r=S.me.role,o=oc(c);if(c.status=="DECIDED")return false;if(r=="auditor")return true;
+ if(r=="intake")return c.status=="NEW"||c.status=="PENDED"||(c.status=="REVIEWED"&&o=="NEED_INFO");
+ if(r=="nurse")return c.status=="NEW"||(c.status=="REVIEWED");
+ return c.status=="ROUTED"||(c.status=="REVIEWED"&&(o=="ROUTE_PHYSICIAN"||o=="ROUTE_NOT_COVERED"||o=="MANUAL_REVIEW"))}
+function shell(){const m=S.cases.filter(mine).length,sv=S.server;$("#root").innerHTML=`<div id="app"><aside><div class="brand"><div class="logo">B</div><div><b>Review Copilot</b><small>Bellcourt Health Administrators</small></div></div>
+ ${NAV.map(([t,k])=>`<button class="nv ${t==S.tab?"on":""}" onclick="go('${t}')">${ic(k)}${t}${t=="Queue"?`<span class="ct">${m}</span>`:t=="Decision letters"?`<span class="ct">${S.letters.length}</span>`:""}</button>`).join("")}
+ <div class="sp"></div><div class="me"><b>${esc(S.me.name)}</b>${esc(S.me.role_label)}<div class="sv"><span class="${sv.live?"ok":"no"}">${sv.live?"Model live":"Model off"}</span><span class="${sv.storage=="supabase"?"ok":"no"}">${sv.storage=="supabase"?"Supabase":"Local store"}</span><span class="${sv.email?"ok":"no"}">${sv.email?"Email on":"Email off"}</span></div>
+ <button class="btn g sm" style="margin-top:10px;width:100%;justify-content:center" onclick="logout()">Sign out</button></div></aside><main id="view"></main></div>`;render()}
+function go(t){S.tab=t;shell();window.scrollTo(0,0)}
+function head(t,p,extra=""){return `<div class="top"><div><h1>${t}</h1><p>${p}</p></div><div class="sp" style="flex:1"></div>${extra}</div>`}
+// ---------------------------------------------------------------- queue
+function queue(){const open=S.cases.filter(c=>c.status!="DECIDED"),k=l=>open.filter(c=>c.priority.level==l).length;
+ let rows=S.filter=="mine"?S.cases.filter(mine):S.filter=="open"?open:S.filter=="new"?S.cases.filter(c=>!c.seeded):S.cases.filter(c=>c.status=="DECIDED");
+ const q=S.search.toLowerCase();if(q)rows=rows.filter(c=>JSON.stringify([c.id,c.raw.client_id,c.raw.service_requested,c.raw.patient_name,c.raw.channel]).toLowerCase().includes(q));
+ return head(`Work queue`,`Sorted by time left on the decision clock. The clock starts when the request is received, on any channel.`,`<button class="btn" onclick="go('New case')">${ic("n")} New case</button>`)+
+ `<div class="kpis"><div class="kpi"><div class="n" style="color:var(--r)">${k("OVERDUE")}</div><div class="l">Overdue</div></div><div class="kpi"><div class="n" style="color:#b54708">${k("URGENT")}</div><div class="l">Urgent or due within 24 hours</div></div>
+ <div class="kpi"><div class="n">${S.cases.filter(mine).length}</div><div class="l">Waiting for you (${esc(S.me.role_label)})</div></div><div class="kpi"><div class="n">${S.cases.filter(c=>c.status=="ROUTED").length}</div><div class="l">With a physician</div></div>
+ <div class="kpi"><div class="n" style="color:var(--g)">${S.cases.filter(c=>c.status=="DECIDED").length}</div><div class="l">Decided</div></div></div>
+ <div class="card"><div style="display:flex;gap:12px;align-items:center;margin-bottom:8px;flex-wrap:wrap"><div class="seg">${[["mine","My queue"],["open","All open"],["new","Raised here"],["done","Decided"]].map(([v,t])=>`<button class="${S.filter==v?"on":""}" onclick="S.filter='${v}';render()">${t}</button>`).join("")}</div>
+ <input type="text" placeholder="Search case, client, service, member" style="max-width:300px" value="${esc(S.search)}" oninput="S.search=this.value;clearTimeout(this.t);this.t=setTimeout(()=>{render();const i=document.querySelector('input[placeholder^=Search]');i.focus();i.setSelectionRange(99,99)},250)"><span class="muted">${rows.length} cases</span></div>
+ <table><tr><th>Priority</th><th>Case</th><th>Plan</th><th>Service</th><th>Decision due</th><th>Recommendation</th><th>Status</th></tr>
+ ${rows.map(c=>{const p=c.priority,o=oc(c),w=Math.max(4,Math.min(100,100-p.hours_remaining/3.6)),col=p.level=="OVERDUE"?"var(--r)":p.level=="URGENT"?"#f97316":p.level=="DUE_SOON"?"#f59e0b":"#94a3b8";
+ return `<tr class="rw" onclick="openCase('${c.id}')"><td>${pill(p.level)}</td><td><b>${c.id}</b><div class="muted">${esc(c.raw.channel)} · ${esc(c.created.source)}</div></td><td>${esc(c.raw.client_id||"not set")}<div class="muted">${esc(c.raw.patient_name||"")}</div></td>
+ <td>${esc(c.raw.service_requested||(c.review&&c.review.case.service_requested)||"not identified")}${c.review?`<div>${tags(c.review.flags.slice(0,3))}</div>`:""}</td>
+ <td>${p.due}<div class="bar"><i style="width:${w}%;background:${col}"></i></div><span class="muted">${p.hours_remaining<0?Math.abs(p.hours_remaining)+"h overdue":p.hours_remaining+"h left"}</span></td>
+ <td>${c.decision?pill(c.decision.type):o?pill(o):'<span class="muted">Run review</span>'}</td><td>${pill(c.status)}</td></tr>`}).join("")||`<tr><td colspan=7 class="muted" style="padding:26px;text-align:center">Nothing here. Try "All open".</td></tr>`}</table></div>`}
+function openCase(id){S.cur=S.cases.find(c=>c.id==id);go("Case")}
+// ---------------------------------------------------------------- case page
+const src=s=>s&&s.doc_id?`<a href="#" onclick="event.preventDefault();showDoc('${s.doc_id}','${s.version||""}','${s.section||""}')">${esc(s.doc_id)} ${esc(s.version||"")}${s.section?", §"+esc(s.section):""}</a>`:"";
+const mark=st=>st=="MET"?`<span class="ic ok">✓</span>`:st=="NOT_MET"?`<span class="ic NOT_MET">✕</span>`:st=="NOT_DOCUMENTED"?`<span class="ic NEED_INFO">?</span>`:`<span class="ic STANDARD">–</span>`;
+function crit(list,empty){return list&&list.length?`<table>${list.map(c=>`<tr><td style="width:34px">${mark(c.status)}</td><td><b>${esc(c.criterion)}</b>${c.evidence_quote?`<div><q>${esc(String(c.evidence_quote).replace(/^"+|"+$/g,""))}</q></div>`:""}${c.note?`<div class="muted">${esc(c.note)}</div>`:""}</td><td style="width:170px;text-align:right">${pill(c.status)}<div class="muted" style="margin-top:3px">${src(c.source)}</div></td></tr>`).join("")}</table>`:`<div class="muted">${empty}</div>`}
+async function showDoc(doc,ver,sec){openModal('<div class="muted">Loading document...</div>');try{const ss=await api(`/api/cases?sections=${doc}&version=${ver}`);
+ openModal(`<div style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><h2 style="margin:0;font-size:17px">${esc(doc)} ${esc(ver)}</h2><div style="flex:1"></div><a class="btn g sm" target="_blank" href="/api/cases?doc=${doc}&version=${ver}&t=${TOKEN}">Open original PDF</a><button class="btn g sm" onclick="closeModal()">Close</button></div>
+ <div class="muted" style="margin-bottom:8px">Text as ingested into the knowledge base. The cited section is highlighted.</div>${ss.map(s=>`<div class="sec ${sec&&(s.section==sec||s.section.startsWith(sec+"."))?"hit":""}" id="s${s.section}"><pre style="border:0;background:none;padding:6px 0;margin:0">${esc(s.text)}</pre></div>`).join("")}`);
+ const h=document.querySelector(".sec.hit");if(h)h.scrollIntoView({block:"center"})}catch(e){openModal(esc(e.message))}}
+function caseView(){const c=S.cur;if(!c)return head("Case","Pick a case from the queue.");const k=c.raw,rv=c.review,r=rv&&rv.result,role=S.me.role,st=c.status,step=st=="NEW"?1:st=="DECIDED"||st=="PENDED"?(c.letter_id?5:4):3;
+ const steps=["Received","Intake check","AI-assisted review","Human decision","Decision letter"];
+ const img=c.image||(k.fax_image?`/api/data?fax=${k.fax_image.split("/").pop()}&t=${TOKEN}`:"");const cc=rv?rv.case:k;const fx=cc.fax||k.fax;
+ let h=head(`${c.id} ${pill(c.priority.level)} ${pill(st)}`,`${esc(cc.service_requested||"Service not identified")} · ${esc(k.client_id||"client not set")} · due ${c.priority.due} (${c.priority.hours_remaining<0?Math.abs(c.priority.hours_remaining)+"h overdue":c.priority.hours_remaining+"h left"})`,`<button class="btn g" onclick="go('Queue')">Back to queue</button>`)
+ +`<div class="grid2"><div>`;
+ h+=`<div class="card"><h2>Case details</h2><div class="kv"><b>Raised by</b><span>${esc(c.created.by)} via ${esc(c.created.source)}</span><b>Channel</b><span>${esc(k.channel)}</span><b>Received</b><span>${esc(k.received_ts)}</span><b>Member</b><span>${esc(k.patient_name||(fx&&fx.patient_name)||"not provided")}</span>
+ <b>Member ID</b><span>${esc(cc.member_id||"missing")}</span><b>Plan / client</b><span>${esc(k.client_id||"not set")}${rv&&rv.eligibility.member_state?" ("+rv.eligibility.member_state+")":""}</span><b>Provider</b><span>${esc(cc.requesting_provider||"")}</span>
+ <b>Service</b><span>${esc(cc.service_requested||"")} ${cc.service_code?"("+cc.service_code+")":""}</span><b>Date of service</b><span>${esc(cc.date_of_service||"missing")}</span><b>Diagnosis code</b><span>${esc(cc.icd10||"not provided")}</span>
+ <b>Urgency</b><span>${esc(k.urgency||"STANDARD")}${k.urgency_form&&k.urgency_form!=k.urgency?" (form says "+esc(k.urgency_form)+")":""}</span>${rv?`<b>Eligibility</b><span>${pill(rv.eligibility.status=="ELIGIBLE"?"MET":rv.eligibility.status=="NOT_ELIGIBLE"?"NOT_MET":"NOT_DOCUMENTED",rv.eligibility.status)} ${esc(rv.eligibility.reason)}</span>`:""}</div>
+ ${(c.intake_gaps||rv&&rv.intake_gaps||[]).length?`<h3>Intake check: missing</h3>${(c.intake_gaps||rv.intake_gaps).map(g=>`<div>${mark("NOT_DOCUMENTED")} ${esc(g)}</div>`).join("")}`:`<h3>Intake check</h3><div>${mark("MET")} All required fields present</div>`}
+ ${rv&&rv.flags.length?`<h3>Flags</h3>${rv.flags.map(f=>`<div style="margin-bottom:4px"><span class="tag ${HOT.includes(f.code)?"hot":""}">${f.code.replace(/_/g," ").toLowerCase()}</span> <span class="muted">${esc(f.detail)}</span></div>`).join("")}`:""}</div>
+ <div class="card"><h2>Clinical record</h2><div class="muted">${rv?"As sent to the model, with identifiers removed.":"As received."}</div><pre>${esc(rv?rv.record:(k.clinical_notes||"No clinical notes."))}</pre>
+ ${img?`<h3>Original document</h3><img class="fax" src="${img}">`:""}${fx?`<h3>Fields read from the document</h3><pre>${esc(JSON.stringify(fx,null,1))}</pre>`:""}</div></div><div>`;
+ if(!rv){h+=`<div class="card"><h2>Ready for review</h2><p class="muted">The copilot will confirm eligibility, select the governing rules for this client and date of service, read the relevant policy sections, check each criterion against the record and recommend an action.</p>
+ ${k.client_id?"":`<label>Client is not set. Choose it:<select id="setc">${CLIENTS.map(x=>`<option value="${x[0]}">${x[1]}</option>`).join("")}</select></label>`}
+ <button class="btn" id="rb" onclick="runReview()" ${role=="auditor"?"disabled":""}>Run review</button></div></div></div>`;return h}
+ const ps=r.primary_source||{},o=r.outcome;
+ h+=`<div class="rec ${o}"><div style="display:flex;gap:10px;align-items:center"><div class="big">Recommendation: ${L[o]}</div><div style="flex:1"></div>${c.expected?"":""}<button class="btn g sm" onclick="runReview()" ${role=="auditor"||st=="DECIDED"?"disabled":""} id="rb">Re-run</button></div>
+ <h3 style="margin-top:10px">Why</h3><div>${esc(r.rationale)}</div>${ps.doc_id?`<h3>Deciding provision</h3><div>${src(ps)} <span class="muted">Click to read the source.</span></div>`:""}</div>
+ <div class="card"><h2>1. Is it covered under the plan?</h2>${crit(r.coverage_checks,"No plan exclusion, limit or special condition applies to this request.")}
+ ${r.plan_limit_check?`<div class="muted" style="margin-top:6px">Visit limit check: ${r.plan_limit_check.used} used + ${r.plan_limit_check.requested} requested against an annual limit of ${r.plan_limit_check.annual_limit}.</div>`:""}</div>
+ <div class="card"><h2>2. Is it medically necessary?</h2>${crit(r.criteria,"Not evaluated.")}<div class="muted" style="margin-top:8px">Criteria logic satisfied: <b>${r.criteria_logic_satisfied?"Yes":"No"}</b>. Every Met or Not met is backed by an exact quote from the record.</div>
+ ${(r.missing_information||[]).length?`<h3>Information to request</h3>${r.missing_information.map(m=>`<div>${mark("NOT_DOCUMENTED")} ${esc(m)}</div>`).join("")}`:""}</div>
+ <div class="card"><h2>Reference documents</h2><table><tr><th>Document</th><th>Authority</th><th>In force</th><th></th></tr>${rv.governing.map(g=>`<tr><td><b>${g.doc_id} ${g.version||""}</b><div class="muted">${esc(g.title)}</div></td><td>Rank ${g.rank}<div class="muted">${esc(g.why.replace(/\(rank \d\)/,""))}</div></td><td>${g.effective_from||"current"}${g.effective_to?" to "+g.effective_to:""}</td>
+ <td style="white-space:nowrap"><button class="btn g sm" onclick="showDoc('${g.doc_id}','${g.version||""}','${ps.doc_id==g.doc_id?ps.section||"":""}')">Read</button> <a class="btn g sm" target="_blank" href="/api/cases?doc=${g.doc_id}&version=${g.version||""}&t=${TOKEN}">PDF</a></td></tr>`).join("")}</table>
+ ${rv.excluded.length?`<h3>Deliberately not used</h3>${rv.excluded.map(e=>`<div><span class="ic NOT_MET">✕</span> <b>${e.doc_id} ${e.version||""}</b> <span class="muted">${esc(e.reason)}</span></div>`).join("")}`:""}</div>`;
+ const D=[["APPROVED","Approve","ok2",["nurse","physician"],"APPROVE_READY"],["PENDED_INFO","Pend for information","g",["intake","nurse","physician"],"NEED_INFO"],["ROUTED_PHYSICIAN","Route to physician","g",["nurse","intake"],"ROUTE_PHYSICIAN"],
+ ["DENIED_MEDICAL_NECESSITY","Deny: medical necessity","d",["physician"],"ROUTE_PHYSICIAN"],["DENIED_NOT_COVERED","Deny: not covered","d",["physician"],"ROUTE_NOT_COVERED"]];
+ const done=st=="DECIDED"||st=="PENDED";
+ h+=`<div class="card" style="border-color:#c7d2fe"><h2>Human decision</h2>${c.decision?`<div class="rec" style="border-color:var(--line);background:#f8fafc;margin-bottom:10px">${pill(c.decision.type)} by <b>${esc(c.decision.by)}</b> at ${c.decision.ts}${c.decision.override?' <span class="tag hot">override</span>':""}${c.decision.note?`<div class="muted">Reason: ${esc(c.decision.note)}</div>`:""}
+ ${c.letter_id?`<div style="margin-top:8px"><button class="btn sm" onclick="openLetter('${c.letter_id}')">View decision letter</button></div>`:st=="ROUTED"?`<div class="muted" style="margin-top:6px">Waiting for a physician to decide. No letter yet.</div>`:""}</div>`:""}
+ ${done?"":`<div class="muted" style="margin-bottom:8px">The copilot recommends; you decide. Only a physician can deny. A decision letter is created from your decision.</div>
+ <label>Note or reason (required if you differ from the recommendation)<textarea id="dn" rows="2"></textarea></label>
+ ${D.map(([d,t,cl,roles,rec])=>`<button class="btn ${rec==o||(d=="ROUTED_PHYSICIAN"&&o=="ROUTE_NOT_COVERED")?(cl=="g"?"":cl):cl=="ok2"?"g":cl}" style="margin:0 6px 6px 0" ${roles.includes(role)?"":"disabled title='Not available to your role'"} onclick="decide('${d}')">${t}</button>`).join("")}
+ <div class="muted">Signed in as ${esc(S.me.role_label)}. Buttons your role cannot use are disabled, and the server enforces the same rule.</div>`}</div>
+ ${rv.info_request&&!c.letter_id?`<div class="card"><h2>Draft request to the provider</h2><pre>${esc(rv.info_request)}</pre></div>`:""}
+ </div></div>`;return h}
+async function busy(id,fn){const b=$("#"+id),t=b&&b.innerHTML;if(b){b.disabled=true;b.innerHTML='<span class="spin" style="border-color:currentColor;border-top-color:transparent"></span> Working...'}try{await fn()}catch(e){toast(e.message)}finally{if(b&&document.body.contains(b)){b.disabled=false;b.innerHTML=t}}}
+function runReview(){busy("rb",async()=>{const sel=$("#setc");if(sel){S.cur.raw.client_id=sel.value}const c=await api("/api/cases",{action:"review",id:S.cur.id,client_id:sel&&sel.value});await load();S.cur=S.cases.find(x=>x.id==c.id);render();toast("Review complete: "+L[c.review.result.outcome])})}
+async function decide(d){try{const c=await api("/api/cases",{action:"decide",id:S.cur.id,decision:d,note:$("#dn").value});await load();S.cur=S.cases.find(x=>x.id==c.id);shell();toast(L[d]+(c.letter_id?". Decision letter created.":"."))}catch(e){toast(e.message)}}
+// ---------------------------------------------------------------- new case
+function newCase(){return head("Raise a new case","Three ways in. Every case goes through the same intake check, review and human decision.")+`<div class="g3">
+ <div class="card"><h2>1. Upload a fax image or PDF</h2><p class="muted">A vision model reads the form into fields: member, service, date, diagnosis code and clinical text. Blank fields are detected.</p>
+ <div class="drop" onclick="$('#ff').click()"><b>Choose an image or PDF</b><div class="muted">PNG, JPG or PDF (first page)</div></div><input type="file" id="ff" accept="image/*,application/pdf" hidden onchange="upFax(this.files[0])"></div>
+ <div class="card"><h2>2. Upload a case file</h2><p class="muted">A case JSON file as exported from PACE or the portal (the open-case format), or a plain text document. Text is read by the model.</p>
+ <div class="drop" onclick="$('#fj').click()"><b>Choose a .json or .txt file</b><div class="muted">One request per file</div></div><input type="file" id="fj" accept=".json,.txt,application/json,text/plain" hidden onchange="upFile(this.files[0])"></div>
+ <div class="card"><h2>3. Fill the form</h2><p class="muted">For a phone request, or a provider entering it directly. The agent sees what is missing while the caller is on the line.</p><button class="btn" onclick="$('#form').style.display='block';this.disabled=true">Open the form</button></div></div>
+ <div id="st"></div><div class="card" id="form" style="display:none"><h2>Request form</h2><div class="g2"><div>
+ <label>Channel<select id="f_channel"><option>PHONE</option><option>PORTAL</option><option>ELECTRONIC</option></select></label>
+ <label>Plan / client<select id="f_client_id">${CLIENTS.map(x=>`<option value="${x[0]}">${x[1]}</option>`).join("")}</select></label>
+ <label>Member name<input type="text" id="f_patient_name"></label><label>Member ID<input type="text" id="f_member_id" placeholder="for example BHA30169508"></label>
+ <label>Date of birth<input type="date" id="f_patient_dob"></label><label>Requesting provider<input type="text" id="f_requesting_provider"></label></div><div>
+ <label>Service<select id="f_service_code">${SVC.map(s=>`<option value="${s[0]}">${s[1]}</option>`).join("")}</select></label><label>Date of service<input type="date" id="f_date_of_service" value="2026-10-12"></label>
+ <label>Urgency<select id="f_urgency"><option>STANDARD</option><option>URGENT</option></select></label><label>Diagnosis code (ICD-10)<input type="text" id="f_icd10"></label>
+ <label>Clinical notes<textarea id="f_clinical_notes" rows="6" placeholder="Symptoms, duration, treatment tried, test results..."></textarea></label></div></div>
+ <button class="btn" id="cb" onclick="createForm()">Create case</button></div>`}
+const working=m=>$("#st").innerHTML=`<div class="card" style="background:var(--tint);border-color:#c7d2fe"><span class="spin" style="border-color:var(--pri);border-top-color:transparent"></span> ${m}</div>`;
+async function created(p){try{const c=await p;await load();S.cur=S.cases.find(x=>x.id==c.id);go("Case");toast("Case "+c.id+" created. Run the review when ready.")}catch(e){$("#st").innerHTML=`<div class="card" style="color:var(--r)">${esc(e.message)}</div>`}}
+function createForm(){const f={};["channel","client_id","patient_name","member_id","patient_dob","requesting_provider","service_code","date_of_service","urgency","icd10","clinical_notes"].forEach(k=>f[k]=$("#f_"+k).value);working("Creating the case...");created(api("/api/cases",{action:"create",source:"form",form:f}))}
+function upFile(f){if(!f)return;const rd=new FileReader();rd.onload=()=>{let j=null;try{j=JSON.parse(rd.result)}catch(e){}working(j?"Importing the case file...":"Reading the document...");created(api("/api/cases",j?{action:"create",source:"json",case:j}:{action:"create",source:"text",text:rd.result}))};rd.readAsText(f)}
+function shrink(cv){const m=1700,sc=Math.min(1,m/Math.max(cv.width,cv.height)),o=document.createElement("canvas");o.width=cv.width*sc;o.height=cv.height*sc;const x=o.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,o.width,o.height);x.drawImage(cv,0,0,o.width,o.height);return o.toDataURL("image/jpeg",.85)}
+async function upFax(f){if(!f)return;working("Reading the document with the vision model. This takes about 10 seconds...");try{let cv=document.createElement("canvas");
+ if(f.type=="application/pdf"){if(!window.pdfjsLib){await new Promise((ok,no)=>{const s=document.createElement("script");s.src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";s.onload=ok;s.onerror=()=>no(new Error("Could not load the PDF reader"));document.head.appendChild(s)});pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}
+  const pdf=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise,pg=await pdf.getPage(1),vp=pg.getViewport({scale:2});cv.width=vp.width;cv.height=vp.height;await pg.render({canvasContext:cv.getContext("2d"),viewport:vp}).promise}
+ else{const im=await createImageBitmap(f);cv.width=im.width;cv.height=im.height;cv.getContext("2d").drawImage(im,0,0)}
+ created(api("/api/cases",{action:"create",source:"fax",image:shrink(cv)}))}catch(e){$("#st").innerHTML=`<div class="card" style="color:var(--r)">${esc(e.message)}</div>`}}
+// ---------------------------------------------------------------- letters
+function openLetter(id){S.letter=id;go("Decision letters")}
+function lettersView(){const cur=S.letters.find(l=>l.id==S.letter)||S.letters[0];
+ return head("Decision letters","Created only from a human decision. Each states the specific reason, the provision relied on and appeal rights.")+(S.letters.length?`<div class="grid2" style="grid-template-columns:minmax(0,4fr) minmax(0,8fr)"><div class="card" style="padding:8px">
+ ${S.letters.map(l=>`<div class="nv" style="color:var(--ink);align-items:flex-start;${cur&&l.id==cur.id?"background:var(--tint)":""}" onclick="S.letter='${l.id}';render()"><div><b>${l.case_id}</b><div>${pill(l.type)}</div><div class="muted">${esc(l.to_name)} · ${l.ts}</div><div class="muted">${l.sent?"Emailed "+l.sent.ts:"Not sent"}</div></div></div>`).join("")}</div>
+ <div><div class="card" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><b>${esc(cur.subject)}</b><div style="flex:1"></div><a class="btn g" target="_blank" href="/api/cases?letter=${cur.id}&t=${TOKEN}">Download PDF</a>
+ <button class="btn" id="sb" onclick="sendLetter('${cur.id}')" ${S.me.role=="auditor"?"disabled":""}>${cur.sent?"Send again":"Send by email"}</button>
+ <div class="muted" style="width:100%">${cur.sent?`Sent to ${esc(cur.sent.to)} at ${cur.sent.ts} by ${esc(cur.sent.by)}.`:S.server.email?"In this demo every letter is delivered to the configured demo mailbox, never to a real patient.":"Email is not configured on the server yet. You can still download the PDF."} Decided by ${esc(cur.created_by)}. Source: ${esc(cur.source)}.</div></div>
+ <div class="paper"><b style="font-size:17px">Bellcourt Health Administrators</b>\nUtilization Management\n\n<b>${esc(cur.title)}</b>\n\n${esc(cur.body)}</div></div></div>`:`<div class="card muted">No letters yet. Open a case, record a decision, and the letter appears here.</div>`)}
+function sendLetter(id){busy("sb",async()=>{const l=await api("/api/cases",{action:"send_letter",letter_id:id});await load();render();toast("Letter emailed to "+l.sent.to)})}
+// ---------------------------------------------------------------- library, how, evidence, audit
+function ask(){return head("Policy library","Ask which rule applies. Search is limited to the documents in force for the client and date you pick.")+`<div class="card"><div class="g2"><div><label>Question<textarea id="q" rows="4">How many weeks of conservative therapy are needed before a lumbar MRI?</textarea></label></div>
+ <div><label>Client<select id="qc">${CLIENTS.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join("")}</select></label><label>Service<select id="qs">${SVC.map(s=>`<option value="${s[0]}">${s[1]}</option>`).join("")}</select></label><label>Date of service<input type="date" id="qd" value="2026-10-02"></label></div></div>
+ <button class="btn" id="ab" onclick="doAsk()">Ask</button><div id="ans"></div></div>`}
+function doAsk(){busy("ab",async()=>{const r=await api("/api/ask",{question:$("#q").value,client_id:$("#qc").value,service_code:$("#qs").value,date_of_service:$("#qd").value});
+ $("#ans").innerHTML=`<h3>Answer</h3><div class="rec APPROVE_READY">${esc(r.answer)}<div class="muted" style="margin-top:6px">Citations: ${esc((r.citations||[]).join("; "))}</div></div><h3>Passages retrieved</h3>${r.hits.map(h=>`<div style="margin-bottom:6px">${pill(h.status=="GOVERNING"?"MET":"NOT_MET",h.status=="GOVERNING"?"Governing":"Not governing")} ${src(h)} <span class="muted">${esc(h.text.slice(0,150))}...</span></div>`).join("")}${(r.excluded||[]).map(e=>`<div><span class="ic NOT_MET">✕</span> <b>${e.doc_id} ${e.version||""}</b> <span class="muted">${esc(e.reason)}</span></div>`).join("")}`})}
+function how(){const ch=[["Fax image or PDF","46%","An image lands on the fax share, or is uploaded here. Nobody has typed anything.","A vision model reads the form into fields. This is not template OCR: it reads different form layouts and handwriting-style text, returns empty strings for blank fields, and separately reports any sentence that tries to instruct the reviewer. Code then validates the result: member ID against the eligibility file, service name against the service list, dates parsed."],
+ ["Portal","31%","The provider fills a web form. The portal calls a webhook with structured fields.","No reading step. Fields arrive structured. Also available here as the case-file upload and the form."],["Phone","15%","A provider calls. The agent keys the request during the call.","The agent uses the form on the New case page. The tool does not listen to calls. Missing items show while the caller is on the line."],
+ ["Electronic (X12 278)","8%","A hospital system sends a standard transaction and PACE creates the case.","Read from the PACE read replica as structured fields."]];
+ const st=[["1 Raise the case","Intake, nurse, provider feed","Form, case file, fax or PDF. Every channel becomes the same case record."],["2 Intake check","Code","Required fields checked at once. Missing items listed. Clock starts at receipt. Priority set: overdue, urgent, due soon, standard."],
+ ["3 Review","Code + model","Code checks eligibility and selects the governing documents by client, service and date. The model reads those sections and tests each criterion with an exact quote. Code verifies the answer."],
+ ["4 Human decision","Nurse or physician","Approve, pend for information, route to physician, or (physician only) deny. An override needs a reason."],["5 Decision letter","Created from the decision","States the specific reason, the provision relied on and appeal rights. Downloadable as PDF and sent by email."],["6 Audit","Automatic","Every create, review, decision and letter is recorded with user, role and time."]];
+ const T=(hd,rows)=>`<table><tr>${hd.map(x=>`<th>${x}</th>`).join("")}</tr>${rows.map(r=>`<tr>${r.map((x,i)=>`<td>${i?x:"<b>"+x+"</b>"}</td>`).join("")}</tr>`).join("")}</table>`;
+ return head("How it works","One pipeline for every request, and a person decides at the end.")+`<div class="card"><h2>How a request arrives and how it is read</h2>${T(["Channel","Share","What arrives","How the copilot reads it"],ch)}</div>
+ <div class="card"><h2>From request to decision letter</h2>${T(["Step","Who","What happens"],st)}</div>
+ <div class="card"><h2>Who can do what</h2>${T(["Role","Raise a case","Run a review","Approve","Pend for information","Route to physician","Deny"],[["Intake coordinator","Yes","Yes","No","Yes","Yes","No"],["Nurse reviewer","Yes","Yes","Yes","Yes","Yes","No"],["Physician reviewer","Yes","Yes","Yes","Yes","n/a","Yes"],["Auditor","No","No","No","No","No","No"],["The copilot","n/a","n/a","Never","Drafts only","Recommends","Never"]])}
+ <div class="muted" style="margin-top:8px">Roles come from your sign-in and are enforced on the server.</div></div>`}
+function evidence(){if(!S.ev)return head("Evidence","Loading...");const e=S.ev,s=e.summary,p=(a,b)=>(100*a/b).toFixed(1)+"%",sc=S.score;
+ return head("Evidence it works","Tested on Bellcourt's own audited cases, the open queue and hostile inputs.")+`<div class="kpis"><div class="kpi"><div class="n" style="color:var(--g)">${p(s.tool_correct,s.n)}</div><div class="l">Copilot agrees with the QA auditor (${s.tool_correct} of ${s.n})</div></div>
+ <div class="kpi"><div class="n" style="color:var(--r)">${p(s.human_correct,s.n)}</div><div class="l">Human reviewers, same cases. Standard is 95%</div></div><div class="kpi"><div class="n">${s.wrong_approvals.length}</div><div class="l">Wrongful approvals</div></div>
+ <div class="kpi"><div class="n">${s.adversarial_passed}/${s.adversarial_total}</div><div class="l">Adversarial, incomplete and wrong-input tests</div></div><div class="kpi"><div class="n">${sc.matched}/${sc.total}</div><div class="l">Open queue vs answer key</div></div></div>
+ <div class="card"><h2>By the kind of mistake the human reviewer made</h2><table><tr><th>Auditor's finding on the original human decision</th><th>Copilot correct</th></tr>${Object.entries(s.by_error_type).map(([k,v])=>`<tr><td>${k=="NONE"?"No human error":k.replace(/_/g," ").toLowerCase()}</td><td>${v[0]} of ${v[1]}</td></tr>`).join("")}</table></div>
+ <div class="card"><h2>Adversarial, incomplete and wrong inputs</h2><table><tr><th>Test</th><th>Expected</th><th>Got</th><th></th></tr>${e.adversarial.map(a=>`<tr><td>${esc(a.test)}</td><td>${pill(a.expected)}</td><td>${pill(a.got)}</td><td>${pill(a.passed?"MET":"NOT_MET",a.passed?"Pass":"Fail")}</td></tr>`).join("")}</table></div>`}
+function auditView(){return head("Audit log","Every action, with user, role and time. This is what Riverbend can request on audit.")+`<div class="card"><table><tr><th>Time</th><th>User</th><th>Role</th><th>Action</th><th>Case</th><th>Detail</th></tr>
+ ${S.audit.map(a=>`<tr><td>${a.ts}</td><td>${esc(a.name)}</td><td>${esc(a.role)}</td><td><b>${a.action.replace(/_/g," ").toLowerCase()}</b></td><td><a href="#" onclick="event.preventDefault();openCase('${a.case_id}')">${a.case_id}</a></td><td class="muted">${esc(a.detail)}</td></tr>`).join("")||'<tr><td colspan=6 class="muted">No actions yet.</td></tr>'}</table>
+ <div class="muted" style="margin-top:8px">Stored in ${S.server.storage=="supabase"?"Supabase (Postgres)":"a local file on this server. Connect Supabase to persist across restarts"}.</div></div>`}
+function render(){const v={"Queue":queue,"Case":caseView,"New case":newCase,"Decision letters":lettersView,"Policy library":ask,"How it works":how,"Evidence":evidence,"Audit log":auditView}[S.tab];$("#view").innerHTML=v();
+ if(S.tab=="Evidence"&&!S.ev)Promise.all(["eval","open_score"].map(f=>api("/api/data?name="+f))).then(([a,b])=>{S.ev=a;S.score=b;render()})}
+(async()=>{if(!TOKEN)return loginView();try{S.me=await api("/api/login");await load();shell()}catch(e){logout()}})();
 </script></body></html>

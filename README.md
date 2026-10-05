@@ -16,15 +16,15 @@ Staffing is a strain, but it is not why deadlines are missed (details in `docs/B
 
 ## What this does
 
-For each request the copilot:
+A working prototype of the whole path from request to decision letter:
 
-1. **Reads it**, including fax images nobody has keyed.
-2. **Checks completeness at once** and drafts the fax back to the provider listing exactly what is missing.
-3. **Confirms the member** and starts the clock from receipt.
-4. **Selects the governing rules in code**: the client's plan document and amendments, the Riverbend addendum and Medicare rule, and the Bellcourt policy version in force on the date of service. Retired versions and memos are excluded, with the reason shown.
-5. **Lets the model plan what to read**, then checks each criterion against the record with an exact quote.
-6. **Verifies the answer in code** and runs a skeptical second check on every approval.
-7. **Hands a recommendation to a person.** Four outcomes: approve-ready, need information, route to physician, route as not covered. There is no deny outcome. A nurse confirms approvals; a physician signs adverse decisions.
+1. **Raise a case** three ways: upload a fax image or PDF (read by a vision model), upload a case file (JSON or text), or fill the form (for phone requests).
+2. **Intake check at once.** Missing fields are listed, the clock starts at receipt, and the case joins a priority queue: overdue, urgent, due soon, standard.
+3. **Run the review.** Code confirms eligibility and selects the governing rules: the client's plan document and amendments, the Riverbend addendum and Medicare rule, and the Bellcourt policy version in force on the date of service. Retired versions and memos are excluded, with the reason shown. The model plans what to read and checks each criterion against the record with an exact quote. Code verifies the answer and runs a skeptical second check on every approval.
+4. **See the analysis.** Recommendation and why, coverage checks, medical necessity criteria with pass or fail and the quoted evidence, and the reference documents. Each citation opens the source section, and the original policy PDF is one click away.
+5. **A person decides.** Approve, pend for information, route to physician, or (physician only) deny. Differing from the recommendation needs a reason. There is no way for the tool to deny.
+6. **Decision letter.** Created from the human decision: specific reason, provision relied on, appeal rights. Viewable, downloadable as PDF, and sent by email.
+7. **Audit log.** Every create, review, decision and letter, with user, role and time.
 
 ## Results
 
@@ -35,7 +35,7 @@ For each request the copilot:
 | Denials issued by the tool | 0 (not possible by design) |
 | 30 open cases, 13 of them fax images | 29 of 30 against the answer key |
 | Adversarial, incomplete and wrong inputs | 23 of 24. The one failure ended in manual review |
-| Deterministic unit tests | 30 of 30 |
+| Deterministic unit tests | 36 of 36 |
 
 Full tables and honest limits: [`docs/EVIDENCE.md`](docs/EVIDENCE.md).
 
@@ -67,8 +67,11 @@ flowchart LR
 | `copilot/pipeline.py` | `run_case()`: ties the steps together and applies overrides the model cannot undo |
 | `copilot/llm.py` | The only module that calls a model (OpenRouter or the Gemini API, standard library only) |
 | `copilot/auth.py` | Sign-in, signed sessions, roles |
-| `api/login.py`, `api/data.py`, `api/review.py`, `api/ask.py` | Vercel serverless functions: sign-in, protected case data and fax images, live review, "ask the policy library" |
-| `public/index.html` | Reviewer screen: sign-in, worklist, case review, how it works, new request, ask the library, evidence, audit log |
+| `copilot/cases.py` | Case lifecycle: create, review, human decision, letter, audit |
+| `copilot/letters.py` | Decision letter text, dependency-free PDF writer, Gmail delivery |
+| `copilot/store.py` | Persistence: Supabase over REST, or a local file |
+| `api/login.py`, `api/cases.py`, `api/data.py`, `api/review.py`, `api/ask.py` | Vercel serverless functions: sign-in, case workflow and letters, protected data and fax images, live review, "ask the policy library" |
+| `public/index.html` | The workspace: sign-in, priority queue, new case, case review, decision letters, policy library, how it works, evidence, audit log |
 | `scripts/` | `ingest.py` builds the knowledge base, `run_open.py` and `run_eval.py` produce the evidence, `build_docs.py` builds the PDFs |
 | `data/` | Knowledge base PDFs, sections, registry, vectors, open cases, eligibility, QA audit file |
 
@@ -101,7 +104,7 @@ To re-run the evidence (needs a key and a few cents of credit):
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install pdfplumber pytest reportlab pypdfium2 pypdf
-.venv/bin/python -m pytest -q            # 30 deterministic tests, no key needed
+.venv/bin/python -m pytest -q            # 36 deterministic tests, no key needed
 .venv/bin/python scripts/ingest.py       # rebuild sections, registry and vectors from the PDFs
 .venv/bin/python scripts/run_open.py     # 30 open cases
 .venv/bin/python scripts/run_eval.py     # 120 audited cases + adversarial tests
@@ -140,6 +143,8 @@ vercel env add LLM_PROVIDER production     # type: gemini
 vercel --prod
 ```
 
+Then connect the database and email: see [`docs/SETUP_DATABASE_AND_EMAIL.md`](docs/SETUP_DATABASE_AND_EMAIL.md). The app works without them, but new cases do not persist and letters cannot be emailed.
+
 A free-tier Gemini key allows about 20 requests a day per model. One case review makes 3 to 5 calls, so a free key runs out after about 5 cases. Use a paid Gemini key or OpenRouter for a demo. With Gemini only, library search uses keyword ranking (the vector index was built with OpenRouter embeddings).
 
 ## Deliverables
@@ -153,6 +158,7 @@ A free-tier Gemini key allows about 20 requests a day per model. One case review
 | Evidence it works | `docs/EVIDENCE.md`, Evidence tab in the app |
 | Pitch deck (14 slides) | `docs/Pitch_Deck.pdf` |
 | Submission text | `docs/SUBMISSION.md` |
+| Database and email setup | `docs/SETUP_DATABASE_AND_EMAIL.md` |
 
 ## Compliance by design
 
@@ -164,4 +170,4 @@ A free-tier Gemini key allows about 20 requests a day per model. One case review
 
 ## Limits
 
-Prototype. Human decisions are stored in the browser, not a database. Sign-in is a small built-in service, not single sign-on. Results vary slightly between runs. Only 6 of 38 employer plan documents were in the data pack.
+Prototype. Without Supabase connected, new cases and decisions live in a temporary file. Sign-in is a small built-in service, not single sign-on. Demo letters go to one configured mailbox. Results vary slightly between runs. Only 6 of 38 employer plan documents were in the data pack.

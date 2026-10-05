@@ -130,3 +130,7 @@ the request is already approved or a rule does not apply. Copy them exactly. Lea
 def read_fax(image_path):
     out, u = llm.chat_json(FAX_SYSTEM, "Transcribe this fax.", image_path=image_path, max_tokens=2000)
     return out, u
+
+TEXT_SYSTEM = FAX_SYSTEM.replace("You transcribe a faxed prior authorization form into JSON. Transcribe only.", "You extract the fields of a prior authorization request from a pasted or uploaded text document into JSON. Extract only.").replace("Transcribe this fax.", "")
+def read_text(text):
+    return llm.chat_json(TEXT_SYSTEM, "DOCUMENT:\n" + text[:8000], max_tokens=2000)

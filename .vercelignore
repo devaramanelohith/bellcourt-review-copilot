@@ -3,6 +3,5 @@
 tests
 docs
 scripts
-data/kb
 .env
 DEMO_LOGINS.txt

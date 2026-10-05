@@ -21,8 +21,10 @@ def normalize(raw):
              requesting_provider=raw.get("requesting_provider"), urgency_header=raw.get("urgency"), urgency_form=None,
              member_id=raw.get("member_id"), patient_dob=raw.get("patient_dob"), date_of_service=raw.get("date_of_service"),
              service_code=raw.get("service_code"), service_requested=raw.get("service_requested"), icd10=raw.get("icd10"),
-             clinical_notes=raw.get("clinical_notes"), fax_image=raw.get("fax_image"), fax=None, planted=[])
-    if raw.get("fax_image") and not raw.get("clinical_notes"):
+             clinical_notes=raw.get("clinical_notes"), fax_image=raw.get("fax_image"), fax=raw.get("fax"), planted=list(raw.get("planted") or []),
+             patient_name=raw.get("patient_name"), source=raw.get("source"))
+    if raw.get("urgency_form"): c["urgency_form"] = raw["urgency_form"]
+    if raw.get("fax_image") and not raw.get("clinical_notes") and not raw.get("fax"):
         img = os.path.join(core.ROOT, "data", "fax", os.path.basename(raw["fax_image"]))
         h = hashlib.sha256(open(img, "rb").read() + (llm.MODEL + PROMPT_VERSION).encode()).hexdigest()[:20]
         fx, _ = _cached("fax_" + h, lambda: list(agent.read_fax(img)))

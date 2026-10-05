@@ -4,7 +4,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, ROOT)
 def load(name):
     spec = importlib.util.spec_from_file_location(name, os.path.join(ROOT, "api", name + ".py")); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m.handler
-API = {"/api/" + n: load(n) for n in ("login", "data", "review", "ask")}
+API = {"/api/" + n: load(n) for n in ("login", "data", "review", "ask", "cases")}
 class H(SimpleHTTPRequestHandler):
     def __init__(self, *a, **k): super().__init__(*a, directory=os.path.join(ROOT, "public"), **k)
     def do_GET(self):
