@@ -1,5 +1,7 @@
 # Bellcourt Review Copilot
 
+**Live demo:** https://bellcourt-review-copilot.vercel.app
+
 Agentic RAG assistant for prior authorization review, built for the FDE Academy hackathon case *Bellcourt Health Administrators: Prior Authorization Under Pressure*.
 
 > Bellcourt, Riverbend, every employer and every patient here are **fictional**. All data is synthetic.

@@ -1,4 +1,7 @@
 {
-  "functions": { "api/*.py": { "maxDuration": 60, "includeFiles": "{copilot,data}/**" } },
-  "outputDirectory": "public"
+  "framework": null,
+  "buildCommand": "",
+  "installCommand": "",
+  "outputDirectory": "public",
+  "functions": { "api/*.py": { "maxDuration": 60, "includeFiles": "{copilot,data}/**" } }
 }
