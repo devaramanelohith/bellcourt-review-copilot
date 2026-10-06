@@ -150,7 +150,7 @@ for x, w_, head_, rows in [(M, 412, "ROOT CAUSE 1 · THE WRONG RULEBOOK", [("34%
                                                                                   ("1 in 3", "faxes arrive missing something, says the intake coordinator: usually the member ID or the clinical notes. The provider finds out days later, by phone.")])]:
     text(x + 16, y - 26, head_, "IS", 8, COPPER); yy = y - 40
     for num, cap in rows:
-        text(x + 16, yy - 24, num, "SSB", 24, INK); yb = para(cap, x + 150, yy - 2, w_ - 166, 9.8, INK, lead=12.6); yy = min(yb, yy - 32) - 13
+        text(x + 16, yy - 24, num, "SSB", 24 if len(num) <= 8 else 19, INK); yb = para(cap, x + 150, yy - 2, w_ - 166, 9.8, INK, lead=12.6); yy = min(yb, yy - 32) - 13
 card(M, 56, CW, 30, TINT, TINT)
 para("<b>So what:</b> fix the rule and the clock. Code can pick the governing document by client, service and date of service; code can stamp receipt and list what is missing in the first minute. Hiring nurses addresses neither.", M + 14, 79, CW - 28, 10.2, INK)
 
