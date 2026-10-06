@@ -400,6 +400,7 @@ open(os.path.join(DOCS, "SUBMISSION.md"), "w").write(f"""# Submission-ready text
 | README + setup steps | `README.md` |
 | Evidence it works | `docs/EVIDENCE.md`, Evidence tab in the app, `tests/` |
 | Pitch deck (optional, 14 slides) | `docs/Pitch_Deck.pdf` |
+| Presentation deck (10 slides, 8-minute flow) and playbook | `docs/Presentation_Deck.pdf`, `docs/Presentation_Playbook.pdf` |
 
 ## One-line answers for the panel
 
@@ -457,7 +458,9 @@ build("README_and_Setup.pdf", RD, "README and setup")
 import shutil, zipfile
 SUB = os.path.join(ROOT, "deliverables"); shutil.rmtree(SUB, ignore_errors=True); os.makedirs(SUB)
 for i, (f, n) in enumerate([("Bellcourt_Case_Documentation.pdf", "1_Documentation_Data_Backed_Diagnosis_and_Solution.pdf"), ("Architecture_Diagram.pdf", "2_Architecture_Diagram.pdf"), ("Implementation_Strategy_and_Design_Note.pdf", "3_Implementation_Strategy_and_Design_Note.pdf"),
-                            ("README_and_Setup.pdf", "4_Working_Demo_README_and_Setup.pdf"), ("Evidence_It_Works.pdf", "5_Evidence_It_Works.pdf"), ("Pitch_Deck.pdf", "6_Pitch_Deck.pdf")]): shutil.copy(os.path.join(DOCS, f), os.path.join(SUB, n))
+                            ("README_and_Setup.pdf", "4_Working_Demo_README_and_Setup.pdf"), ("Evidence_It_Works.pdf", "5_Evidence_It_Works.pdf"), ("Pitch_Deck.pdf", "6_Pitch_Deck.pdf"),
+                            ("Presentation_Deck.pdf", "7_Presentation_Deck_8min.pdf"), ("Presentation_Playbook.pdf", "8_Presentation_Playbook.pdf")]):
+    if os.path.exists(os.path.join(DOCS, f)): shutil.copy(os.path.join(DOCS, f), os.path.join(SUB, n))
 shutil.copy(os.path.join(DOCS, "architecture.png"), os.path.join(SUB, "2_Architecture_Diagram.png"))
 open(os.path.join(SUB, "0_Submission_Text.txt"), "w").write(open(os.path.join(DOCS, "SUBMISSION.md")).read())
 with zipfile.ZipFile(os.path.join(ROOT, "Bellcourt_Submission_Lohith_Devaramane.zip"), "w", zipfile.ZIP_DEFLATED) as z:

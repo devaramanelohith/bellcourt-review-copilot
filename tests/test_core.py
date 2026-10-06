@@ -131,3 +131,27 @@ def test_route_then_physician_denial_letter_has_reason_citation_and_appeal_right
 def test_letter_pdf_is_a_valid_pdf():
     c = cases.decide(N, "PA-2609-8100", "APPROVED"); pdf = letters.to_pdf(store.get("letter", c["letter_id"]))
     assert pdf.startswith(b"%PDF-1.4") and pdf.rstrip().endswith(b"%%EOF") and b"Notice of Approval" in pdf
+
+# ---------------------------------------------------------------- roles added with the provider portal and status desk
+PR = dict(u="provider", n="Test Provider", r="provider"); AG = dict(u="agent", n="Test Agent", r="agent")
+def test_reviewers_cannot_raise_cases_and_providers_cannot_decide():
+    with pytest.raises(PermissionError): cases.create(N, {"source": "form", "form": {"client_id": "HARLAN"}})
+    with pytest.raises(PermissionError): cases.create(PH, {"source": "form", "form": {"client_id": "HARLAN"}})
+    with pytest.raises(PermissionError): cases.decide(PR, "PA-2609-8100", "APPROVED")
+    with pytest.raises(PermissionError): cases.review(PR, "PA-2609-8100")
+def test_provider_sees_only_own_requests_as_status_views():
+    c = cases.create(PR, {"source": "form", "form": {"client_id": "JUNIPER", "member_id": "BHA56805493", "patient_name": "T", "patient_dob": "1980-10-23", "service_code": "BHA-SURG-6350", "date_of_service": "2026-10-12", "clinical_notes": "x", "icd10": "M54.16"}})
+    mine = cases.own(PR); assert [m["id"] for m in mine] == [c["id"]] and mine[0]["public"] and "review" not in mine[0] and mine[0]["status"] == "RECEIVED"
+    assert mine[0]["precheck"]["status"] == "COVERED_WITH_CONDITIONS" and "5.6" in " ".join(mine[0]["precheck"]["provisions"])
+    assert cases.own(dict(u="other", n="o", r="provider")) == []
+def test_status_desk_requires_matching_date_of_birth():
+    with pytest.raises(PermissionError): cases.lookup(AG, "PA-2609-8100", "1956-08-18")
+    v = cases.lookup(AG, "PA-2609-8100", "1956-08-17"); assert v["status"] == "IN_REVIEW" and "rationale" not in v
+    assert [a["action"] for a in store.all("audit").values()] == ["STATUS_LOOKUP_FAILED", "STATUS_LOOKUP"]
+def test_coverage_check_reads_plan_exclusions_and_amendments_by_date():
+    assert core.coverage_check("", "HARLAN", "BHA-SURG-4310", "2026-10-12")["verdict"]["status"] == "NOT_COVERED"
+    assert core.coverage_check("", "KESTREL", "BHA-SURG-4310", "2026-03-18")["verdict"]["status"] == "COVERED_WITH_CONDITIONS"     # amendment 3 in force
+    assert core.coverage_check("", "KESTREL", "BHA-SURG-4310", "2025-11-18")["verdict"]["status"] == "NOT_COVERED"                 # before the amendment
+    r = core.coverage_check("RBM96929364", "", "BHA-IMG-0721", "2026-10-02"); assert r["client_id"] == "RB-MA" and r["policy"]["version"] == "v2" and r["verdict"]["status"] == "COVERED_SUBJECT_TO_CRITERIA"
+def test_dry_run_decision_changes_nothing():
+    assert cases.decide(N, "PA-2609-8100", "APPROVED", dry=True)["dry"] and cases.get("PA-2609-8100")["decision"] is None and store.all("audit") == {}

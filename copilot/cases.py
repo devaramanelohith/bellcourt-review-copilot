@@ -1,4 +1,8 @@
-"""Case lifecycle: create (form, file, fax or PDF upload) -> review -> human decision -> decision letter. Every step is recorded."""
+"""Case lifecycle: create (form, file, fax or PDF upload) -> review -> human decision -> decision letter. Every step is recorded.
+Who may do what is decided here and checked on every request:
+  provider  raises requests for its own patients and sees only their status;   intake  raises requests from the fax share and phone, runs the review, pends or routes;
+  nurse     runs the review and approves, pends or routes (never raises a case: the person who decides does not create the record);
+  physician decides every adverse determination;   agent  looks up status for callers after verifying identity;   auditor  reads everything, changes nothing."""
 import os, json, time, base64, tempfile, glob
 from . import core, store, pipeline, agent, letters, auth
 
@@ -7,6 +11,7 @@ RECEIVED = core.DEMO_NOW.strftime("%Y-%m-%d %H:%M")          # demo clock is pin
 DECISIONS = {  # decision -> (roles allowed, resulting status, creates a letter)
     "APPROVED": ({"nurse", "physician"}, "DECIDED", True), "PENDED_INFO": ({"intake", "nurse", "physician"}, "PENDED", True),
     "ROUTED_PHYSICIAN": ({"nurse", "intake"}, "ROUTED", False), "DENIED_MEDICAL_NECESSITY": ({"physician"}, "DECIDED", True), "DENIED_NOT_COVERED": ({"physician"}, "DECIDED", True)}
+CAN_CREATE = {"intake", "provider"}
 # Only a handful of cases are preloaded, one per kind of outcome. Everything else is raised by a user (fax, file or form) and reviewed on demand.
 SAMPLE_IDS = ("PA-2609-8113", "PA-2609-8106", "PA-2609-8100", "PA-2609-8105", "PA-2609-8118")
 _seed = None
@@ -21,7 +26,7 @@ def seeds():
             if cid not in SAMPLE_IDS: continue
             rv["case"]["patient_name"] = raws[cid].get("patient_name") or (rv["case"].get("fax") or {}).get("patient_name")
             _seed[cid] = dict(id=cid, status="REVIEWED", raw=raws[cid], review=rv, decision=None, letter_id=None, seeded=True,
-                              created=dict(by="System import", ts=raws[cid]["received_ts"], source={"FAX": "Fax share", "PORTAL": "Portal webhook", "PHONE": "PACE (phone)", "ELECTRONIC": "PACE (X12 278)"}[raws[cid]["channel"]]))
+                              created=dict(by="System import", user=None, ts=raws[cid]["received_ts"], source={"FAX": "Fax share", "PORTAL": "Portal webhook", "PHONE": "PACE (phone)", "ELECTRONIC": "PACE (X12 278)"}[raws[cid]["channel"]]))
     return _seed
 def priority(c):
     rv = c.get("review"); clk = rv["clock"] if rv else core.clock(c["raw"]["client_id"], c["raw"]["received_ts"], c["raw"].get("urgency"), c["raw"].get("urgency_form"))
@@ -39,8 +44,37 @@ def get(cid):
 def audit(sess, action, case_id, detail=""):
     store.put("audit", f"{time.time():.4f}", dict(ts=NOW(), user=sess["u"], name=sess["n"], role=sess["r"], action=action, case_id=case_id, detail=detail))
 
+# ---------------------------------------------------------------- what a provider or a caller may be told
+PUBLIC = {"NEW": ("RECEIVED", "Received. In the review queue."), "REVIEWED": ("IN_REVIEW", "Under clinical review."), "ROUTED": ("IN_REVIEW", "Under physician review."),
+          "PENDED": ("INFO_NEEDED", "Waiting for information from the provider."), "DECIDED": ("DECIDED", "Decided. See the notice.")}
+def public_view(c):
+    """Status only: no recommendation, no rationale, no model output. Missing items and the decision notice are the provider's business; the review is not."""
+    k = c["raw"]; rv = c.get("review"); d = c.get("decision"); st, label = PUBLIC[c["status"]]
+    missing = list(c.get("intake_gaps") or (rv and rv.get("intake_gaps")) or [])
+    if c["status"] == "PENDED" and rv: missing = list(dict.fromkeys(missing + list(rv["result"].get("missing_information") or [])))
+    if d and d["type"].startswith("DENIED"): label = "Denied. The notice explains the reason and how to appeal."
+    elif d and d["type"] == "APPROVED": label = "Approved."
+    elif d and d["type"] == "PENDED_INFO": label = "Information requested. See the notice for the list."
+    pre = c.get("precheck")
+    return dict(id=c["id"], public=True, status=st, label=label, received_ts=k["received_ts"], channel=k["channel"], client_id=k.get("client_id"), service=k.get("service_requested") or (rv and rv["case"].get("service_requested")),
+                date_of_service=k.get("date_of_service"), patient_name=k.get("patient_name"), member_id=k.get("member_id"), urgency=k.get("urgency"), due=c["priority"]["due"], hours_remaining=c["priority"]["hours_remaining"],
+                missing=missing, decision=d and dict(type=d["type"], ts=d["ts"]), letter_id=c.get("letter_id") if d else None, created=c["created"],
+                precheck=pre and dict(status=pre["verdict"]["status"], headline=pre["verdict"]["headline"], policy=pre.get("policy") and f"{pre['policy']['doc_id']} {pre['policy']['version']}", plan=pre.get("plan") and pre["plan"]["doc_id"],
+                                      provisions=[f"{p['doc_id']} §{p['section']} ({p['kind'].lower()})" for p in pre.get("provisions") or []]))
+def own(sess): return [public_view(c) for c in all_cases() if (c.get("created") or {}).get("user") == sess["u"]]
+def lookup(sess, cid, dob):
+    """Status desk: the caller must give the case number AND the patient's date of birth before anything is disclosed."""
+    c = get((cid or "").strip().upper())
+    if not c: raise ValueError("No request with that number.")
+    rv = c.get("review") or {}; fx = (c["raw"].get("fax") or (rv.get("case") or {}).get("fax") or {})
+    want = core.to_date(c["raw"].get("patient_dob") or (rv.get("case") or {}).get("patient_dob") or fx.get("date_of_birth")); got = core.to_date(dob)
+    if not want: raise ValueError("This request has no date of birth on file, so identity cannot be verified by phone. Ask the provider to use the portal.")
+    if not got or got != want: audit(sess, "STATUS_LOOKUP_FAILED", c["id"], "date of birth did not match"); raise PermissionError("Date of birth does not match. Nothing disclosed.")
+    audit(sess, "STATUS_LOOKUP", c["id"], "identity verified by date of birth"); return public_view(c)
+
 def create(sess, b):
     """source: form | json | text | fax (image as data URL; a PDF is rendered to an image in the browser first)."""
+    if sess["r"] not in CAN_CREATE: raise PermissionError("Only intake coordinators and provider offices raise requests. Reviewers decide; they do not create the record.")
     src = b.get("source", "form"); existing = store.all("case"); n = len(existing) + 1; cid = f"PA-2610-{9000 + n}"; image = None
     base = dict(case_id=cid, received_ts=RECEIVED, urgency="STANDARD", requesting_provider="", client_id="", source=src)
     if src == "json":
@@ -63,13 +97,18 @@ def create(sess, b):
     else:
         f = b.get("form") or {}; raw = {**base, **{k: (str(f.get(k)).strip() or None) if f.get(k) is not None else None for k in ("channel", "urgency", "client_id", "requesting_provider", "member_id", "patient_name", "patient_dob", "date_of_service", "service_code", "clinical_notes", "icd10")}}
         raw["channel"] = raw.get("channel") or "PORTAL"; raw["urgency"] = raw.get("urgency") or "STANDARD"
+    if sess["r"] == "provider":
+        raw["channel"] = "FAX" if src == "fax" else "PORTAL"; raw["requesting_provider"] = raw.get("requesting_provider") or sess["n"]
     if not raw.get("client_id") and raw.get("member_id") in core.ELIG: raw["client_id"] = core.ELIG[raw["member_id"]]["client_id"]     # client from the member ID
     if raw.get("service_code") and not raw.get("service_requested"): raw["service_requested"] = core.SERVICES.get(raw["service_code"])
-    c = dict(id=cid, status="NEW", raw=raw, review=None, decision=None, letter_id=None, image=image, created=dict(by=sess["n"], ts=NOW(), source={"form": "Form", "json": "Case file upload", "fax": "Fax or PDF upload", "text": "Text document upload"}[src]),
+    c = dict(id=cid, status="NEW", raw=raw, review=None, decision=None, letter_id=None, image=image, created=dict(by=sess["n"], user=sess["u"], role=sess["r"], ts=NOW(), source={"form": "Form", "json": "Case file upload", "fax": "Fax or PDF upload", "text": "Text document upload"}[src]),
              intake_gaps=core.intake_gaps(raw) + ([] if raw.get("client_id") else ["Health plan or employer (client)"]))
-    store.put("case", cid, c); audit(sess, "CASE_CREATED", cid, c["created"]["source"]); return get(cid)
+    try: c["precheck"] = core.coverage_check(raw.get("member_id"), raw.get("client_id"), raw.get("service_code"), raw.get("date_of_service"), raw.get("urgency")) if raw.get("client_id") else None
+    except Exception: c["precheck"] = None
+    store.put("case", cid, c); audit(sess, "CASE_CREATED", cid, c["created"]["source"] + (f"; intake check missing: {', '.join(c['intake_gaps'])}" if c["intake_gaps"] else "; complete on receipt")); return get(cid)
 
 def review(sess, cid, client_id=None):
+    if sess["r"] not in auth.CAN_RUN_LIVE: raise PermissionError("Your role cannot run a review.")
     c = get(cid)
     if not c: raise ValueError("unknown case")
     if client_id and not c["raw"].get("client_id") and client_id in core.PLAN_CLIENTS: c["raw"]["client_id"] = client_id
@@ -78,7 +117,7 @@ def review(sess, cid, client_id=None):
     c.update(review=rv, status="REVIEWED", decision=None, letter_id=None, reviewed=dict(by=sess["n"], ts=NOW())); c.pop("priority", None); c.pop("seeded", None)
     store.put("case", cid, c); audit(sess, "REVIEW_RUN", cid, rv["result"]["outcome"]); return get(cid)
 
-def decide(sess, cid, decision, note=""):
+def decide(sess, cid, decision, note="", dry=False):
     c = get(cid)
     if not c or not c.get("review"): raise ValueError("Run a review before recording a decision.")
     if decision not in DECISIONS: raise ValueError("unknown decision")
@@ -87,6 +126,7 @@ def decide(sess, cid, decision, note=""):
     rec = c["review"]["result"]["outcome"]; expected = {"APPROVED": "APPROVE_READY", "PENDED_INFO": "NEED_INFO", "ROUTED_PHYSICIAN": "ROUTE_PHYSICIAN", "DENIED_MEDICAL_NECESSITY": "ROUTE_PHYSICIAN", "DENIED_NOT_COVERED": "ROUTE_NOT_COVERED"}[decision]
     override = rec != expected and not (decision == "ROUTED_PHYSICIAN" and rec == "ROUTE_NOT_COVERED")
     if override and not (note or "").strip(): raise ValueError("This differs from the recommendation. A reason is required.")
+    if dry: return dict(ok=True, dry=True, decision=decision, override=override)
     c["decision"] = dict(type=decision, by=sess["n"], user=sess["u"], role=sess["r"], ts=NOW(), note=note, override=override, recommended=rec); c["status"] = status
     if makes_letter:
         L = letters.build(c, decision, sess["n"], auth.ROLES[sess["r"]]); L.update(id=f"L-{cid[3:]}-{int(time.time()) % 100000}", created_by=sess["n"], ts=NOW(), sent=None)
@@ -96,5 +136,5 @@ def decide(sess, cid, decision, note=""):
 def send_letter(sess, lid):
     L = store.get("letter", lid)
     if not L: raise ValueError("unknown letter")
-    if sess["r"] == "auditor": raise PermissionError("Your role is read-only.")
+    if sess["r"] not in auth.CAN_DECIDE: raise PermissionError("Your role cannot send letters.")
     to = letters.send(L); L["sent"] = dict(ts=NOW(), to=to, by=sess["n"]); store.put("letter", lid, L); audit(sess, "LETTER_SENT", L["case_id"], to); return L

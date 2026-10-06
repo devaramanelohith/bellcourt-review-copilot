@@ -215,3 +215,61 @@ def verify(result, gov, record, planted):
     if ps.get("doc_id") and str(ps.get("doc_id")) not in (result.get("letter_paragraph") or ""):
         result["letter_paragraph"] = (result.get("letter_paragraph") or "").rstrip() + f" (Source: {cite}.)"
     return errs
+
+# ------------------------------------------------------------------ coverage pre-check (deterministic, no model)
+SERVICE_KEYWORDS = {"BHA-IMG-0721": ["lumbar", "mri", "advanced imaging"], "BHA-SURG-4310": ["bariatric", "weight-loss", "obesity"], "BHA-DME-2103": ["glucose monitor", "cgm"],
+                    "BHA-DX-9581": ["sleep study", "polysomnograph"], "BHA-SURG-2988": ["arthroscop"], "BHA-SURG-2744": ["knee replacement", "arthroplasty"], "BHA-LAB-8162": ["brca", "genetic test"],
+                    "BHA-SURG-1582": ["eyelid", "blepharoplasty"], "BHA-SURG-3052": ["septoplasty", "rhinoplasty"], "BHA-SURG-6350": ["spinal cord stimulat", "spinal procedure", "neurostimulat"],
+                    "BHA-VASC-3647": ["varicose", "vein ablation"], "BHA-THER-1830": ["hyperbaric"], "BHA-RAD-5205": ["proton beam"], "BHA-REH-9711": ["outpatient rehabilitation", "physical therapy", "therapy are limited"],
+                    "BHA-IMG-7519": ["coronary", "angiograph"], "BHA-HH-0550": ["home health"], "BHA-DME-0601": ["cpap", "positive airway"]}
+MONTHS = "January|February|March|April|May|June|July|August|September|October|November|December"
+def _kind(section, text, dos=None):
+    t = text.lower()
+    if section.startswith("8") and "amendment" in t:
+        m = re.search(rf"({MONTHS}) (\d{{1,2}}), (\d{{4}})", text); eff = dt.datetime.strptime(m.group(0), "%B %d, %Y").date() if m else None
+        return "AMENDMENT" if (not eff or not dos or dos >= eff) else "AMENDMENT_NOT_YET"
+    if re.search(r"covered only|covered subject to|must be documented|must be pended|requirement applies|take precedence|criteria to apply|must be applied", t): return "CONDITION"
+    if re.search(r"limited to|per plan year|annual limit", t): return "LIMIT"
+    if re.search(r"\bexcluded\b|is not covered|are not covered|not a covered", t): return "EXCLUSION_EXCEPT" if "except" in t else "EXCLUSION"
+    return "MENTION"
+def _short_title(t):
+    w = re.sub(r"^\d+(\.\d+)?\s*", "", t).split()
+    for i in range(1, len(w)):
+        if w[i][:1].isupper() and w[i - 1].lower() not in ("of", "and", "the", "for", "to"): return " ".join(w[:i])
+    return " ".join(w[:6])
+def coverage_check(member_id, client_id, service_code, dos, urgency="STANDARD"):
+    """What a provider office or a member-services agent can be told before a request is even filed: eligibility, whether the plan covers the
+    service on that date, the policy version whose criteria will apply, the documents to send, and the decision clock. Rules only, no model."""
+    out = dict(member_id=member_id or None, client_id=client_id or None, service_code=service_code, service=SERVICES.get(service_code), date_of_service=str(to_date(dos) or ""))
+    m = ELIG.get((member_id or "").strip())
+    if m and not client_id: client_id = out["client_id"] = m["client_id"]
+    out["eligibility"] = eligibility((member_id or "").strip() or None, client_id, dos) if client_id else dict(status="UNVERIFIED", reason="No client and no known member ID", member_state=None)
+    if not client_id or client_id not in PLAN_CLIENTS:
+        out.update(verdict=dict(status="UNKNOWN", headline="No plan document on file", detail="The tool does not guess coverage. Set the health plan or employer."), plan=None, policy=None, excluded=[], provisions=[]); return out
+    if not service_code or not to_date(dos):
+        out.update(verdict=dict(status="UNKNOWN", headline="Service and date of service are needed", detail="Coverage and the policy version depend on both."), plan=None, policy=None, excluded=[], provisions=[]); return out
+    gov, exc = governing_set(client_id, service_code, dos)
+    plan = next(g for g in gov if g["doc_type"] in ("plan_document", "delegation_agreement")); pol = next((g for g in gov if g["doc_type"] == "policy" and g["doc_id"] != "MP-117"), None)
+    keys = SERVICE_KEYWORDS.get(service_code, []); d_ = to_date(dos)
+    prov = []
+    for s in SECTIONS:
+        if s["doc_id"] != plan["doc_id"] or s["section"] == "0" or s["section"] in ("1", "2", "3", "4", "4.1", "5", "5.1", "5.2", "5.4", "5.5", "6", "7"): continue
+        tl = s["text"].lower()
+        if any(k in tl for k in keys): prov.append(dict(doc_id=plan["doc_id"], section=s["section"], title=_short_title(s["title"]), kind=_kind(s["section"], s["text"], d_), excerpt=re.sub(r"\s+", " ", s["text"])[:420]))
+    kinds = {p["kind"] for p in prov}
+    if "AMENDMENT" in kinds: v = dict(status="COVERED_WITH_CONDITIONS", headline="Covered under a plan amendment", detail="A plan amendment deletes or changes the original wording and governs on this date of service. The original exclusion is shown for reference only.")
+    elif "EXCLUSION" in kinds: v = dict(status="NOT_COVERED", headline="Not a covered benefit under this plan", detail="The plan document excludes this service" + (" (an amendment lifts it, but only for later dates of service)" if "AMENDMENT_NOT_YET" in kinds else "") + ". A request would go to a physician for a not-covered determination; medical necessity is not reached.")
+    elif "EXCLUSION_EXCEPT" in kinds: v = dict(status="COVERED_WITH_CONDITIONS", headline="Excluded unless the plan's stated exception applies", detail="Read the cited section: the exclusion has an exception (for example an age limit) that decides coverage.")
+    elif "CONDITION" in kinds or "LIMIT" in kinds: v = dict(status="COVERED_WITH_CONDITIONS", headline="Covered only if the plan's conditions are met", detail="The plan adds a condition or limit on top of the clinical criteria. Read the cited section before filing.")
+    else: v = dict(status="COVERED_SUBJECT_TO_CRITERIA", headline="Covered, subject to the clinical criteria below", detail="No plan exclusion or limit mentions this service. The decision turns on the medical policy criteria in force on the date of service.")
+    if out["eligibility"]["status"] == "NOT_ELIGIBLE": v = dict(status="NOT_ELIGIBLE", headline="Member not covered on that date", detail=out["eligibility"]["reason"])
+    sec = lambda n: next((re.sub(r"\s+", " ", x["text"]) for x in SECTIONS if pol and x["doc_id"] == pol["doc_id"] and x["version"] == pol["version"] and x["section"] == n), "")
+    docs = sec("5").split("If required documentation")[0]
+    docs = re.sub(r"^5\.?\s*Documentation requirements\s*", "", docs).strip()
+    out.update(verdict=v, plan=dict(doc_id=plan["doc_id"], title=plan["title"], rank=plan["rank"]), provisions=prov, excluded=exc,
+               policy=pol and dict(doc_id=pol["doc_id"], version=pol["version"], title=pol["title"], effective_from=pol["effective_from"], effective_to=pol["effective_to"],
+                                   criteria=re.sub(r"^3\.?\s*Coverage criteria\s*", "", sec("3"))[:900], limitations=re.sub(r"^4\.?\s*Not medically necessary / limitations\s*", "", sec("4"))[:500], documentation=docs[:500]),
+               clock=dict(product=product(client_id), sla_hours=72 if str(urgency).upper() == "URGENT" else (168 if client_id == "RB-MA" else 360), starts="at receipt, on any channel"),
+               checklist=["Member ID exactly as on the card", "Planned date of service", "Diagnosis code (ICD-10)", "Clinical notes that address each criterion"] + ([f"Policy documentation: {docs[:160]}"] if docs else []) +
+                         [f"Plan condition ({p['doc_id']} §{p['section']}): {p['excerpt'][:140]}" for p in prov if p["kind"] in ("CONDITION", "LIMIT", "EXCLUSION_EXCEPT")])
+    return out

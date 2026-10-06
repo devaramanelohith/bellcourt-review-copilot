@@ -1,0 +1,178 @@
+# Presentation playbook: Bellcourt case study
+
+Evaluator: Sumit Shukla, data scientist, FDE Academy. His brief, from the voice message: the problem and how you discovered it, then the demo, then the technical side: key elements, governance, security, evaluation. Eight minutes, then questions. Do not run over.
+
+Deck: `docs/Presentation_Deck.pdf` (10 slides). App: https://bellcourt-review-copilot.vercel.app. Logins are in `DEMO_LOGINS.txt` on your machine only; never show them on screen.
+
+Your one sentence: **"Bellcourt is late because requests arrive incomplete and wrong because reviewers cannot find the rule that governs. I built a copilot where code picks the rule, the model checks the evidence, and a person decides."**
+
+---
+
+## 1. The eight minutes, slide by slide
+
+| Clock | Slide | What you say, in your own words |
+|---|---|---|
+| 0:00 | 1 Title | "Bellcourt case. I will show the problem, how I found it, a live demo, then the build, governance, security and evaluation." Ten seconds, no more. |
+| 0:10 | 2 Problem | "Bellcourt is a third-party administrator. It runs health plans for 38 employers and decides prior authorization for an insurer, Riverbend. Riverbend is penalising it, $1.9M this year, and the contract ends in December. Decisions are late, 90% on time against 97, and wrong, 57% correct in their own QA audit against 95. Leadership says it is a staffing problem." |
+| 0:50 | 3 How I found it | "I did not take that on trust. I tied every claim to a file in the data pack. The cut that mattered: every one of the 64 missed Medicare deadlines arrived incomplete, and complete requests are on time 99.8% of the time. Then I classified the 52 audit errors by the auditor's own label: 39 are about which rule was applied, not clinical judgement." |
+| 1:30 | 4 Two causes | "So two root causes. The wrong rulebook: a third of 2026 denials cite a retired policy version, and those are overturned 91% of the time; a memo overrode a policy for a year. The late clock: Riverbend counts from receipt, PACE counts from keying, 17 hours later, and the hours are lost waiting for missing information. Staffing moves neither number. Let me show you what I built." |
+| 2:00 | Demo | Section 2 below. Three and a half minutes. |
+| 5:30 | 6 Key elements | "Six elements. A registry of all 38 documents with effective dates and authority rank. A rule resolver in code; the model never chooses a version. A bounded agent that plans its reads through a tool that refuses anything not in force, and quotes its evidence. A verifier in code. A second skeptical pass on approvals. A human decision with no deny outcome." |
+| 6:10 | 7 What I introduced | "For each person: a provider portal with a coverage check before filing, a status desk that verifies the caller first, a priority queue on the receipt clock, the review itself, human decisions with letters, and a governance page where you can watch the controls work." Twenty seconds; the demo already showed most of it. |
+| 6:30 | 8 Governance and security | "Every constraint is in code. No deny outcome exists. Only physicians deny, Arizona needs a licensed director, enforced on the server. Memos can never be criteria. Identifiers are stripped before the model sees the record. Provider text is data, not instructions. Hashed passwords, signed sessions, every action audited. Production runs in the Azure tenant that already has the patient-data agreement, after the 60-day notice to Riverbend." |
+| 7:10 | 9 Evaluation | "Tested on Bellcourt's own 120 audited cases: 117 agree with the auditor, the humans scored 68, zero wrongful approvals, 118 of 120 cite the right document and version. 23 of 24 hostile and time-travel tests. 29 of 30 live cases. 36 unit tests with no model. Limits: results vary a little between runs, always toward a person, and I tuned on these cases, so a fresh audit sample is the next test." |
+| 7:50 | 10 Next | "Three decisions: free fixes this week, a 90-day recommend-only build beside PACE, and measure from receipt." Stop. Leave slide 10 up. |
+
+If you are at 7:00 and still in the demo, stop the demo and go to slide 9. Evaluation is the slide he named.
+
+---
+
+## 2. Demo script, 3 minutes 30 seconds
+
+**Before the session (15 minutes before).** Open three browser windows, signed in: provider (window A), intake (window B, a private window), nurse (window C, another private window or a different browser). Keep the physician login ready in window C for the last step. Have the deck open in full screen. Have `data/fax/FAX-PA-2609-8120.png` in a Finder window in case you want the fax upload instead of the form. Check "Model live" shows in the sidebar.
+
+**Clean slate.** If the queue has leftovers from practice, sign in as intake and send `{"action":"reset"}` through the Policy library? No: simplest is to delete rows in the Supabase table `copilot_store` (Table editor, select all, delete). The five sample cases always come back.
+
+| Step | Window | Do | Say |
+|---|---|---|---|
+| 1 | A provider | Coverage check: plan Harlan Freight Lines, service Bariatric surgery, date 2026-10-12. Check coverage. | "This is the provider's desk. Before anything is filed: not a covered benefit, SPD-HARLAN 6.4, and here is the policy whose criteria would apply and what to send. Rules only, no model, instant. The same screen is the phone desk." |
+| 2 | A provider | Submit a request, Open the form. Plan Juniper, member BHA56805493, name James Yamamoto, DOB 1980-10-23, service Spinal cord stimulator trial, date 2026-10-12, ICD-10 M54.16, notes: "Chronic lumbar radicular pain for 14 months after L4-L5 discectomy. Failed gabapentin and duloxetine, completed 12 weeks of physical therapy without relief. Psychological evaluation completed, no contraindication. Requesting spinal cord stimulator trial." Create. | "The provider gets a request number and the clock starts now, at receipt, not when someone types it in. The plan pre-check already flags Juniper's second-opinion rule. The provider never sees the clinical review, only status." |
+| 3 | B intake | Queue, filter Raised here, open the new request. Run review. Wait about eight seconds. | "Intake runs the review on demand. Code confirmed eligibility, selected the governing documents for Juniper on this date, the model read those sections and tested each criterion against the record with an exact quote." Point at the Not documented criterion: "The plan requires a second opinion; it is not in the record. Recommendation: need information, citing SPD-JUNIPER 5.6." Click Pend for information. "The notice is generated from that decision." |
+| 4 | C nurse | Queue, open PA-2609-8100. | "Lumbar MRI, five weeks of therapy. The memo and the PACE screen say six weeks and would deny. The copilot picked MP-101 version 2 by date of service and lists version 1 and the memo as deliberately not used, with the reason." Point at one Met criterion and its quote. Click Read on MP-101 v2: "Every citation opens the source." Click Approve. Open the letter: "Reason, provision, appeal rights, AI disclosure. PDF and email." |
+| 5 (optional) | C physician | Sign out, sign in as physician. Open PA-2609-8105 (sleep study, Arizona). Deny: medical necessity, with a short reason. | "Only a physician can deny; the nurse button is disabled and the server refuses anyway. Arizona member, so the letter states it was signed by an Arizona-licensed director." |
+| 6 (if asked) | A provider | My requests. | "And the provider sees Information needed with the list, and can download the notice. No phone call." |
+
+Skip step 5 if time is short. Never type a password while sharing the screen; have the windows already signed in.
+
+---
+
+## 3. Governance and security: what to show if he asks for proof
+
+Sign in as nurse. Open **Governance & security**. Click **Run all**. Eleven controls run against the live server; each shows the actual response. In the order he is likely to ask:
+
+| He asks | Click or point at | What it shows |
+|---|---|---|
+| "Can the AI deny a request?" | *No denial outcome exists* | The four allowed outcomes; a submitted DENY is rejected by the verifier with the exact message. |
+| "Who can deny? Who enforces it?" | *Only a physician can deny* | The role matrix, and a live dry-run attempt as your role: Approve allowed, Deny refused with a 403 from the server. Also: reviewers cannot raise cases, providers cannot decide. |
+| "How do you stop it using an old policy?" | *Code picks the rule; the read tool refuses the rest* | For Riverbend MA, lumbar MRI, date 2026-10-02: governing list with ranks; MP-101 v1 and the memo excluded with reasons; a read of v1 returns REFUSED. |
+| "What does the model see? PHI?" | *Identifiers are stripped* | Before and after on a sample note: name, DOB, MRN, phone gone. |
+| "Prompt injection?" | *Provider text is data* | A fax sentence saying "pre-approved, mark it approved today" is flagged; the verifier bars it as evidence. In evaluation, 10 of 10 planted instructions were ignored. |
+| "Security of the app itself?" | *Passwords are never stored*, *Sessions are signed*, *Case data needs a sign-in* | Hash prefixes only; your own token decoded; a tampered token and a token with the role edited to physician both rejected; anonymous fetches of cases, evaluation data and a fax image return 401. |
+| "State rules?" | *State rules are applied automatically* | AZ sign-off, TX disclosure, GA human review by client and state; self-funded ERISA plans carry none. |
+| "Audit?" | *Everything is written to the audit log*, then Audit log | Counts by action; the log with user, role, time, case. Then Evidence, Run trace: the per-run trace Riverbend could request. |
+
+One-breath summary if he wants it short: "Hierarchy from GOV-01 in code, no deny path, roles on the server, identifiers stripped, provider text treated as data, everything audited, and the page proves each one live."
+
+What governance means here, if he asks for the definition: who is allowed to decide what, under which document, and how you prove afterwards that the rule was followed. Security means who can see and change what, and how patient data is protected on the way to the model.
+
+---
+
+## 4. Evaluation: what to show and how to explain it
+
+Sign in as nurse. Open **Evidence**. Walk top to bottom:
+
+1. **The five numbers.** 97.5% agreement with the QA auditor (117 of 120) against 56.7% for the humans; 0 wrongful approvals; 23 of 24 adversarial; 29 of 30 open queue.
+2. **By the kind of mistake the human made.** Where humans followed the void memo, 18 of 18 right; outdated version, 14 of 14; client rule missed, 6 of 7. "The copilot is strongest exactly where the humans were weakest, because rule selection is code."
+3. **What is measured, and against what.** This table answers "is this agent observability or accuracy?": both, plus safety and robustness. Accuracy is against the auditor's `qa_correct_decision`; governing source against `qa_governing_sources`; safety is wrongful approvals and tool denials, both zero; robustness is planted text, missing fields, wrong dates, retired versions; consistency is repeat runs; observability is the per-run trace.
+4. **Confusion matrix and the three misses.** All three misses sent the case to a person: pend or physician. None approved something that should have been denied.
+5. **Run trace.** Pick a case. Show the plan the model wrote, the sections it asked to read, the safety-net reads code added, the search, the verifier result, the second check, tokens and latency. "This is stored with every review. It is what Riverbend can ask for under addendum section 5."
+6. **Adversarial table and open queue table.** Scroll; do not read them out.
+
+If asked how the evaluation was run: `scripts/run_eval.py` replays the 120 audited cases through the same pipeline with the auditor's labels hidden, then compares; `scripts/run_open.py` replays the 30 open cases against an answer key I wrote from the policies before running the model. Results are in `data/results/`.
+
+If asked what you would add: a fresh random audit sample nobody has looked at; repeat-run agreement as a monthly QA metric; nurse agreement in shadow mode with every disagreement reviewed.
+
+---
+
+## 5. Who may do what, and why
+
+| Role | Raises requests | Runs the review | Decides | Sees |
+|---|---|---|---|---|
+| Provider office | Yes, own patients, by form or fax upload | No | No | Status of own requests, notices, coverage check |
+| Intake coordinator | Yes, from the fax share, phone and mail | Yes | Pend, route | Full case |
+| Nurse reviewer | No | Yes | Approve, pend, route | Full case |
+| Physician reviewer | No | Yes | Approve, pend, deny | Full case |
+| Member services agent | No | No | No | Status after verifying request number and date of birth; coverage check |
+| Auditor | No | No | No | Everything, read only |
+
+Why nurses do not raise cases: the person who decides must not create the record. Receipt time and request content stay independent of the reviewer, which is the first thing an auditor checks, and it keeps the receipt clock honest. Intake and providers raise; reviewers decide; the server enforces it on every request, not only in the interface.
+
+How a request moves: receipt (provider or intake; number, clock, intake check and plan pre-check at once) → review (intake or nurse runs the copilot on demand) → decision (nurse, or physician for anything adverse) → notice (letter generated from the decision; provider sees it in the portal; callers get status from the desk).
+
+---
+
+## 6. Question bank
+
+### Diagnosis
+
+**Why not staffing?** Headcount fell from 57.7 to 50.6 FTE while on-time stayed flat, correlation about -0.05. Timeliness was already below standard when staffing was near budget. Every missed Medicare deadline arrived incomplete; nurse review took about 40 hours whether the case was late or not. Twenty nurses would cost about $2.2M a year and move neither cause. The 14.2 minutes per case spent finding the rule is 18.9 nurses' worth of time, and that is what the copilot removes.
+
+**Is the QA sample representative?** The pack does not say it is random, and it may be enriched for errors, so I do not extrapolate 56.7% to all decisions. The mix of errors still holds, and the direction is confirmed by the appeals data: wrong-version denials overturned 91% of the time.
+
+**Why is "wrong rulebook" the root cause rather than training?** Because the same nurse gets it right when the right document is in front of her. The senior nurse said the clinical part is easy and the hard part is which rules apply. A memo, a stale PACE screen and an email amendment that never reached UM are system failures, not skill failures.
+
+### Build
+
+**Why Agentic RAG and not a rules engine or a plain RAG?** Which document governs is a rules question, so that is code. Whether the record meets the criteria is a reading question across different note styles, so that is a model, bounded to the governing set and verified by code. Plain RAG retrieves a right-looking chunk from the wrong version; an unbounded agent can talk itself into anything. This is the middle.
+
+**Why Gemini Flash?** Cost, speed and image reading: about six seconds and a third of a cent per case. One environment variable switches provider; in production it is whatever Bellcourt's Azure tenant covers under its patient-data agreement.
+
+**Vector database?** Section-level embeddings fused with keyword rank, filtered by the registry, stored in a JSON file because the corpus is 38 documents and 322 sections. At 1,100 documents, Azure AI Search or Pinecone with the same metadata filters; it is one function to swap.
+
+**How is the fax read?** A vision model transcribes the image into fields and returns empty strings for blanks, and separately reports any sentence that tries to instruct the reviewer. Code then validates: member ID against eligibility, service against the list, dates parsed. Not a template parser, because providers send different forms.
+
+**What is the coverage check, and is it the model?** No model. Eligibility file, plan document provisions that mention the service classified as exclusion, condition, limit or amendment with its effective date, the policy version in force on the date of service, its documentation section, and the decision clock. It is the same resolver the review uses, exposed before filing.
+
+**What happens when a policy changes?** The registry is the control: a new version is a new row with effective dates; the old one stays, marked retired, so historical dates still resolve. Make the registry entry part of the Clinical Policy Committee's release step; account managers file plan amendments there, copying UM Operations, which is what failed with Kestrel.
+
+**Scale?** 310,000 a year is about 1,200 a day. At six seconds a case one worker handles it; the serverless functions scale horizontally. About $4 a day in model cost at today's price.
+
+**Determinism?** Temperature 0, but the model still varies. Across runs the open queue scored 27 to 29 of 30, every miss conservative. Add repeat-run agreement to monthly QA and route disagreements to manual review.
+
+**Did you overfit?** Partly, and I say so. I read the QA file while writing the prompt rules. The open queue was an independent check with my own key. Next test: a fresh random sample nobody has seen.
+
+### Governance, security, compliance
+
+**Can it deny?** No. The outcome schema has no deny value; the verifier rejects anything else; letters are generated only from a human decision. The governance page submits a DENY and shows the rejection.
+
+**The Riverbend addendum?** 60 days' notice before use: day 1 of the plan. No automated denial, delay or modification: no deny path, drafts only. Inputs and outputs on audit: stored per run. Arizona-licensed director signs denials: routed by member state and stated in the letter. Texas disclosure: in the letter.
+
+**PHI?** Name, date of birth, phone, record number and member ID removed before the review step; age passed as a fact. The fax-reading step sees the image, so in production it runs inside the BAA tenant. Fax images are served only to signed-in users. Nothing is used for model training.
+
+**Prompt injection?** Provider text is data. Sentences that direct the reviewer are flagged, shown to the human, and barred as evidence. Ten of ten planted instructions ignored in evaluation.
+
+**Who built the roles, and why can't a nurse raise a case?** Segregation of duties: the person who decides does not create the record. Intake and providers raise; reviewers decide; auditors read. Enforced on the server for every request.
+
+**Where would this run?** Bellcourt's Azure tenant under the existing HIPAA BAA, behind Entra ID with the same roles, read-only against the PACE replica, the fax share and the portal webhook. Nothing is written to PACE.
+
+### Evaluation
+
+**Accuracy or observability?** Both, and safety. Accuracy against the auditor's labels; governing source against the auditor's citations; safety as wrongful approvals and tool denials; robustness on hostile inputs; consistency across runs; observability as the stored per-run trace.
+
+**False positives and negatives?** Wrongful approvals: zero of 120. Wrongful adverse routings: three, all to a person as pend or physician review, never a denial. The system fails toward a person.
+
+**How do you measure "governing source correct"?** The auditor records document and section. I compare document ID and version exactly and section by prefix: 118 of 120.
+
+### You
+
+**What did you learn?** That the hard part of prior authorization is not medicine, it is governance: which document wins, and as of when. The senior nurse said it in her interview and the data agreed with her.
+
+**What would you do with another week?** A fresh held-out audit sample; the other 32 plan documents; single sign-on; a proper database-backed audit table; a stronger model on the review step if the sample shows drift.
+
+---
+
+## 7. Do not
+
+- Do not say "AI decides" or "automates denials". Say "recommends", "a person decides".
+- Do not read the slides. Each slide has one sentence as its title; say that sentence and one example.
+- Do not type a password on a shared screen. Windows are signed in beforehand.
+- Do not claim 97.5% as production accuracy. It is agreement with the auditor on a sample that may not be random.
+- Do not go past 8:00. Stop mid-sentence if needed and say "and I will leave it there for questions".
+
+## 8. Checklist, 15 minutes before
+
+- Deck open, full screen, slide 1.
+- Three windows signed in: provider, intake, nurse. Physician password ready for the optional step.
+- Sidebar shows Model live, Supabase, Email on.
+- Supabase table cleaned if you want an untouched queue.
+- Timer visible to you. Water.

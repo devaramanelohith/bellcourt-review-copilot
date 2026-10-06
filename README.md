@@ -1,3 +1,5 @@
+<img src="docs/logo_wordmark.png" alt="Review Copilot" width="320">
+
 # Bellcourt Review Copilot
 
 **Live demo:** https://bellcourt-review-copilot.vercel.app
@@ -16,15 +18,17 @@ Staffing is a strain, but it is not why deadlines are missed (details in `docs/B
 
 ## What this does
 
-A working prototype of the whole path from request to decision letter:
+A working prototype of the whole path from request to decision letter, with a screen for each person in the picture:
 
-1. **Raise a case** three ways: upload a fax image or PDF (read by a vision model), upload a case file (JSON or text), or fill the form (for phone requests).
+0. **Provider portal.** A provider office runs a **coverage check** before filing (eligibility, plan exclusions and conditions, the policy version whose criteria will apply, what to send; rules only, instant), submits the request by fax upload or form, gets a request number and receipt time at once, and follows status and written notices without a phone call. A **status desk** lets member-services agents look a request up for callers after the request number and the patient's date of birth both match.
+1. **Raise a case** three ways: upload a fax image or PDF (read by a vision model), upload a case file (JSON or text), or fill the form (for phone requests). Intake coordinators and provider offices raise cases; reviewers do not.
 2. **Intake check at once.** Missing fields are listed, the clock starts at receipt, and the case joins a priority queue: overdue, urgent, due soon, standard.
 3. **Run the review.** Code confirms eligibility and selects the governing rules: the client's plan document and amendments, the Riverbend addendum and Medicare rule, and the Bellcourt policy version in force on the date of service. Retired versions and memos are excluded, with the reason shown. The model plans what to read and checks each criterion against the record with an exact quote. Code verifies the answer and runs a skeptical second check on every approval.
 4. **See the analysis.** Recommendation and why, coverage checks, medical necessity criteria with pass or fail and the quoted evidence, and the reference documents. Each citation opens the source section, and the original policy PDF is one click away.
 5. **A person decides.** Approve, pend for information, route to physician, or (physician only) deny. Differing from the recommendation needs a reason. There is no way for the tool to deny.
 6. **Decision letter.** Created from the human decision: specific reason, provision relied on, appeal rights. Viewable, downloadable as PDF, and sent by email.
-7. **Audit log.** Every create, review, decision and letter, with user, role and time.
+7. **Audit log.** Every create, review, decision, letter and status lookup, with user, role and time.
+8. **Governance and security page.** Eleven live controls, each a button that runs the real code path and shows the server's answer: no deny outcome, role gate with a dry-run attempt, read-tool refusal of retired versions, de-identification, planted-text flagging, password hashing, token tampering, anonymous access, state rules, the receipt clock and the audit log.
 
 ## Results
 
@@ -35,7 +39,7 @@ A working prototype of the whole path from request to decision letter:
 | Denials issued by the tool | 0 (not possible by design) |
 | 30 open cases, 13 of them fax images | 29 of 30 against the answer key |
 | Adversarial, incomplete and wrong inputs | 23 of 24. The one failure ended in manual review |
-| Deterministic unit tests | 36 of 36 |
+| Deterministic unit tests | 41 of 41 |
 
 Full tables and honest limits: [`docs/EVIDENCE.md`](docs/EVIDENCE.md).
 
@@ -67,12 +71,13 @@ flowchart LR
 | `copilot/pipeline.py` | `run_case()`: ties the steps together and applies overrides the model cannot undo |
 | `copilot/llm.py` | The only module that calls a model (OpenRouter or the Gemini API, standard library only) |
 | `copilot/auth.py` | Sign-in, signed sessions, roles |
-| `copilot/cases.py` | Case lifecycle: create, review, human decision, letter, audit |
+| `copilot/cases.py` | Case lifecycle: create, review, human decision, letter, audit. Role rules, provider status views, status-desk lookup |
+| `copilot/controls.py` | Live proofs for the Governance and security page |
 | `copilot/letters.py` | Decision letter text, dependency-free PDF writer, Gmail delivery |
 | `copilot/store.py` | Persistence: Supabase over REST, or a local file |
 | `api/login.py`, `api/cases.py`, `api/data.py`, `api/review.py`, `api/ask.py` | Vercel serverless functions: sign-in, case workflow and letters, protected data and fax images, live review, "ask the policy library" |
-| `public/index.html` | The workspace: sign-in, priority queue, new case, case review, decision letters, policy library, how it works, evidence, audit log |
-| `scripts/` | `ingest.py` builds the knowledge base, `run_open.py` and `run_eval.py` produce the evidence, `build_docs.py` builds the PDFs |
+| `public/index.html` | The workspace: sign-in, priority queue, new case, case review, coverage check, decision letters, policy library, governance and security, evidence, how it works, audit log; provider portal and status desk views by role |
+| `scripts/` | `ingest.py` builds the knowledge base, `run_open.py` and `run_eval.py` produce the evidence, `build_docs.py` builds the PDFs, `build_deck.py` the presentation deck, `build_logo.py` the product mark |
 | `data/` | Knowledge base PDFs, sections, registry, vectors, open cases, eligibility, QA audit file |
 
 ## How each kind of request is read
@@ -88,7 +93,18 @@ Every channel becomes the same case record and goes through the same six steps. 
 
 ## Sign-in and roles
 
-The app requires sign-in. Four roles: intake coordinator, nurse reviewer, physician reviewer, auditor (read only). Passwords are stored only as salted PBKDF2 hashes in `copilot/users.json`. Sessions are HMAC-signed tokens that expire after 8 hours. Case data, fax images and both model endpoints are served only to signed-in users, and role limits are enforced on the server. Demo logins are shared with evaluators in the submission comment, not in this repository.
+The app requires sign-in. Six roles, enforced on the server for every request:
+
+| Role | Raises requests | Runs the review | Decides | Sees |
+|---|---|---|---|---|
+| Provider office | Own patients, by form or fax upload | No | No | Status of own requests, notices, coverage check |
+| Intake coordinator | Yes (fax share, phone, mail) | Yes | Pend, route | Full case |
+| Nurse reviewer | No | Yes | Approve, pend, route | Full case |
+| Physician reviewer | No | Yes | Approve, pend, deny | Full case |
+| Member services agent | No | No | No | Status after verifying request number and date of birth; coverage check |
+| Auditor | No | No | No | Everything, read only |
+
+Reviewers do not raise cases: the person who decides must not create the record, so the receipt time and the request content stay independent of the reviewer. Passwords are stored only as salted PBKDF2 hashes in `copilot/users.json`. Sessions are HMAC-signed tokens that expire after 8 hours. Case data, fax images and both model endpoints are served only to signed-in users, and role limits are enforced on the server. Demo logins are shared with evaluators in the submission comment, not in this repository.
 
 ## Run it locally
 
@@ -104,7 +120,7 @@ To re-run the evidence (needs a key and a few cents of credit):
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install pdfplumber pytest reportlab pypdfium2 pypdf
-.venv/bin/python -m pytest -q            # 36 deterministic tests, no key needed
+.venv/bin/python -m pytest -q            # 41 deterministic tests, no key needed
 .venv/bin/python scripts/ingest.py       # rebuild sections, registry and vectors from the PDFs
 .venv/bin/python scripts/run_open.py     # 30 open cases
 .venv/bin/python scripts/run_eval.py     # 120 audited cases + adversarial tests
@@ -156,6 +172,8 @@ A free-tier Gemini key allows about 20 requests a day per model. One case review
 | Implementation strategy (90 days) and one-page design note | `docs/Implementation_Strategy_and_Design_Note.pdf` |
 | Working demo, README, setup | this repository |
 | Evidence it works | `docs/EVIDENCE.md`, Evidence tab in the app |
+| Presentation deck (10 slides, the evaluator's 8-minute flow) | `docs/Presentation_Deck.pdf` |
+| Presentation playbook: talk track, demo steps, governance and evaluation proof steps, question bank | `docs/PRESENTATION_PLAYBOOK.md`, `docs/Presentation_Playbook.pdf` |
 | Pitch deck (14 slides) | `docs/Pitch_Deck.pdf` |
 | All of the above as one folder | `deliverables/` |
 | Submission text | `docs/SUBMISSION.md` |

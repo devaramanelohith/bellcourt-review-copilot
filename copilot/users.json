@@ -22,5 +22,17 @@
   "role": "auditor",
   "salt": "b8c9f7d7f006bdeb9000884a25409bf9",
   "hash": "cf7dcae86ab850a49a5d01cab25c40d2b665af5d73b94e6a2c546a0e57566fa1"
+ },
+ "provider": {
+  "name": "Tasha Greene (Summit Metabolic Surgery Center)",
+  "role": "provider",
+  "salt": "4f6f0b65c864e86cf9361de1ab186cd5",
+  "hash": "c7ab8d70207e2cafd8ba1232746d1783d63e481f02912708e4a828ce0d32fd62"
+ },
+ "agent": {
+  "name": "Priya Natarajan (Member Services)",
+  "role": "agent",
+  "salt": "a557d57e9754c9b912544ec583308a3c",
+  "hash": "b52ea9a3d9b8e31135ecc57d7911091ae4f4997b4efcade928fb62569ddc6988"
  }
 }

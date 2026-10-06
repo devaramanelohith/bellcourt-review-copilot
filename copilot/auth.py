@@ -5,8 +5,10 @@ import os, json, hmac, hashlib, base64, time
 from . import llm  # loads .env for local runs
 
 USERS = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "users.json")))
-ROLES = {"nurse": "Nurse reviewer", "physician": "Physician reviewer", "intake": "Intake coordinator", "auditor": "Auditor (read only)"}
-CAN_RUN_LIVE = {"nurse", "physician", "intake"}          # the auditor role is read-only, enforced on the server
+ROLES = {"nurse": "Nurse reviewer", "physician": "Physician reviewer", "intake": "Intake coordinator", "provider": "Provider office", "agent": "Member services agent", "auditor": "Auditor (read only)"}
+CAN_RUN_LIVE = {"nurse", "physician", "intake"}          # who may run the AI-assisted review
+CAN_DECIDE = {"nurse", "physician", "intake"}            # who may record a decision (which decisions is checked per decision)
+STAFF = {"nurse", "physician", "intake", "auditor"}      # who sees the internal workspace; providers and agents see only status views
 TTL = 8 * 3600
 
 def _secret():
