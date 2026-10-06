@@ -1,41 +1,39 @@
 # Presentation prep: Bellcourt case study
 
-Evaluator: Sumit Shukla (data scientist, FDE Academy). Format expected: Problem, How you found it, Approach and why, Architecture, Live demo. Claims must trace to the data pack.
+Evaluator: Sumit Shukla (data scientist, FDE Academy). His required flow: problem and how you discovered it, then the demo, then the technical side (key elements, governance, security, evaluation). 8 minutes to present, 2 for questions. Claims must trace to the data pack.
 
 Your single sentence: **"Bellcourt is late because requests arrive incomplete and wrong because reviewers cannot find the rule that governs. I built a copilot where code picks the rule, the model checks the evidence, and a person decides."**
 
 ---
 
-## 1. Talk track (12 minutes, then demo)
+## 1. The 8-minute flow Sumit asked for
 
-| Minute | Slide | Say this, in your own words |
+His instruction, from the voice message: problem and how you discovered it, then straight into the demo, then the technical side: key elements, governance, security, evaluation. Eight minutes to present, two for questions. Do not run over.
+
+Use the short deck `Pitch_Deck_8min.pdf` (6 slides). Slides 1 and 2 before the demo, slides 3 to 6 after it.
+
+| Minute | Part | Say this, in your own words |
 |---|---|---|
-| 0 to 1 | Title | "Bellcourt is a TPA. It runs health plans for 38 employers and decides prior authorization requests for an insurer, Riverbend. Riverbend is penalising them and may leave in December. Leadership blames staffing. I tested that against their own data and found something different." |
-| 1 to 2 | The business | "Two kinds of customer. Employers pay a fee per employee and pay the medical bills themselves. Riverbend pays per member and per case, and can claw back fees. Prior authorization is a check before an expensive service: is it covered, and is it medically necessary. Nurses approve, only physicians deny, and the deadlines are legal: 7 days for Medicare Advantage, 15 otherwise, 72 hours urgent." |
-| 2 to 3 | The problem | "Four numbers. On-time 90% against 97. Overturns on appeal 56% against a 30% trigger. QA accuracy 57% against 95. $1.9M in penalties, a fifth of profit. And the leadership disagreed about why." |
-| 3 to 5 | How I found it | "I treated each stakeholder claim as a hypothesis. Staffing: headcount fell from 57.7 to 50.6, but the on-time rate didn't move with it, correlation minus 0.05, and it was already 87% when staffing was 98% of budget. Then the decisive cut: all 64 late Medicare Advantage decisions arrived incomplete. Complete requests are on time 99.8% of the time. So lateness is an intake problem, not a nursing problem." |
-| 5 to 6 | Root cause 1 | "Wrong rule. 34% of 2026 denials cite a policy version that was already retired, and those are overturned 91% of the time. A memo told nurses to keep a 6-week rule after the policy moved to 4 weeks: 72 denials. Kestrel started covering bariatric surgery in January; the email went to another team; all 8 requests were wrongly denied. 39 of the 52 errors in the QA audit are this kind: not clinical judgement, rule lookup." |
-| 6 to 7 | Root cause 2 | "The clock. Riverbend's clock starts when the fax arrives. Bellcourt's starts when someone types it in, 17 hours later. Late cases spend 122 of 199 hours waiting for missing information. Nurse review is 40 hours whether the case is late or not. I recomputed on the real cases: fix intake and you reach 97.7%; cut nurse time by a third and you only reach 94%." |
-| 7 to 8 | Priorities | "Wrong rule first: it's the only fix that is both faster and more defensible, which is literally the CEO's brief, and it is what Riverbend named. Intake second, because it drives the penalties, so I built its most valuable slice: catch incompleteness in the first minute. Visibility third." |
-| 8 to 9 | Approach | "Why Agentic RAG. Plain RAG retrieves by similarity, and version 1 and 2 of a policy are nearly identical text, while the void memo looks highly relevant. It would repeat the error. A fully autonomous agent is not allowed: no tool may deny, delay or modify. So code selects the documents that are in force, the model reads within them and quotes its evidence, code verifies, and a person decides. There is no deny outcome." |
-| 9 to 10 | Architecture | Walk the six boxes left to right. Point at the three plug-ins: fax share, portal webhook, PACE read replica. Point at the green box: human decides. Mention the audit log and the loop from verifier back to agent. |
-| 10 to 11 | Evidence | "I tested on Bellcourt's own audited cases. 117 of 120 agree with the auditor; the humans scored 68. Zero wrongful approvals. On the cases humans got wrong for a rule reason, 38 of 39. Ten planted instructions, all flagged and ignored. Seven time-travel cases, the version flips with the date. I will also tell you what is weak: results vary slightly between runs, and I tuned prompts on these cases, so a fresh audit sample is the next test." |
-| 11 to 12 | Rollout | "Day 0 is not technology: send Riverbend the 60-day notice and withdraw the memo. Pilot on employer plans while the notice runs because ERISA plans are not bound by the state AI laws. Riverbend goes live in the third month. Staffing answer: fill the 7 vacancies, don't add 20. Rule-hunting is 19 nurses' worth of time." |
+| 0:00 to 0:45 | Slide 1: the problem | "Bellcourt is a TPA. It runs health plans for 38 employers and decides prior authorization requests for an insurer, Riverbend. Riverbend is penalising them, $1.9M this year, and may leave in December. Decisions are late, 90% on time against 97, and wrong: 57% correct in their own QA audit against 95. Leadership blames nurse headcount." |
+| 0:45 to 2:00 | Slide 2: how I found it | "I tested that claim against their data. Headcount fell from 57.7 to 50.6, but timeliness was already failing at full staffing and didn't track headcount. The decisive cut: every one of the 64 late Medicare Advantage decisions arrived incomplete; complete requests are on time 99.8% of the time. So lateness is an intake problem. And accuracy: 39 of 52 audited errors are rule lookups, not clinical judgement. A third of 2026 denials cite a retired policy version; those are overturned 91% of the time. A memo told nurses to keep a 6-week rule after the policy moved to 4 weeks: 72 wrong denials." Then: "Let me show you what I built." |
+| 2:00 to 5:30 | Demo, live | Follow Section 2. Queue, case 8100, upload fax 8120 and run it, approve 8100 and open the letter, physician denial on 8105. Keep moving. |
+| 5:30 to 6:30 | Slide 3: key elements | "Six elements. A metadata registry of all 38 documents with effective dates and authority rank. A rule resolver in code that picks what is in force; the model never chooses a version. A bounded agent that plans its reads, uses a read tool that refuses anything not in force, and quotes its evidence. A verifier in code: citations in force, quotes in the record, outcome consistent, visit arithmetic recomputed. A second skeptical pass on approvals. A human decision with no deny outcome, and a letter generated from that decision." |
+| 6:30 to 7:15 | Slide 4: governance and security | "Governance: GOV-01's hierarchy is enforced in code, memos can never be criteria, every run stores inputs, documents, versions, tool trace, output and the human decision, which is what the Riverbend addendum requires on audit. Only physicians can deny, enforced on the server. Security: sign-in with hashed passwords and signed sessions, roles on the server, data and fax images served only to signed-in users, identifiers stripped before the model sees the record, provider text treated as data with planted instructions flagged. Production runs in the Azure tenant that already has the patient-data agreement, after the 60-day notice to Riverbend." |
+| 7:15 to 8:00 | Slide 5: evaluation | "Tested on Bellcourt's own 120 audited cases: 117 agree with the auditor, the humans scored 68, zero wrongful approvals. On the cases humans got wrong for a rule reason, 38 of 39. Ten planted instructions, all ignored. Seven time-travel cases: the version flips with the date. 36 unit tests with no model. Limits: results vary a little between runs, always toward a person, and I tuned on these cases, so a fresh audit sample is the next test." Slide 6 stays on screen for questions. |
 
-Then: "Let me show you."
+If you are at 7 minutes and still in the demo, skip the physician step and go to slide 5. Evaluation is the slide he asked for by name.
 
-## 2. Demo script (5 to 6 minutes)
+## 2. Demo script (3.5 minutes, inside the 8)
 
-Before the session: sign in as nurse in one browser window and as physician in a private window. Open `data/open_cases/PA-2609-8116.json` and `data/fax/FAX-PA-2609-8120.png` in a Finder window. Delete leftover test rows in Supabase if you want a clean queue.
+Before the session: sign in as nurse in one window and as physician in a private window. Have `data/fax/FAX-PA-2609-8120.png` in a Finder window. Clean the Supabase table if you want an untouched queue.
 
-1. **Queue (30 sec).** "Five sample cases, sorted by time left. 8113 is a fax, urgent on the form, already overdue, and nobody had typed it in."
-2. **Case 8100 (90 sec).** Open it. "Lumbar MRI, 5 weeks of therapy. The memo and the PACE screen say 6 weeks. The copilot picked MP-101 version 2 by the date of service." Scroll to Reference documents: "Version 1 and the memo are listed as deliberately not used, with the reason." Click Read on MP-101 v2: "Every citation opens the source section." Show the criteria: "Each Met has an exact quote from the record."
-3. **Upload a fax (90 sec).** New case, upload FAX-PA-2609-8120.png. "A vision model reads it into fields. No OCR template." Run review. "Need information: Juniper's plan requires a second opinion before a stimulator trial, and it isn't in the record. And see this flag: the fax contains a note saying Juniper dropped that rule and asking us to approve today. It is flagged as a planted instruction and ignored." Show the drafted request to the provider.
-4. **Decide and letter (60 sec).** Back on 8100, click Approve. Open Decision letters. "The letter is generated from my decision, cites the section, and can be emailed." Download the PDF.
-5. **Physician (60 sec).** Switch to the physician window, open 8105. "The nurse could not deny this. The physician can, and the letter carries the specific reason, the appeal rights, and the Arizona sign-off line."
-6. **Evidence tab (30 sec).** Point at 117 of 120 and the adversarial table.
+1. **Queue (20 sec).** "Five sample cases sorted by time left. 8113 is a fax marked urgent, already overdue, and nobody had typed it in."
+2. **Case 8100 (60 sec).** "Lumbar MRI, 5 weeks of therapy. The memo and the screen say 6 weeks. The copilot picked version 2 by date of service, and lists version 1 and the memo as deliberately not used, with the reason." Point at one Met criterion with its quote. Click Read on MP-101 v2 once: "every citation opens the source."
+3. **Upload fax 8120 (70 sec).** New case, upload, run review. "A vision model read the form. Juniper's plan requires a second opinion; it is not in the record, so: need information, and the request to the provider is already drafted. And this flag: the fax says Juniper dropped that rule and asks us to approve today. Flagged as a planted instruction, ignored."
+4. **Approve and letter (40 sec).** Back on 8100, Approve. Decision letters: "generated from my decision, cites the section, PDF, email."
+5. **Physician (30 sec).** Private window, 8105: "the nurse could not deny this. The physician can, and the letter carries the reason, appeal rights and the Arizona sign-off."
 
-If anything fails live: say "the saved results are in the Evidence tab" and continue. Never debug on stage.
+If anything fails live: "the saved results are in the Evidence tab", and move on. Never debug on stage.
 
 ## 3. Numbers to know cold
 
