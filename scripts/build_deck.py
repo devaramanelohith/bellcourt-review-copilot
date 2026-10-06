@@ -253,8 +253,34 @@ text(M + 430, 122, "THE THREE MISSES, ALL TOWARD A PERSON", "IS", 8, TEAL)
 para("<br/>".join(f"{q['id']} {q['client']} · {q['service'].split(' (')[0][:30]} · auditor {q['truth'].replace('_', ' ').lower()}, copilot {q['tool'].replace('_', ' ').lower()}" for q in miss), M + 430, 113, CW - 444, 7.6, INK, lead=9.4)
 para("<b>Limits I state openly:</b> results vary slightly between runs; prompts were tuned while looking at these cases, so a fresh random audit sample is the next test; the open-case key is my own reading of the policies; 6 of 38 employer plan documents are in the pack.", M, 60, CW, 8.6, MUTED)
 
-# ================================================================ 10. closing (dark)
-y = slide("8 · What Bellcourt should do next", "Three decisions.", dark=True, tsize=34, source=f"Questions  ·  {LIVE}  ·  {REPO}")
+# ================================================================ 10. cost and margin
+y = slide("8 · Cost and margin", "About $0.55M to build and run in year one, against $1.9M of credits and a $2.2M hiring plan.", source="Financials FY2023 to FY2026F, client roster, Riverbend addendum §6 (4% of quarterly fees per point below 97%), time-and-motion study (212 reviews), call log (3,200 calls). (A) = my assumption; validate with Finance.")
+cx = [M, M + 312, M + 616]; cwid = [298, 290, CW - 616]; ctop = y + 2; cbot = 118
+for x, w_ in zip(cx, cwid): card(x, cbot, w_, ctop - cbot)
+text(cx[0] + 12, ctop - 18, "WHAT IT COSTS ($M)", "IS", 8, TEAL)
+tbl([["Item", "Year 1", "Ongoing"], ["90-day build: FDE, 2 engineers, half a clinical SME, security review (A)", "0.30", ""], ["Model and fax reading: 310k cases × $0.003, 143k faxes × $0.004", "0.01", "0.01"],
+     ["Azure hosting, Postgres, logging, monitoring (A)", "0.05", "0.06"], ["Support: half an engineer, half a policy librarian (A)", "0.12", "0.24"], ["Contingency 15% (A)", "0.07", ""], ["<b>Total</b>", "<b>0.55</b>", "<b>0.30</b>"]],
+    cx[0] + 10, ctop - 26, [196, 40, 44], 8.6, pad=3.2)
+para("0.5% of revenue. One tenth of the hiring plan. Payback from credits alone in about five months.", cx[0] + 12, cbot + 34, cwid[0] - 24, 8.6, MUTED)
+text(cx[1] + 12, ctop - 18, "WHAT IT IS WORTH, PER YEAR", "IS", 8, TEAL)
+yy = ctop - 26
+for a, b in [("$1.9M", "service credits avoided. The FY2026 line. Each point of timeliness below 97% costs 4% of Riverbend's quarterly fees, about $0.27M a year per point."),
+             ("$2.2M", "hiring avoided (A: 20 nurses at $110k loaded). Finding the rule is 14.2 of 38 minutes per case, 37% of nurse time, about 18.9 FTE. Half of that fills the 7.4 FTE vacancy gap."),
+             ("12.5 FTE", "call-centre capacity. 67% of 2,400 daily calls are status or fax-receipt; half deflected by the portal and status desk at 446 s a call (A: 50%)."),
+             ("$6.8M", "Riverbend fees protected, plus Harlan ($8.1M) and 13 other employers ($42M in admin fees) renewing on 1 January. Not counted in the margin bars.")]:
+    text(cx[1] + 12, yy - 14, a, "SSB", 15, INK); yy = para(b, cx[1] + 78, yy - 2, cwid[1] - 90, 8.3, INK, lead=10.6) - 10
+text(cx[2] + 12, ctop - 18, "OPERATING MARGIN, SCENARIOS", "IS", 8, TEAL)
+yy = ctop - 34
+for lab, v, col in [("FY2026 forecast (actual trend 14.0 → 8.0%)", 8.0, MUTED), ("Hire 20 nurses, credits continue (VP plan)", 6.0, COPPER), ("  … and Riverbend leaves on 31 Dec (A)", 1.8, COPPER),
+                    ("Copilot, year one: credits fall to $0.5M (A)", 8.8, GREEN), ("Copilot, steady state: credits zero", 9.4, GREEN), ("  … and freed capacity converted (A $1.0M)", 10.3, GREEN)]:
+    text(cx[2] + 12, yy, lab, "I", 8, INK); bw = (cwid[2] - 60) * v / 10.3
+    c.setFillColor(col); c.roundRect(cx[2] + 12, yy - 13, bw, 8, 1.5, stroke=0, fill=1); text(cx[2] + 16 + bw, yy - 12, f"{v:.1f}%", "IS", 8.2, INK); yy -= 31
+para("Revenue held at the FY2026 forecast; SG&amp;A flat; no growth counted. The CEO's three further delegated plans are upside.", cx[2] + 12, cbot + 32, cwid[2] - 24, 8, MUTED, lead=9.8)
+card(M, 56, CW, 28, TINT, TINT)
+para("<b>The argument in one line:</b> the credits alone are 21% of operating profit and 1.7 margin points; the copilot costs 0.3 points a year and removes the cause, while the hiring plan costs 2 points and removes nothing.", M + 14, 78, CW - 28, 9.2, INK)
+
+# ================================================================ 11. closing (dark)
+y = slide("9 · What Bellcourt should do next", "Three decisions.", dark=True, tsize=34, source=f"Questions  ·  {LIVE}  ·  {REPO}")
 cards = [("This week, no technology", ["Withdraw UM-MEMO-2025-19", "Tell UM Operations about the Kestrel amendment", "Re-review denials still open to appeal under the old versions", "Report Riverbend timeliness from receipt time"]),
          ("90 days, recommend-only, beside PACE", ["Send the 60-day notice to Riverbend on day 1", "Registry of documents owned by the Clinical Policy Committee", "Shadow mode with senior nurses, then self-funded clients, then Riverbend", "Provider portal and status desk to cut status calls"]),
          ("Measure it, from receipt", ["MA on-time from about 90% to 97% or better", "QA accuracy from 56.7% to 95% or better", "Wrong-version citations to zero; overturns below 30%", "Stop rule: pause if accuracy on sampled cases falls under 90%"])]

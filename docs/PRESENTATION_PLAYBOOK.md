@@ -2,7 +2,7 @@
 
 Evaluator: Sumit Shukla, data scientist, FDE Academy. His brief, from the voice message: the problem and how you discovered it, then the demo, then the technical side: key elements, governance, security, evaluation. Eight minutes, then questions. Do not run over.
 
-Deck: `docs/Presentation_Deck.pdf` (10 slides). App: https://bellcourt-review-copilot.vercel.app. Logins are in `DEMO_LOGINS.txt` on your machine only; never show them on screen.
+Deck: `docs/Presentation_Deck.pdf` (11 slides). App: https://bellcourt-review-copilot.vercel.app. Logins are in `DEMO_LOGINS.txt` on your machine only; never show them on screen.
 
 Your one sentence: **"Bellcourt is late because requests arrive incomplete and wrong because reviewers cannot find the rule that governs. I built a copilot where code picks the rule, the model checks the evidence, and a person decides."**
 
@@ -20,10 +20,11 @@ Your one sentence: **"Bellcourt is late because requests arrive incomplete and w
 | 5:30 | 6 Key elements | "Six elements. A registry of all 38 documents with effective dates and authority rank. A rule resolver in code; the model never chooses a version. A bounded agent that plans its reads through a tool that refuses anything not in force, and quotes its evidence. A verifier in code. A second skeptical pass on approvals. A human decision with no deny outcome." |
 | 6:10 | 7 What I introduced | "For each person: a provider portal with a coverage check before filing, a status desk that verifies the caller first, a priority queue on the receipt clock, the review itself, human decisions with letters, and a governance page where you can watch the controls work." Twenty seconds; the demo already showed most of it. |
 | 6:30 | 8 Governance and security | "Every constraint is in code. No deny outcome exists. Only physicians deny, Arizona needs a licensed director, enforced on the server. Memos can never be criteria. Identifiers are stripped before the model sees the record. Provider text is data, not instructions. Hashed passwords, signed sessions, every action audited. Production runs in the Azure tenant that already has the patient-data agreement, after the 60-day notice to Riverbend." |
-| 7:10 | 9 Evaluation | "Tested on Bellcourt's own 120 audited cases: 117 agree with the auditor, the humans scored 68, zero wrongful approvals, 118 of 120 cite the right document and version. 23 of 24 hostile and time-travel tests. 29 of 30 live cases. 36 unit tests with no model. Limits: results vary a little between runs, always toward a person, and I tuned on these cases, so a fresh audit sample is the next test." |
-| 7:50 | 10 Next | "Three decisions: free fixes this week, a 90-day recommend-only build beside PACE, and measure from receipt." Stop. Leave slide 10 up. |
+| 7:05 | 9 Evaluation | "Tested on Bellcourt's own 120 audited cases: 117 agree with the auditor, the humans scored 68, zero wrongful approvals, 118 of 120 cite the right document and version. 23 of 24 hostile and time-travel tests. 29 of 30 live cases. 41 unit tests with no model. Limits: results vary a little between runs, always toward a person, and I tuned on these cases, so a fresh audit sample is the next test." |
+| 7:35 | 10 Cost and margin | "About $0.55M in year one, $0.3M a year after, half a percent of revenue. Against it: $1.9M of service credits, which are a fifth of operating profit, and the $2.2M hiring plan. Margin goes from 8% to about 9.4% at steady state; hiring twenty nurses takes it to 6%, and to under 2% if Riverbend leaves. Payback in about five months." |
+| 7:50 | 11 Next | "Three decisions: free fixes this week, a 90-day recommend-only build beside PACE, and measure from receipt." Stop. Leave slide 11 up. |
 
-If you are at 7:00 and still in the demo, stop the demo and go to slide 9. Evaluation is the slide he named.
+If you are at 7:00 and still in the demo, stop the demo and go to slide 9. Evaluation is the slide he named. Slide 10 (cost and margin) can be covered in one sentence if time is short.
 
 ---
 
@@ -84,7 +85,58 @@ If asked what you would add: a fresh random audit sample nobody has looked at; r
 
 ---
 
-## 5. Who may do what, and why
+## 5. Cost and business case
+
+Every number here is either from the data pack (financials, roster, addendum, time-and-motion study, call log) or marked (A) as my assumption. Say so when you present it.
+
+**What it costs**
+
+| Item | Year 1 | Ongoing per year |
+|---|---|---|
+| 90-day build: an FDE, two engineers, half a clinical SME, a security review (A) | $0.30M | |
+| Model and fax reading: 310,000 cases at about $0.003, 143,000 faxes at about $0.004 | $0.01M | $0.01M |
+| Azure hosting, Postgres, logging, monitoring (A) | $0.05M | $0.06M |
+| Support: half an engineer plus half a policy librarian who owns the registry (A) | $0.12M | $0.24M |
+| Contingency 15% (A) | $0.07M | |
+| **Total** | **about $0.55M** | **about $0.30M** |
+
+That is 0.5% of FY2026 revenue ($112.4M) and one tenth of the hiring plan.
+
+**What it is worth, per year**
+
+| Benefit | Value | Basis |
+|---|---|---|
+| Service credits avoided | $1.9M | FY2026 forecast line in the financials. The addendum charges 4% of quarterly Riverbend fees per point of timeliness below 97%; at about 90% that is 7 points. Each point is worth about $0.27M a year. Credits are 1.7 margin points and 21% of FY2026 operating profit. |
+| Hiring avoided | $2.2M (A) | The VP wants 20 nurses; at $110k loaded (A) that is $2.2M a year. The time-and-motion study puts 14.2 of 38 minutes per case on finding the rule: 37% of nurse time, about 18.9 of 50.6 FTE. The resolver removes most of it; even half fills the 7.4 FTE gap between the 58 budgeted and 50.6 actual. |
+| Call-centre capacity | about 12.5 FTE | 2,400 calls a day; 67% are status checks or fax-receipt confirmations (call log); half deflected by the portal and status desk (A); 446 seconds average handle time (call log). About 100 agent-hours a day. Worth about $0.75M a year at $60k loaded (A) if converted; counted as capacity, not savings, in the base case. |
+| Intake keying | about 4 FTE | 640 faxes a day keyed into 14 fields; fields confirmed instead of typed (A: 5 minutes a fax, 60% saved). Capacity, not savings. |
+| Revenue protected | $6.8M Riverbend; $8.1M Harlan; $42M across 14 employers renewing 1 Jan 2027 | Riverbend PMPM fees are $6.16M (92,400 × $4.10 and 61,300 × $2.20, times 12) plus per-case fees; the credits formula implies about $6.8M of fees. Harlan: 18,400 employees × $36.50 × 12. Not counted in the margin scenarios. |
+
+**Margin forecast** (revenue held at the FY2026 forecast, SG&A flat, no growth counted)
+
+| Scenario | Revenue | Costs | Operating profit | Margin |
+|---|---|---|---|---|
+| FY2026 forecast (actual trend 14.0% → 11.6% → 9.4% → 8.0%) | $112.4M | $103.4M | $9.0M | 8.0% |
+| Hire 20 nurses, credits continue (the VP's plan) | $112.4M | $105.6M | $6.8M | 6.0% |
+| Same, and Riverbend leaves on 31 December (A: $6.8M of UM fees lost, credits stop) | $105.6M | $103.7M | $1.9M | 1.8% |
+| Copilot, FY2027: credits fall to $0.5M by mid-year (A), year-one cost $0.55M | $112.4M | $102.5M | $9.9M | 8.8% |
+| Copilot, FY2028 steady state: credits zero, $0.30M a year | $112.4M | $101.8M | $10.6M | 9.4% |
+| Same, with freed call-centre and intake capacity converted to cost (A: $1.0M) | $112.4M | $100.8M | $11.6M | 10.3% |
+
+Payback: year-one cost of $0.55M against $1.4M of credits avoided in FY2027 is about five months. Against the hiring plan the copilot is $1.9M a year cheaper, every year.
+
+The one-line version: the credits are a fifth of operating profit; the copilot costs 0.3 margin points a year and removes the cause; the hiring plan costs 2 points and removes nothing.
+
+**Q: How confident are you in these numbers?**
+The revenue, cost, credit, fee and headcount figures are from the pack. The solution cost, the loaded cost per nurse, the deflection rate and the Riverbend share of UM fees are my assumptions and are marked. The margin scenarios hold revenue flat, so they understate the copilot case if the CEO's three further delegated plans happen, and overstate the VP case if Harlan also leaves. I would validate the build cost with Finance and the nurse cost with HR before the board sees it.
+
+**Q: Why not just hire the 20 nurses?**
+Because the data says they would not fix either cause. Timeliness did not move with headcount; the misses are incomplete requests, and the errors are rule lookups. Twenty nurses cost 2 margin points a year and leave the $1.9M of credits in place. The copilot costs 0.3 points, removes the rule hunt that is 37% of nurse time, and fills the vacancy gap without a hire.
+
+**Q: What does production actually cost to run?**
+About $0.30M a year: mostly people (half an engineer, half a policy librarian), about $60k of Azure, and about $10k of model calls. The model is the cheapest line: a third of a cent per case.
+
+## 6. Who may do what, and why
 
 | Role | Raises requests | Runs the review | Decides | Sees |
 |---|---|---|---|---|
@@ -101,7 +153,7 @@ How a request moves: receipt (provider or intake; number, clock, intake check an
 
 ---
 
-## 6. Question bank
+## 7. Question bank
 
 ### Diagnosis
 
@@ -161,7 +213,7 @@ How a request moves: receipt (provider or intake; number, clock, intake check an
 
 ---
 
-## 7. Do not
+## 8. Do not
 
 - Do not say "AI decides" or "automates denials". Say "recommends", "a person decides".
 - Do not read the slides. Each slide has one sentence as its title; say that sentence and one example.
@@ -169,7 +221,7 @@ How a request moves: receipt (provider or intake; number, clock, intake check an
 - Do not claim 97.5% as production accuracy. It is agreement with the auditor on a sample that may not be random.
 - Do not go past 8:00. Stop mid-sentence if needed and say "and I will leave it there for questions".
 
-## 8. Checklist, 15 minutes before
+## 9. Checklist, 15 minutes before
 
 - Deck open, full screen, slide 1.
 - Three windows signed in: provider, intake, nurse. Physician password ready for the optional step.
