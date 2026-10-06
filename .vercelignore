@@ -5,3 +5,5 @@ docs
 scripts
 .env
 DEMO_LOGINS.txt
+DEMO_SCRIPT_WITH_LOGINS.md
+DEMO_SCRIPT_WITH_LOGINS.pdf
