@@ -14,9 +14,9 @@ Your one sentence: **"Bellcourt is late because requests arrive incomplete and w
 |---|---|---|
 | 0:00 | 1 Title | "Bellcourt case. I will show the problem, how I found it, a live demo, then the build, governance, security and evaluation." Ten seconds, no more. |
 | 0:10 | 2 Problem | "Bellcourt is a third-party administrator. It runs health plans for 38 employers and decides prior authorization for an insurer, Riverbend. Riverbend is penalising it, $1.9M this year, and the contract ends in December. Decisions are late, 90% on time against 97, and wrong, 57% correct in their own QA audit against 95. Leadership says it is a staffing problem." |
-| 0:50 | 3 How I found it | "I did not take that on trust. I tied every claim to a file in the data pack. The cut that mattered: every one of the 64 missed Medicare deadlines arrived incomplete, and complete requests are on time 99.8% of the time. Then I classified the 52 audit errors by the auditor's own label: 39 are about which rule was applied, not clinical judgement." |
-| 1:30 | 4 Two causes | "So two root causes. The wrong rulebook: a third of 2026 denials cite a retired policy version, and those are overturned 91% of the time; a memo overrode a policy for a year. The late clock: Riverbend counts from receipt, PACE counts from keying, 17 hours later, and the hours are lost waiting for missing information. Staffing moves neither number. Let me show you what I built." |
-| 2:00 | Demo | Section 2 below. Three and a half minutes. |
+| 0:50 | 3 How I found it | The four cuts, word for word in section 2 below. Point at each number as you say it. |
+| 1:30 | 4 Two causes | The six numbers, word for word in section 2 below. End with "Let me show you what I built." |
+| 2:00 | Demo | Section 3 below. Three and a half minutes. |
 | 5:30 | 6 Key elements | "Six elements. A registry of all 38 documents with effective dates and authority rank. A rule resolver in code; the model never chooses a version. A bounded agent that plans its reads through a tool that refuses anything not in force, and quotes its evidence. A verifier in code. A second skeptical pass on approvals. A human decision with no deny outcome." |
 | 6:10 | 7 What I introduced | "For each person: a provider portal with a coverage check before filing, a status desk that verifies the caller first, a priority queue on the receipt clock, the review itself, human decisions with letters, and a governance page where you can watch the controls work." Twenty seconds; the demo already showed most of it. |
 | 6:30 | 8 Governance and security | "Every constraint is in code. No deny outcome exists. Only physicians deny, Arizona needs a licensed director, enforced on the server. Memos can never be criteria. Identifiers are stripped before the model sees the record. Provider text is data, not instructions. Hashed passwords, signed sessions, every action audited. Production runs in the Azure tenant that already has the patient-data agreement, after the 60-day notice to Riverbend." |
@@ -28,7 +28,55 @@ If you are at 7:00 and still in the demo, stop the demo and go to slide 9. Evalu
 
 ---
 
-## 2. Demo script, 3 minutes 30 seconds
+## 2. How I found it: the exact words
+
+Slide 3 has four cards, one number each. Slide 4 has two cards, three numbers each. Say the number, then what it proves. Do not read the small print.
+
+### The 70-second version (slides 3 and 4, from 0:50 to 2:00)
+
+**Slide 3.** "I did not take the staffing claim on trust. I tied every claim to a file in the data pack and made four cuts.
+
+Cut one, is it staffing? I lined up nurse headcount against the on-time rate for ninety weeks. The correlation is minus 0.05, essentially zero. Timeliness was already at 87 percent when staffing was at 98 percent of budget. Headcount does not move the number.
+
+Cut two, why late? I rebuilt the clock from the moment the fax arrived, which is what the Riverbend contract counts, instead of when someone typed it into PACE seventeen hours later. Then I split timeliness by whether the request was complete on arrival. Every one of the 64 missed Medicare deadlines arrived incomplete. Complete requests were on time 99.8 percent of the time. Lateness is an intake problem.
+
+Cut three, why wrong? I took the 52 errors in Bellcourt's own QA audit and sorted them by the auditor's own label. 39 of 52 are about which rule was applied: 18 followed a memo that a newer policy version had overridden, 14 used a retired version, 7 missed a client's plan rule. Only 10 were clinical misreads.
+
+Cut four, what does it cost? The time-and-motion study says 14.2 of the 38 minutes per case go on finding the rule. That is 37 percent of nurse time, about nineteen of the fifty nurses, almost exactly the twenty the VP wants to hire."
+
+**Slide 4.** "So, two root causes. The wrong rulebook: a third of 2026 denials cite a policy version that was already retired, and 91 percent of those appeals succeed. A memo kept a six-week rule for lumbar MRI for a year after the policy moved to four weeks: 72 wrongful denials. Kestrel started covering bariatric surgery in January and nobody told the reviewers: eight more.
+
+And the late clock: seventeen hours from fax arrival to keying; in late cases 122 of 199 hours were spent waiting for missing information; 66 of 69 late decisions arrived incomplete.
+
+The senior nurse said it in her interview: the clinical part is easy, the hard part is which rules apply. The data agreed with her. Let me show you what I built."
+
+### The 30-second version (if you are running late)
+
+"I did not take the staffing claim on trust. Headcount against on-time rate for ninety weeks: correlation minus 0.05. Rebuilding the clock from fax receipt: every one of the 64 missed Medicare deadlines arrived incomplete, and complete requests are on time 99.8 percent of the time. Sorting the 52 audit errors by the auditor's own label: 39 are about which rule was applied, not clinical judgement. And 14 of the 38 minutes per case go on finding that rule, which is nineteen nurses' worth of time. Two causes: the wrong rulebook and the late clock. Here is what I built."
+
+### If he digs deeper: the four steps in order
+
+1. **Challenge the premise with data, not opinions.** The VP says "staffing problem, full stop" and wants 20 nurses. `nurse_staffing_weekly` against `pa_requests` shows on-time at 87% when staffing was 98% of budget, and r = -0.05 across 90 weeks. Headcount is not the lever.
+2. **Rebuild the clock and cut by completeness.** PACE starts the clock at keying; the addendum starts it at receipt. The Analytics team had already recomputed turnaround from receipt in the request file. Cutting by completeness on arrival: 64 of 64 missed Medicare standard decisions incomplete, 66 of 69 late decisions across all clients, complete requests 99.8% on time, 122 of 199 late-case hours waiting for information, nurse review about 40 hours either way. So the fix is at intake: receipt stamp, completeness check, ask for what is missing in the first minute.
+3. **Sort the audit errors by the auditor's own label.** 52 errors: memo conflict 18, outdated version 14, client rule missed 7, criteria misread 10, missing information not requested 3. 39 of 52 are rule selection. The nurses are not bad clinicians; the rulebook is scattered across 1,100 files searchable only by file name, with three files called "MP-103 final", and PACE screens that lag the policies. The appeal data confirms it: wrong-version denials overturned 30 of 33 times.
+4. **Check the operational cost.** 14.2 of 38 minutes per case finding the rule, from a 212-review time-and-motion study. 37% of nurse time is 18.9 of 50.6 FTE. The VP's 20 nurses are already inside the building, spent on searching. Then the interviews: the senior nurse, the intake coordinator ("about a third are missing something"), Riverbend ("that's a wrong-decision problem").
+
+### The numbers to keep in your head
+
+| Number | What it is | What it proves |
+|---|---|---|
+| r = -0.05 | Nurse FTE vs on-time rate, 90 weeks | Staffing does not drive timeliness |
+| 87% at 98% | On-time rate when staffing was near budget | It was failing at full strength |
+| 64 of 64 | Missed Medicare deadlines that arrived incomplete | Lateness starts at intake |
+| 99.8% | Complete requests decided on time | The process works when the request is complete |
+| 17 h | Fax arrival to keying | PACE's clock hides the delay the contract counts |
+| 122 of 199 h | Late-case hours spent waiting for information | The clock is lost waiting, not reviewing |
+| 39 of 52 | QA errors that are rule selection | Accuracy is a governance problem |
+| 34%, 91% | 2026 denials on a retired version; their appeal success rate | Wrong version is systematic and expensive |
+| 72, 8 | Lumbar MRI denials under the memo; Kestrel denials after the amendment | Two concrete failures of document control |
+| 14.2 of 38 | Minutes per case finding the rule | 18.9 FTE of nurse time, nearly the 20 requested |
+
+## 3. Demo script, 3 minutes 30 seconds
 
 **Before the session (15 minutes before).** Open three browser windows, signed in: provider (window A), intake (window B, a private window), nurse (window C, another private window or a different browser). Keep the physician login ready in window C for the last step. Have the deck open in full screen. Have `data/fax/FAX-PA-2609-8120.png` in a Finder window in case you want the fax upload instead of the form. Check "Model live" shows in the sidebar.
 
@@ -47,7 +95,7 @@ Skip step 5 if time is short. Never type a password while sharing the screen; ha
 
 ---
 
-## 3. Governance and security: what to show if he asks for proof
+## 4. Governance and security: what to show if he asks for proof
 
 Sign in as nurse. Open **Governance & security**. Click **Run all**. Eleven controls run against the live server; each shows the actual response. In the order he is likely to ask:
 
@@ -68,7 +116,7 @@ What governance means here, if he asks for the definition: who is allowed to dec
 
 ---
 
-## 4. Evaluation: what to show and how to explain it
+## 5. Evaluation: what to show and how to explain it
 
 Sign in as nurse. Open **Evidence**. Walk top to bottom:
 
@@ -85,7 +133,7 @@ If asked what you would add: a fresh random audit sample nobody has looked at; r
 
 ---
 
-## 5. Cost and business case
+## 6. Cost and business case
 
 Every number here is either from the data pack (financials, roster, addendum, time-and-motion study, call log) or marked (A) as my assumption. Say so when you present it.
 
@@ -136,7 +184,7 @@ Because the data says they would not fix either cause. Timeliness did not move w
 **Q: What does production actually cost to run?**
 About $0.30M a year: mostly people (half an engineer, half a policy librarian), about $60k of Azure, and about $10k of model calls. The model is the cheapest line: a third of a cent per case.
 
-## 6. Who may do what, and why
+## 7. Who may do what, and why
 
 | Role | Raises requests | Runs the review | Decides | Sees |
 |---|---|---|---|---|
@@ -153,7 +201,7 @@ How a request moves: receipt (provider or intake; number, clock, intake check an
 
 ---
 
-## 7. Question bank
+## 8. Question bank
 
 ### Diagnosis
 
@@ -213,7 +261,7 @@ How a request moves: receipt (provider or intake; number, clock, intake check an
 
 ---
 
-## 8. Do not
+## 9. Do not
 
 - Do not say "AI decides" or "automates denials". Say "recommends", "a person decides".
 - Do not read the slides. Each slide has one sentence as its title; say that sentence and one example.
@@ -221,7 +269,7 @@ How a request moves: receipt (provider or intake; number, clock, intake check an
 - Do not claim 97.5% as production accuracy. It is agreement with the auditor on a sample that may not be random.
 - Do not go past 8:00. Stop mid-sentence if needed and say "and I will leave it there for questions".
 
-## 9. Checklist, 15 minutes before
+## 10. Checklist, 15 minutes before
 
 - Deck open, full screen, slide 1.
 - Three windows signed in: provider, intake, nurse. Physician password ready for the optional step.

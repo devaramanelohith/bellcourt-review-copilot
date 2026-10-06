@@ -121,40 +121,36 @@ para("Riverbend's contract ends <b>31 December 2026</b> and may go out to bid th
 text(M + 582, y2 - 20, "THE CLAIM I HAD TO TEST", "IS", 8, TEAL)
 para("<i>\"It's a staffing problem, full stop.\"</i> The VP of Operations wants 20 more nurses, about $2.2M a year. The CEO is not convinced and wants decisions that are <i>\"faster and more defensible, not just faster\"</i>.", M + 582, y2 - 30, CW - 596, 10, INK, "SS", 13.5)
 
-# ================================================================ 3. how I found it
-y = slide("2 · How I found it", "I tested the staffing claim against the data pack, not the interviews.", source="Analysis script: FDE_Briefing/evidence_analysis.py. 2,400 requests, 120 audited cases, 90 weeks of staffing, 3,200 calls, 38 documents")
-text(M, y - 14, "METHOD", "IS", 8, TEAL)
-yy = bullets(["<b>Reconcile every claim to a file.</b> Staffing to <i>nurse_staffing_weekly</i>, timeliness to <i>pa_requests</i>, accuracy to the <i>QA audit</i>, calls to the <i>call log</i>.",
-              "<b>Cut timeliness by completeness at receipt</b>, not by nurse hours. That one cut explained every missed Medicare deadline.",
-              "<b>Classify the 52 QA errors by the auditor's own error type</b>, then ask which are clinical judgement and which are rule lookup.",
-              "<b>Rebuild the clock from receipt time</b>, as the Riverbend addendum defines it, instead of PACE's keying time.",
-              "<b>Confirm with the people who live it.</b> The senior nurse: <i>\"The hard part is figuring out which rules apply.\"</i>"], M, y - 26, 400, 10.4, 6)
-card(M + 430, 92, CW - 430, y - 100)
-text(M + 446, y - 24, "THE 52 AUDITED ERRORS, BY THE AUDITOR'S OWN LABEL", "IS", 8, TEAL)
-by = y - 48
-for lab, v, col in [("Memo overrode policy", 18, COPPER), ("Outdated policy version", 14, COPPER), ("Criteria misread", 10, INK), ("Client plan rule missed", 7, COPPER), ("Missing info not requested", 3, INK)]:
-    hbar(M + 446, by, CW - 462, lab, v, 18, col, 150, 9.6); by -= 22
-para("<font color='#B4532A'><b>39 of 52</b></font> errors are about <b>which rule</b> was applied, not clinical judgement. UM-MEMO-2025-19 kept a 6-week lumbar MRI rule after MP-101 v2 moved to 4 weeks: 72 wrongful denials.", M + 446, by - 2, CW - 462, 9.4, INK)
-yb = 92 + 60
-c.setStrokeColor(HAIR); c.line(M + 446, yb + 6, W - M - 16, yb + 6)
-for i, (a, b) in enumerate([("64 of 64", "missed MA standard deadlines were incomplete on receipt"), ("99.8%", "of complete requests decided on time"), ("r = -0.05", "nurse count vs on-time rate, 90 weeks")]):
-    xx = M + 446 + i * 148; text(xx, yb - 16, a, "SSB", 17, GREEN if i == 1 else INK); para(b, xx, yb - 24, 140, 8.2, MUTED)
+# ================================================================ 3. how I found it (four cuts, four numbers)
+y = slide("2 · How I found it", "Four cuts of the data. Each one is a number, not an opinion.", source="Files: nurse_staffing_weekly (90 weeks) · pa_requests_2025_2026 (2,400 requests, clock rebuilt from receipt) · qa_audit_sample_2026 (120 cases) · time-and-motion study (212 reviews) · 8 interviews")
+cw2 = (CW - 14) / 2; ch2 = (y - 66) / 2 - 7
+cuts = [("CUT 1 · IS IT STAFFING?", "r = -0.05", "Nurse headcount against the on-time rate, week by week for 90 weeks.", "Timeliness was already 87% when staffing was at 98% of budget. Headcount fell from 57.7 to 50.6 FTE and the on-time rate did not move with it.", "No. Headcount does not move the number.", INK),
+        ("CUT 2 · WHY LATE?", "64 of 64", "missed Medicare deadlines arrived incomplete.", "Clock rebuilt from fax receipt, as the contract counts it, not from keying 17 hours later. Complete requests were on time 99.8% of the time. In late cases 122 of 199 hours were spent waiting for missing information.", "Lateness is an intake problem, not a review problem.", COPPER),
+        ("CUT 3 · WHY WRONG?", "39 of 52", "audit errors are about which rule was applied.", "Sorted by the auditor's own label: memo overrode policy 18, retired policy version 14, client plan rule missed 7. Clinical misreads 10, information not requested 3.", "The rulebook, not the nurse.", COPPER),
+        ("CUT 4 · WHAT DOES IT COST?", "14.2 of 38", "minutes per case spent finding the rule.", "37% of nurse time, about 18.9 of 50.6 FTE, almost the 20 nurses the VP wants to hire. The senior nurse: \"the hard part is figuring out which rules apply.\"", "Fix the rule and the capacity appears.", GREEN)]
+for i, (q, num, what, how, verdict, col) in enumerate(cuts):
+    x = M + (i % 2) * (cw2 + 14); yy = y - (i // 2) * (ch2 + 14)
+    card(x, yy - ch2, cw2, ch2)
+    text(x + 14, yy - 18, q, "IS", 8, TEAL); text(x + 14, yy - 54, num, "SSB", 30, col)
+    yb = para(f"<b>{what}</b>", x + 14, yy - 62, cw2 - 28, 10.5, INK)
+    yb = para(how, x + 14, yb - 3, cw2 - 28, 9, MUTED, lead=11.5)
+    c.setFillColor(TINT); c.roundRect(x + 14, yy - ch2 + 10, cw2 - 28, 20, 4, stroke=0, fill=1); text(x + 22, yy - ch2 + 16.5, verdict, "IS", 9, TEAL)
+para("Method: every claim tied to a file, every file reproduced by one script (evidence_analysis.py). Nothing on this slide comes from an interview alone; the interviews confirmed what the files said.", M, 58, CW, 8.4, MUTED)
 
-# ================================================================ 4. diagnosis
-y = slide("2 · What the data says", "Two root causes, one thread: nobody can say which rule applies, and the clock starts late.", source="Staffing is not the main driver: headcount fell 57.7 to 50.6 FTE while on-time stayed flat. Requests that arrived complete are overturned more often than incomplete ones, so appeals are not 'new information'.")
+# ================================================================ 4. two root causes, six numbers
+y = slide("2 · What the data says", "Two root causes, one thread: nobody can say which rule applies, and the clock starts late.", source="Staffing is not the driver: headcount fell 57.7 to 50.6 FTE while on-time stayed flat. Requests that arrived complete are overturned more often than incomplete ones, so appeals are not 'new information'.")
 card(M, 96, 412, y - 104); card(M + 428, 96, CW - 428, y - 104)
-text(M + 16, y - 26, "ROOT CAUSE 1 · THE WRONG RULEBOOK", "IS", 8, COPPER)
-bullets(["<b>34% of 2026 denials</b> cite a policy version that was already retired. Appeals against them succeed <b>91%</b> of the time.",
-         "A memo overrode a policy for a year. Governance (GOV-01) says memos cannot change criteria; PACE screens still show the old rule.",
-         "Kestrel started covering bariatric surgery in January. Nobody told the reviewers: <b>8 wrongful \"not covered\" denials</b>.",
-         "<b>20 glucose-monitor denials</b> for Medicare members under the stricter Bellcourt rule, when the addendum says Medicare criteria apply. All 11 appeals overturned.",
-         "<b>14.2 of 38 minutes</b> per case go on finding the rule. That is 18.9 of 50.6 nurses, almost the 20 the VP wants to hire."], M + 16, y - 40, 384, 10.2, 6)
-text(M + 444, y - 26, "ROOT CAUSE 2 · THE LATE CLOCK", "IS", 8, COPPER)
-bullets(["Riverbend's clock starts when the fax <b>arrives</b>. PACE starts it when someone <b>types it in</b>, about 17 hours later.",
-         "A third of faxes are missing something, and nobody tells the provider until a person has opened the image.",
-         "In late cases, <b>122 of 199 hours</b> were spent waiting for missing information. Nurse review took about 40 hours whether the case was late or not.",
-         "Every one of the <b>64 missed Medicare deadlines</b> started with an incomplete request; across all clients, 66 of 69 late decisions did.",
-         "PACE dashboards therefore flatter Bellcourt: the Analytics team had to recompute turnaround from receipt time by hand."], M + 444, y - 40, CW - 460, 10.2, 6)
+for x, w_, head_, rows in [(M, 412, "ROOT CAUSE 1 · THE WRONG RULEBOOK", [("34%", "of 2026 denials cite a policy version that was already retired. Appeals against them succeed 91% of the time (30 of 33)."),
+                                                                           ("72", "lumbar MRI requests denied under a memo that kept a 6-week rule after MP-101 v2 moved to 4 weeks. GOV-01 says a memo cannot change criteria."),
+                                                                           ("8", "Kestrel bariatric denials after an amendment that covered the surgery from January. The email went to claims configuration, never to UM."),
+                                                                           ("20", "glucose-monitor denials for Medicare members under the stricter Bellcourt rule, when the addendum says Medicare criteria apply. All 11 appeals overturned.")]),
+                           (M + 428, CW - 428, "ROOT CAUSE 2 · THE LATE CLOCK", [("17 h", "from fax arrival to keying. Riverbend's clock starts when the fax arrives; PACE starts it when someone types it in."),
+                                                                                  ("122 of 199 h", "in late cases spent waiting for missing information. Nurse review took about 40 hours whether the case was late or not."),
+                                                                                  ("66 of 69", "late decisions across all clients arrived incomplete; 64 of 64 for Medicare Advantage. Nobody tells the provider until a person opens the image."),
+                                                                                  ("1 in 3", "faxes arrive missing something, says the intake coordinator: usually the member ID or the clinical notes. The provider finds out days later, by phone.")])]:
+    text(x + 16, y - 26, head_, "IS", 8, COPPER); yy = y - 40
+    for num, cap in rows:
+        text(x + 16, yy - 24, num, "SSB", 24, INK); yb = para(cap, x + 150, yy - 2, w_ - 166, 9.8, INK, lead=12.6); yy = min(yb, yy - 32) - 13
 card(M, 56, CW, 30, TINT, TINT)
 para("<b>So what:</b> fix the rule and the clock. Code can pick the governing document by client, service and date of service; code can stamp receipt and list what is missing in the first minute. Hiring nurses addresses neither.", M + 14, 79, CW - 28, 10.2, INK)
 
