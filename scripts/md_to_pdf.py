@@ -33,6 +33,11 @@ while i < len(src):
         t = Table([[Paragraph(inl(c), S["cb"] if k == 0 else S["c"]) for c in r + [""] * (n - len(r))] for k, r in enumerate(rows)], colWidths=w, repeatRows=1)
         t.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("BACKGROUND", (0, 0), (-1, 0), HEAD), ("LINEBELOW", (0, 0), (-1, -1), 0.4, HAIR), ("LEFTPADDING", (0, 0), (-1, -1), 4), ("RIGHTPADDING", (0, 0), (-1, -1), 4), ("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3)]))
         E += [t, Spacer(1, 6)]; continue
+    if ln.startswith("!["):
+        flush(); from reportlab.platypus import Image; from reportlab.lib.utils import ImageReader; import os
+        mm_ = re.match(r"!\[.*?\]\((.+?)\)(?:\{(\d+)%\})?", ln); pth = mm_.group(1); frac = int(mm_.group(2) or 100) / 100
+        pth = pth if os.path.isabs(pth) else os.path.join(os.path.dirname(os.path.abspath(sys.argv[1])), "..", pth) if not os.path.exists(pth) else pth
+        iw, ih = ImageReader(pth).getSize(); w = min(CW, iw) * frac; E += [Image(pth, width=w, height=w * ih / iw), Spacer(1, 6)]; i += 1; continue
     if ln.startswith("# "): flush(); E.append(Paragraph(inl(ln[2:]), S["t"])); E.append(Spacer(1, 4))
     elif ln.startswith("## "): flush(); E += [Paragraph(inl(ln[3:]), S["h2"]), HRFlowable(width="100%", thickness=0.8, color=NAVY, spaceAfter=4)]
     elif ln.startswith("### "): flush(); E.append(Paragraph(inl(ln[4:]), S["h3"]))

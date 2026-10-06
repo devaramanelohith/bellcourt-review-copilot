@@ -174,6 +174,7 @@ A free-tier Gemini key allows about 20 requests a day per model. One case review
 | Evidence it works | `docs/EVIDENCE.md`, Evidence tab in the app |
 | Presentation deck (10 slides, the evaluator's 8-minute flow) | `docs/Presentation_Deck.pdf` |
 | Presentation playbook: talk track, demo steps, governance and evaluation proof steps, question bank | `docs/PRESENTATION_PLAYBOOK.md`, `docs/Presentation_Playbook.pdf` |
+| Technical question bank: agentic RAG loop with flowchart, chunking, embeddings, model, where AI is and is not used, scaling, 90-day production plan, future scope | `docs/TECHNICAL_QA_BANK.md`, `docs/Technical_QA_Bank.pdf` |
 | Pitch deck (14 slides) | `docs/Pitch_Deck.pdf` |
 | All of the above as one folder | `deliverables/` |
 | Submission text | `docs/SUBMISSION.md` |

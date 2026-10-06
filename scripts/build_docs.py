@@ -459,7 +459,7 @@ import shutil, zipfile
 SUB = os.path.join(ROOT, "deliverables"); shutil.rmtree(SUB, ignore_errors=True); os.makedirs(SUB)
 for i, (f, n) in enumerate([("Bellcourt_Case_Documentation.pdf", "1_Documentation_Data_Backed_Diagnosis_and_Solution.pdf"), ("Architecture_Diagram.pdf", "2_Architecture_Diagram.pdf"), ("Implementation_Strategy_and_Design_Note.pdf", "3_Implementation_Strategy_and_Design_Note.pdf"),
                             ("README_and_Setup.pdf", "4_Working_Demo_README_and_Setup.pdf"), ("Evidence_It_Works.pdf", "5_Evidence_It_Works.pdf"), ("Pitch_Deck.pdf", "6_Pitch_Deck.pdf"),
-                            ("Presentation_Deck.pdf", "7_Presentation_Deck_8min.pdf"), ("Presentation_Playbook.pdf", "8_Presentation_Playbook.pdf")]):
+                            ("Presentation_Deck.pdf", "7_Presentation_Deck_8min.pdf"), ("Presentation_Playbook.pdf", "8_Presentation_Playbook.pdf"), ("Technical_QA_Bank.pdf", "9_Technical_QA_Bank.pdf")]):
     if os.path.exists(os.path.join(DOCS, f)): shutil.copy(os.path.join(DOCS, f), os.path.join(SUB, n))
 shutil.copy(os.path.join(DOCS, "architecture.png"), os.path.join(SUB, "2_Architecture_Diagram.png"))
 open(os.path.join(SUB, "0_Submission_Text.txt"), "w").write(open(os.path.join(DOCS, "SUBMISSION.md")).read())
