@@ -260,7 +260,7 @@ for x, w_ in zip(cx, cwid): card(x, cbot, w_, ctop - cbot)
 text(cx[0] + 12, ctop - 18, "WHAT IT COSTS ($M)", "IS", 8, TEAL)
 tbl([["Item", "Year 1", "Ongoing"], ["90-day build: FDE, 2 engineers, half a clinical SME, security review (A)", "0.30", ""], ["Model and fax reading: 310k cases × $0.003, 143k faxes × $0.004", "0.01", "0.01"],
      ["Azure hosting, Postgres, logging, monitoring (A)", "0.05", "0.06"], ["Support: half an engineer, half a policy librarian (A)", "0.12", "0.24"], ["Contingency 15% (A)", "0.07", ""], ["<b>Total</b>", "<b>0.55</b>", "<b>0.30</b>"]],
-    cx[0] + 10, ctop - 26, [196, 40, 44], 8.6, pad=3.2)
+    cx[0] + 10, ctop - 26, [186, 40, 54], 8.6, pad=3.2)
 para("0.5% of revenue. One tenth of the hiring plan. Payback from credits alone in about five months.", cx[0] + 12, cbot + 34, cwid[0] - 24, 8.6, MUTED)
 text(cx[1] + 12, ctop - 18, "WHAT IT IS WORTH, PER YEAR", "IS", 8, TEAL)
 yy = ctop - 26
