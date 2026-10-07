@@ -96,7 +96,8 @@ function shell(){const m=STAFF(S.me.role)?S.cases.filter(mine).length:S.cases.le
  ${navFor(S.me.role).map(([t,k])=>`<button class="nv ${t==S.tab?"on":""}" onclick="go('${t}')">${ic(k)}${t}${t=="Queue"||t=="My requests"?`<span class="ct">${m}</span>`:t=="Decision letters"?`<span class="ct">${S.letters.length}</span>`:""}</button>`).join("")}
  <div class="sp"></div><div class="me"><b>${esc(S.me.name)}</b>${esc(S.me.role_label)}<div class="sv"><span class="${sv.live?"ok":"no"}">${sv.live?"Model live":"Model off"}</span><span class="${sv.storage=="supabase"?"ok":"no"}">${sv.storage=="supabase"?"Supabase":"Local store"}</span><span class="${sv.email?"ok":"no"}">${sv.email?"Email on":"Email off"}</span></div>
  <button class="btn g sm" style="margin-top:10px;width:100%;justify-content:center" onclick="logout()">Sign out</button></div></aside><main id="view"></main></div>`;render()}
-function go(t){S.tab=t;shell();window.scrollTo(0,0)}
+async function go(t){S.tab=t;try{await load()}catch(e){}shell();window.scrollTo(0,0)}
+setInterval(async()=>{if(!S.me||!["Queue","My requests","Decision letters","Audit log"].includes(S.tab)||document.activeElement&&document.activeElement.tagName=="INPUT")return;try{await load();shell()}catch(e){}},20000);
 function head(t,p,extra=""){return `<div class="top"><div><h1>${t}</h1><p>${p}</p></div><div class="sp" style="flex:1"></div>${extra}</div>`}
 // ---------------------------------------------------------------- queue
 function queue(){const open=S.cases.filter(c=>c.status!="DECIDED"),k=l=>open.filter(c=>c.priority.level==l).length;
